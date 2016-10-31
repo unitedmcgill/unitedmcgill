@@ -1,0 +1,52 @@
+<header class="navbar">
+    <div class="container-fluid">
+        <button class="navbar-toggler hidden-lg-up" type="button" mobile-nav-toggle>&#9776;</button>
+        <a class="navbar-brand" href="#"></a>
+        <ul class="nav navbar-nav hidden-md-down">
+            <li class="nav-item">
+                <a class="nav-link navbar-toggler sidebar-toggle" href="#">&#9776;</a>
+            </li>
+        </ul>
+        <div class="hidden-md-down pull-right">
+            <a class="nav-link" href="/location">Location &nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+</header>
+
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">Welcome</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/Location']">Location</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Main content -->
+<main class="main">
+
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <breadcrumbs></breadcrumbs>
+    </ol>
+
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- /.conainer-fluid -->
+</main>
+
+<footer class="footer">
+    <span>
+        <p class="text-xs-center">
+            &copy; {{year}} <a href="http://unitedmcgill.com">United McGill Corporation</a> — Family owned and operated since 1951
+        </p>
+    </span>
+    <span class="float-xs-right">
+        
+    </span>
+</footer>
