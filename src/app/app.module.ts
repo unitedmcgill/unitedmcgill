@@ -1,5 +1,6 @@
-import { NgModule }                     from '@angular/core';
+import { NgModule, APP_INITIALIZER }    from '@angular/core';
 import { BrowserModule }                from '@angular/platform-browser';
+import { HttpModule }                   from '@angular/http';
 import { LocationStrategy,
          PathLocationStrategy }         from '@angular/common';
 
@@ -19,11 +20,12 @@ import { AppRoutingModule }             from './app.routing';
 import { FullLayoutComponent }          from './layouts/full-layout.component';
 
 // My Components (Move to modules that need them...)
-
+import { ConfigService }                from "./services/config.service";
 
 @NgModule({
     imports: [
         BrowserModule,
+        HttpModule,
         AppRoutingModule,
         Ng2BootstrapModule,
         ChartsModule
@@ -36,10 +38,18 @@ import { FullLayoutComponent }          from './layouts/full-layout.component';
         SIDEBAR_TOGGLE_DIRECTIVES,
         AsideToggleDirective
     ],
-    providers: [{
-        provide: LocationStrategy,
-        useClass: PathLocationStrategy
-    }],
+    providers: [
+        ConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (config: ConfigService) => () => config.load(),
+            deps: [ConfigService],
+            multi: true},
+        {
+            provide: LocationStrategy,
+            useClass: PathLocationStrategy
+        }
+    ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactUs } from '../models/contact-us';
+import { ContactUsService } from './contactus.service';
 
 @Component({
   //selector: 'app-contactus',
@@ -11,7 +12,7 @@ export class ContactUsComponent implements OnInit {
   public contact : ContactUs;
   public active : boolean;
 
-  constructor() {
+  constructor( private contactUsService: ContactUsService) {
     this.contact = new ContactUs();
     this.active = true;
    }
@@ -20,7 +21,9 @@ export class ContactUsComponent implements OnInit {
   }
 
   public onSend(){
-    alert("Send!");
+    //console.log(this.config.apiUrl);
+    //alert(JSON.stringify(this.config));
+    this.contactUsService.sendMessage(this.contact);
 
     // Clear the form since we are doing *ngIf="active" on the form tag
     this.contact = new ContactUs();

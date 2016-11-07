@@ -5,6 +5,7 @@ import { TabsModule }               from 'ng2-bootstrap/components/tabs';
 
 import { ContactUsComponent }       from './contactus.component';
 import { ContactUsRoutingModule }   from './contactus-routing.module';
+import { ContactUsService }         from './contactus.service';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { ContactUsRoutingModule }   from './contactus-routing.module';
     ],
     declarations: [ 
         ContactUsComponent 
-    ]
+    ],
+    providers:[ContactUsService]
 })
 export class ContactUsModule { }
