@@ -21,11 +21,11 @@ export class ContactUsComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.contactUsService.getValues()
-                         .subscribe(
-                            data => this.values = data,
-                            err => console.error(err),
-                            () => console.log('done'));
+    // this.contactUsService.getValues()
+    //                      .subscribe(
+    //                         data => this.values = data,
+    //                         err => console.error(err),
+    //                         () => console.log('done'));
   }
 
   public onSend(){
