@@ -27,8 +27,8 @@ export class ContactUsService{
         //         return res.json();
         //     }
         // })
-
-        return this.http.get("http://localhost:5001/api/values")
+        let url = this.config.apiUrl+"/values";
+        return this.http.get(url)
                    .map((res:Response)=>res.json())
                    .catch((error:any)=>Observable.throw(error.json().error||'Server error'));
 
@@ -45,18 +45,18 @@ export class ContactUsService{
         let url = this.config.apiUrl+"/contactus";
         //let options = new RequestOptions({ headers: headers, method: "post" }); // Create a request option
         //.map((response:Response) => response.json())
+        // .map((res:Response) => {
+        //     console.log(res.json());
+        //     return res.json();})
 
-        this.http.post(url, bodyString, {headers:headers})      
-        .map((res:Response) => {
-            console.log(res.json());
-            return res.json();})
+        this.http.post(url, bodyString, {headers:headers})
+        .map((res:Response) => res.json())      
         .catch(this._handleError)
         .subscribe(
                 data => console.log(data),
                 err => console.log(err)
             );
-        
-
+       
         //alert(url + ":" + bodyString);
     }
 
