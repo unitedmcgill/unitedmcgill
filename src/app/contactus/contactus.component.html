@@ -37,7 +37,7 @@
       <div class="form-group row">
         <label class="col-xs-2 col-form-label" for="message-input">Message</label>
         <div class="col-xs-10">
-          <textarea class="form-control" id="message-input" [(ngModel)]="contact.message" name="message" rows="5" required #message="ngModel"></textarea>
+          <textarea class="form-control" id="message-input" [(ngModel)]="contact.theMessage" name="theMessage" rows="5" required #message="ngModel"></textarea>
           <div [hidden]="message.valid || message.pristine" 
              class="alert alert-danger">
              Message is required
@@ -50,5 +50,12 @@
         </div>
       </div>
     </form>
+    <div>
+      <span>Values:</span>
+      <span>{{errorMessage}}</span>
+      <ul>
+        <li *ngFor="let value of values">{{value}}</li>
+      </ul>
+    </div>
   </div>
 </div>

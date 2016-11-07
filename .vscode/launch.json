@@ -11,30 +11,11 @@
             "diagnosticLogging": false,
             "sourceMapPathOverrides": {
                 "webpack:///c:/d-drive/project/angular2/unitedmcgill/*": "${workspaceRoot}/*"
-                // "webpack:////absolute/path/to/workspaceRoot/*": "${webRoot}/*"
-                // works too, but this will not work:
-                // "webpack:///${workspaceRoot}/*": "${webRoot}/*"
             },
             "runtimeArgs": [
                 "--disable-session-crashed-bubble",
                 "--disable-infobars"
             ]   
-        },
-        {
-            "name": "Attach to Chrome, with sourcemaps",
-            "type": "chrome",
-            "request": "attach",
-            "port": 9222,
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}",
-            "diagnosticLogging": false,
-            "sourceMapPathOverrides": {
-                 "webpack:///c:/d-drive/project/angular2/unitedmcgill/*": "${workspaceRoot}/*"
-            },
-            "runtimeArgs": [
-                "--disable-session-crashed-bubble",
-                "--disable-infobars"
-            ]
         }
     ]
 }
