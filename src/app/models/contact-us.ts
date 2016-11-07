@@ -1,10 +1,10 @@
 export class ContactUs {
     
-    public name : string;
-    public company : string;
-    public email : string;
-    public phone : string;
-    public message : string;
+    public Name : string;
+    public Company : string;
+    public Eemail : string;
+    public Phone : string;
+    public theMessage : string;
 
     constructor(){
 
