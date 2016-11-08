@@ -22,6 +22,7 @@ import { FullLayoutComponent }          from './layouts/full-layout.component';
 // My Components (Move to modules that need them...)
 import { ConfigService }                from "./services/config.service";
 
+
 @NgModule({
     imports: [
         BrowserModule,
