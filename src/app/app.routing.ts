@@ -27,6 +27,10 @@ export const routes: Routes = [
                 loadChildren: 'app/products/products.module#ProductsModule'
             },
             {
+                path: 'career',
+                loadChildren: 'app/career/career.module#CareerModule'
+            },
+            {
                 path: 'location',
                 loadChildren: 'app/location/location.module#LocationModule'
             },
