@@ -35,6 +35,10 @@ export const routes: Routes = [
                 loadChildren: 'app/customers/customers.module#CustomersModule'
             },
             {
+                path: 'files',
+                loadChildren: 'app/files/files.module#FilesModule'
+            },
+            {
                 path: 'location',
                 loadChildren: 'app/location/location.module#LocationModule'
             },
