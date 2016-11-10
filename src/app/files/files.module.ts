@@ -5,7 +5,7 @@ import { TabsModule }               from 'ng2-bootstrap/components/tabs';
 
 import { FilesComponent }       from './files.component';
 import { FilesRoutingModule }   from './files-routing.module';
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
+// import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
     imports: [
@@ -15,9 +15,9 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file
         TabsModule
     ],
     declarations: [ 
-        FilesComponent,
-        FileSelectDirective,
-        FileDropDirective
+        FilesComponent
+        //FileSelectDirective,
+        //FileDropDirective
     ]
 })
 export class FilesModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FileUploader, Headers } from 'ng2-file-upload/ng2-file-upload';
+//import { FileUploader, Headers } from 'ng2-file-upload/ng2-file-upload';
 
 import { ConfigService } from "../services/config.service";
 
@@ -13,7 +13,7 @@ export class FilesComponent implements OnInit {
 
   public locationCode : string;
   private url : string;
-  public uploader : FileUploader;
+  //public uploader : FileUploader;
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
   private config : any;
@@ -24,9 +24,9 @@ export class FilesComponent implements OnInit {
 
   ngOnInit() {
     this.url = this.config.apiUrl+"/files";
-    this.uploader = new FileUploader({
-      url: this.url}
-    );
+    // this.uploader = new FileUploader({
+    //   url: this.url}
+    // );
 
     // ,
     //   headers: <Headers[]> [
