@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 //import { FileUploader, Headers } from 'ng2-file-upload/ng2-file-upload';
 
@@ -14,24 +14,31 @@ export class FilesComponent implements OnInit {
   public locationCode : string;
   private url : string;
   //public uploader : FileUploader;
-  public hasBaseDropZoneOver:boolean = false;
-  public hasAnotherDropZoneOver:boolean = false;
+  //public hasAnotherDropZoneOver:boolean = false;
   private config : any;
+  
+  private zone: NgZone;
+  private basicOptions: Object;
+  public progress: number = 0;
+  public response: any = {};
+  public speed: string;
 
   constructor(private configService: ConfigService){
         this.config = configService.config;
   }
 
+  public handleUpload(data: any): void {
+    this.zone.run(() => {
+      this.response = data;
+      this.progress = data.progress.percent;
+      this.speed = data.speedAverageHumanized;
+    });
+  }
+
   ngOnInit() {
     this.url = this.config.apiUrl+"/files";
-    // this.uploader = new FileUploader({
-    //   url: this.url}
-    // );
-
-    // ,
-    //   headers: <Headers[]> [
-    //       { name: 'Content-Type', value: 'multipart/form-data; boundary=----WebKitFormBoundaryXAIXdwxDD9DS3PsV' }
-    //   ]
+    this.basicOptions  = {url: this.url, calculateSpeed: true };
+    this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
   public navigateToShare(){
