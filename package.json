@@ -31,7 +31,6 @@
     "moment": "2.15.2",
     "ng2-bootstrap": "^1.1.14",
     "ng2-charts": "1.4.0",
-    "ng2-uploader": "^1.4.1",
     "rxjs": "5.0.0-rc.1",
     "ts-helpers": "1.1.2",
     "zone.js": "0.6.26"
