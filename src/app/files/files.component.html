@@ -1,90 +1,16 @@
 <div class="animated fadeIn">
 	<div class="card card-block card-outline-primary ">
 		<h4 class="card-title">McGill Files</h4>
-		<p class="card-text">This application will allow employees of the McGill Family of Companies to share files with customers, clients, and other employees. It is meant to be used in place for sending email attachments. If you would like to get started, enter your code in the text box and press Go. If you don't have a code you must create a file share first.  Refer to the help tab for more information.</p>
-    <hr>
-		<tabset>
-			<tab heading="ng2-uploader">
-				<input type="file" 
-					ngFileSelect
-					[options]="basicOptions" 
-					(onUpload)="handleUpload($event)">
-				<p></p>
-				<div hidden>
-				Response: {{ response | json }}
-				</div>
-				<progress class="progress progress-striped" value={{progress}} max="100"></progress>
-				<div>
-					<span>Result: {{response.originalName}}&nbsp;:&nbsp;{{response.statusText}}</span>
-				</div>
-			</tab>
-			<tab heading="File Sharing Code">
-				<div class="card card-block card-outline-primary ">
-					<h4 class="card-title card-accent-primary">Enter the file sharing code</h4>
-					<p class="cart-text">Your code should be 10 characters long, and will only contain the numbers 0 - 9 and letters A - F.</p>
-					<form  name="enterCode" (ngSubmit)="navigateToShare()" #codeForm="ngForm" >
-						<div class="form-group row">
-							<div class="col-xs-5">
-								<input type="text" minlength="10" maxlength="10" class="form-control" id="code-input" [(ngModel)]="locationCode" name="code" required #code="ngModel">
-								<div [hidden]="code.valid || code.pristine" 
-									class="alert alert-danger">
-									Code must be a length of 10
-								</div>
-							</div>
-							<div class="col-xs-7">
-          						<button class="btn btn-success" [disabled]="!codeForm.form.valid" >Go</button>   
-        					</div>	
-						</div>
-					</form>	
-			 	</div>
-			</tab>
-			<tab heading="Create File Share">
-				<div class="card card-block card-outline-primary ">
-					<h4 class="card-title card-accent-primary">Create a file share</h4>
-					<div class="card-text">
-					</div>
-				</div>
-			</tab>
-			<tab heading="Help">
-				<div class="card card-block card-outline-primary ">
-					<h4 class="card-title card-accent-primary">Help</h4>
-					<p class="card-text"><b>Enter your code</b><br>
-					If you have already been given a code to access a file share location, enter it into the text box and press Go. Please contact the associate you are working with if you need to share files and do not have a code.<br>
-					You may have to provide a user name and password to access the page. If you cannot remember this information, please contact us.
-					</p>
-					<p class="card-text"><b>Click Browse... and find your file to upload</b><br>
-					Under the Share a New File heading, click the Browse... button. A new window will appear, prompting you to find a file on your computer to upload.<br>
-					After you have found the file, press the Open button at the lower-right of the window. It will disappear, and your file name will be displayed in the text box next to the Browse... button.
-					</p>
-					<p class="card-text"><b>Click Upload</b><br>
-					Make sure the file you wish to upload is displayed in the text box, and click the Upload button. You will be able to monitor the progress of your upload as it happens.<br>
-					After the upload is finished, your file will be included in the List of Shared Files at the top of the page. It will be immediately available for anyone to download.
-					</p>
-					<p class="card-text"><b>Share the uploaded file</b><br>
-					There are a few ways to share your uploaded files:
-					</p>
-					<ul>
-						<li>Highlight and copy the Shared File Location's code under the <b>About this File Sharing Location</b> heading, and give it to the intended recepient.</li>
-						<li>Highlight and copy/paste the link to the File Sharing Location (also under the <b>About this File Sharing Location</b> heading). This would enable the recipient to access the File Sharing Location without entering a code.</li>						
-						<li>Highlight and copy/paste the direct link to the file you wish to share, located in the <b>List of Shared Files</b>.</li>						
-					</ul>
-					<p class="card-text"><b>Deleting Files</b><br>
-					To delete a file, click the check box next to the unwanted file, and press the delete button. You can delete all files from the share location by placing a check in the box at the top of the list.
-					</p>
-				</div>
-			</tab>
-			<tab heading="Admin">
-				<div class="card card-block card-outline-primary ">
-					<h4 class="card-title card-accent-primary">Admin</h4>
-					<div class="p-1">
-						<a class="btn btn-primary" href="#"><i class="fa fa-search"></i>&nbsp;&nbsp;View all file shares</a>
-					</div>
-					<div class="p-1">
-						<a class="btn btn-primary" href="#"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Login to manage file shares</a>
-					</div>
-				</div>
-			</tab>
-		
-		</tabset>		
+		<p class="card-text">This application will allow employees of the McGill Family of Companies to share files with customers, clients, and other employees. It is meant to be used in place for sending email attachments.</p>
+		<p class="card-text">Start by selecting the company desired for sharing.</p>
+		<ul>
+	   	 <li><a href="http://files.mcgillairclean.com"><h6>McGill AirClean <small>LLC</small></h6></a></li>
+	   	 <li><a href="http://files.mcgillairpressure.com"><h6>McGill AirPressure <small>LLC</small></h6></a></li>
+	   	 <li><a href="http://files.mcgillairflow.com"><h6>McGill AirFlow <small>LLC</small></h6></a></li>
+	   	 <li><a href="http://files.mcgillairsilence.com"><h6>McGill AirSilence <small>LLC</small></h6></a></li>
+	   	 <li><a href="http://files.mcgillairseal.com"><h6>McGill AirSeal <small>LLC</small></h6></a></li>
+	   	 <li><a href="http://files.unitedmcgill.com"><h6>United McGill Corporation</h6></a></li>
+	   	 <li><a href="http://files.themcgillcorp.com"><h6>The McGill Corporation</h6></a></li>
+		</ul>
   </div>
 </div>
