@@ -5,7 +5,7 @@ import { LocationStrategy,
          PathLocationStrategy }         from '@angular/common';
 
 import { AppComponent }                 from './app.component';
-import { Ng2BootstrapModule }           from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule }           from 'ng2-bootstrap';
 import { NAV_DROPDOWN_DIRECTIVES }      from './shared/nav-dropdown.directive';
 
 import { ChartsModule }                 from 'ng2-charts/ng2-charts';
@@ -22,6 +22,10 @@ import { FullLayoutComponent }          from './layouts/full-layout.component';
 // My Components (Move to modules that need them...)
 import { ConfigService }                from "./services/config.service";
 
+// Init the config service
+export function initConfig(config: ConfigService){
+ return () => config.load() 
+}
 
 @NgModule({
     imports: [
@@ -43,7 +47,7 @@ import { ConfigService }                from "./services/config.service";
         ConfigService,
         {
             provide: APP_INITIALIZER,
-            useFactory: (config: ConfigService) => () => config.load(),
+            useFactory: initConfig,
             deps: [ConfigService],
             multi: true},
         {

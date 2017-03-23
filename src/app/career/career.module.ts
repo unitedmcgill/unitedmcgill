@@ -1,7 +1,7 @@
 import { NgModule }                 from '@angular/core';
 import { CommonModule }             from '@angular/common';
 import { FormsModule }              from '@angular/forms';
-import { TabsModule }               from 'ng2-bootstrap/components/tabs';
+import { TabsModule }               from 'ng2-bootstrap/tabs';
 
 import { CareerComponent }       from './career.component';
 import { CareerRoutingModule }   from './career-routing.module';
@@ -11,7 +11,7 @@ import { CareerRoutingModule }   from './career-routing.module';
         CareerRoutingModule,
         CommonModule,
         FormsModule,
-        TabsModule
+        TabsModule.forRoot()
     ],
     declarations: [ 
         CareerComponent 

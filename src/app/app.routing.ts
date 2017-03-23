@@ -20,31 +20,31 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
+                loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
             {
                 path: 'products',
-                loadChildren: 'app/products/products.module#ProductsModule'
+                loadChildren: './products/products.module#ProductsModule'
             },
             {
                 path: 'career',
-                loadChildren: 'app/career/career.module#CareerModule'
+                loadChildren: './career/career.module#CareerModule'
             },
             {
                 path: 'customers',
-                loadChildren: 'app/customers/customers.module#CustomersModule'
+                loadChildren: './customers/customers.module#CustomersModule'
             },
             {
                 path: 'files',
-                loadChildren: 'app/files/files.module#FilesModule'
+                loadChildren: './files/files.module#FilesModule'
             },
             {
                 path: 'location',
-                loadChildren: 'app/location/location.module#LocationModule'
+                loadChildren: './location/location.module#LocationModule'
             },
             {
                 path: 'contactus',
-                loadChildren: 'app/contactus/contactus.module#ContactUsModule'
+                loadChildren: './contactus/contactus.module#ContactUsModule'
             }
         ]
     }

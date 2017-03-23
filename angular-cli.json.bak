@@ -1,16 +1,15 @@
 {
   "project": {
-    "version": "1.0.0-alpha.3",
+    "version": "1.0.0-alpha.2",
     "name": "core-ui"
   },
   "apps": [
     {
       "root": "src",
       "outDir": "dist",
-      "assets": ["assets", "app.config.json"],
+      "assets": "assets",
       "index": "index.html",
       "main": "main.ts",
-      "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
@@ -22,8 +21,8 @@
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
         "../node_modules/chart.js/dist/Chart.min.js"
       ],
-      "environmentSource": "environments/environment.ts",
       "environments": {
+        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -36,16 +35,6 @@
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [
-    {
-      "files": "src/**/*.ts",
-      "project": "src/tsconfig.json"
-    },
-    {
-      "files": "e2e/**/*.ts",
-      "project": "e2e/tsconfig.json"
-    }
-  ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"
