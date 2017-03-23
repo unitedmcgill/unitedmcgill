@@ -1,7 +1,7 @@
 import { NgModule }                 from '@angular/core';
 import { CommonModule }             from '@angular/common';
 import { FormsModule }              from '@angular/forms';
-import { TabsModule }               from 'ng2-bootstrap/components/tabs';
+import { TabsModule }               from 'ng2-bootstrap/tabs';
 
 import { ProductsComponent }       from './products.component';
 import { ProductsRoutingModule }   from './products-routing.module';
@@ -11,7 +11,7 @@ import { ProductsRoutingModule }   from './products-routing.module';
         ProductsRoutingModule,
         CommonModule,
         FormsModule,
-        TabsModule
+        TabsModule.forRoot()
     ],
     declarations: [ 
         ProductsComponent 
