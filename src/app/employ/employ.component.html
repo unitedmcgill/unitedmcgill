@@ -1,0 +1,22 @@
+<div class="animated fadeIn">
+	<span *ngIf="showLoader" class="loading"></span>
+	<div class="card card-block card-outline-primary ">
+		<h4 class="card-title">Employment Applications (Admin)</h4>
+		<table class="table table-responsive employment table-hover" >
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>lastname</th>
+					<th>firstname</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let applicant of applicants" (click)="selectedRow(applicant.employmentAppId)">
+					<td>{{applicant.employmentAppId}}</td>
+					<td>{{applicant.lastName}}</td>
+					<td>{{applicant.firstName}}</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
+</div>
