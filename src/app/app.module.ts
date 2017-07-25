@@ -12,6 +12,7 @@ import { ChartsModule }                 from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES }    from './shared/sidebar.directive';
 import { AsideToggleDirective }         from './shared/aside.directive';
 import { BreadcrumbsComponent }         from './shared/breadcrumb.component';
+import { LoaderService }                from './services/loader.service';
 
 // Routing Module
 import { AppRoutingModule }             from './app.routing';
@@ -44,6 +45,7 @@ export function initConfig(config: ConfigService){
         AsideToggleDirective
     ],
     providers: [
+        LoaderService,
         ConfigService,
         {
             provide: APP_INITIALIZER,
