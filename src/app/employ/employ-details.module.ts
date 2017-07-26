@@ -4,19 +4,19 @@ import { FormsModule }              from '@angular/forms';
 import { TabsModule }               from 'ng2-bootstrap/tabs';
 import { EmployService }             from './employ.service';
 
-import { EmployComponent }          from './employ.component';
-import { EmployRoutingModule }      from './employ-routing.module';
+import { EmployDetailsComponent }          from './employ-details.component';
+import { EmployDetailsRoutingModule }      from './employ-details-routing.module';
 
 @NgModule({
     imports: [
-        EmployRoutingModule,
+        EmployDetailsRoutingModule,
         CommonModule,
         FormsModule,
         TabsModule.forRoot()
     ],
     declarations: [ 
-        EmployComponent
+        EmployDetailsComponent
     ],
     providers:[EmployService]
 })
-export class EmployModule { }
+export class EmployDetailsModule { }
