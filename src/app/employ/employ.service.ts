@@ -64,9 +64,30 @@ export class EmployService{
 
     public getApplicants() : Observable<IEmploymentListItem[]>{
        
-        let bodyString = JSON.stringify(''); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        //let bodyString = JSON.stringify(''); // Stringify payload
+        //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/onlineapp";
+
+        return this.http.get(url)//, bodyString, {headers:headers})
+        .map((res:Response) => {
+            let data = res.json();
+            //console.log('test: '+data);
+            // Fix enums
+            //let duct = DuctType[data.type];
+            //data.type = duct;
+
+            return data;
+        })      
+        .catch(this._handleError);
+       
+        //alert(url + ":" + bodyString);
+    }
+
+        public getApplicant(id : number) : Observable<IEmploymentListItem>{
+       
+        //let bodyString = JSON.stringify(''); // Stringify payload
+        //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let url = this.config.apiUrl+"/onlineapp"+"/"+id;
 
         return this.http.get(url)//, bodyString, {headers:headers})
         .map((res:Response) => {

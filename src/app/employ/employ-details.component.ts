@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IEmploymentListItem } from '../models/employment';
 
 @Component({
   //selector: 'app-products',
-  templateUrl: './employ.component.html',
-  styleUrls: ['./employ.component.scss']
+  templateUrl: './employ-details.component.html',
+  styleUrls: ['./employ-details.component.scss']
 })
-export class EmployComponent implements OnInit {
+export class EmployDetailsComponent implements OnInit, OnDestroy {
 
-  public selectedValue : number;
-  public applicants : IEmploymentListItem[];
+  public applicant : IEmploymentListItem;
   public showLoader : boolean = false;
-  public selectedId : number = -1;
+  public sub :any;
 
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
@@ -22,24 +21,30 @@ export class EmployComponent implements OnInit {
    }
 
   ngOnInit() {
-    // Get applicants for list
-    this.getApplicants();
+    this.sub = this.route.params.subscribe(params => {
+      let id = Number.parseInt(params['id']);
+      this.getApplicant(id);
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   public selectedRow(i){
-    //alert(i);
-    this.selectedId = i;
+    alert(i);
   }
 
-  public getApplicants(){
+  public getApplicant(id){
     this.showLoader = true;
-    this.employService.getApplicants()
-      .subscribe((data: IEmploymentListItem[]) => {
+    this.employService.getApplicant(id)
+      .subscribe((data: IEmploymentListItem) => {
           if ( data ){
             // console.log(data);
             // console.log(this.ductConvert);
             // const duct = JSON.stringify(data);
-            this.applicants = data;
+            this.applicant = data;
             // console.log(this.ductConvert);
           } else {
             console.log("error");
@@ -53,6 +58,11 @@ export class EmployComponent implements OnInit {
         },
         // Finally
         () => this.showLoader = false);
+  }
+
+  public gotoEmployList(){
+    let link = ['/employ'];
+    this.router.navigate(link);
   }
 
 }
