@@ -3,6 +3,7 @@ import  { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ConfigService } from "../services/config.service";
 import { Observable } from 'rxjs/Observable';
 import { IEmploymentListItem } from '../models/employment';
+import { IApplication, SectionA, SectionB } from '../models/application';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -66,7 +67,7 @@ export class EmployService{
        
         //let bodyString = JSON.stringify(''); // Stringify payload
         //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        let url = this.config.apiUrl+"/onlineapp";
+        let url = this.config.apiUrl+"/applicant";
 
         return this.http.get(url)//, bodyString, {headers:headers})
         .map((res:Response) => {
@@ -83,11 +84,32 @@ export class EmployService{
         //alert(url + ":" + bodyString);
     }
 
-        public getApplicant(id : number) : Observable<IEmploymentListItem>{
+    public getApplicant(id : number) : Observable<IEmploymentListItem>{
        
         //let bodyString = JSON.stringify(''); // Stringify payload
         //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        let url = this.config.apiUrl+"/onlineapp"+"/"+id;
+        let url = this.config.apiUrl+"/applicant"+"/"+id;
+
+        return this.http.get(url)//, bodyString, {headers:headers})
+        .map((res:Response) => {
+            let data = res.json();
+            //console.log('test: '+data);
+            // Fix enums
+            //let duct = DuctType[data.type];
+            //data.type = duct;
+
+            return data;
+        })      
+        .catch(this._handleError);
+       
+        //alert(url + ":" + bodyString);
+    }
+
+        public getApplication(code : string) : Observable<IApplication>{
+       
+        //let bodyString = JSON.stringify(''); // Stringify payload
+        //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let url = this.config.apiUrl+"/onlineapp"+"/"+code;
 
         return this.http.get(url)//, bodyString, {headers:headers})
         .map((res:Response) => {

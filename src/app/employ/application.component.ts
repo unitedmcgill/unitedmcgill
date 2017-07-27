@@ -1,23 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
-import { IEmploymentListItem } from '../models/employment';
 import { IApplication, SectionA, SectionB } from '../models/application';
 
 @Component({
   //selector: 'app-products',
-  templateUrl: './employ-details.component.html',
-  styleUrls: ['./employ-details.component.scss']
+  templateUrl: './application.component.html',
+  styleUrls: ['./application.component.scss']
 })
-export class EmployDetailsComponent implements OnInit, OnDestroy {
-
-  public applicant : IEmploymentListItem = {
-    employmentAppId : 0,
-    lastName: '',
-    firstName: '',
-    status: '',
-    code: '' 
-  };
+export class ApplicationComponent implements OnInit, OnDestroy {
 
   public application : IApplication = {
     employmentAppId : 0,
@@ -88,8 +79,8 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      let id = Number.parseInt(params['id']);
-      this.getApplicant(id);
+      let code = params['code']; // Number.parseInt(params['id']);
+      this.getApplication(code);
     });
 
   }
@@ -98,19 +89,16 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public selectedRow(i){
-    alert(i);
-  }
 
-  public getApplicant(id){
+  public getApplication(code){
     this.showLoader = true;
-    this.employService.getApplicant(id)
-      .subscribe((data: IEmploymentListItem) => {
+    this.employService.getApplication(code)
+      .subscribe((data: IApplication) => {
           if ( data ){
             // console.log(data);
             // console.log(this.ductConvert);
             // const duct = JSON.stringify(data);
-            this.applicant = data;
+            this.application = data;
             // console.log(this.ductConvert);
           } else {
             console.log("error");

@@ -2,14 +2,14 @@ import { NgModule }             from '@angular/core';
 import { Routes,
          RouterModule }         from '@angular/router';
 
-import { EmployDetailsComponent }   from './employ-details.component';
+import { ApplicationComponent }   from './application.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: EmployDetailsComponent,
+        component: ApplicationComponent,
         data: {
-            title: 'Applicant'
+            title: 'Application'
         }
     }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class EmployDetailsRoutingModule {}
+export class ApplicationRoutingModule {}
