@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IEmploymentListItem } from '../models/employment';
-import { IApplication, SectionA, SectionB } from '../models/application';
 
 @Component({
   //selector: 'app-products',
@@ -18,64 +17,6 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
     status: '',
     code: '' 
   };
-
-  public application : IApplication = {
-    employmentAppId : 0,
-    lastName: '',
-    firstName: '',
-    status: '',
-    code: '' ,
-    sectionA : {
-        "employmentAppId": 0,
-        "locations": '',
-        "otherLocation": '',
-        "agreeText": '',
-        "agreeTime": 0
-    },
-    sectionB : {
-        "employmentAppId": 0,
-        "employBefore": 0,
-        "beforeStartMonth": '',
-        "beforeStartYear": '',
-        "beforeEndMonth": '',
-        "beforeEndYear": '',
-        "beforeJob": '',
-        "beforeSupervisor": '',
-        "beforeManager": '',
-        "beforeLeave": '',
-        "applyBefore": 0,
-        "applyDate": '',
-        "applyJob": '',
-        "mcGillRelatives": 0,
-        "relativeNameOne": '',
-        "relativeNameTwo": '',
-        "relativeNameThree": '',
-        "relativeRelationshipOne": '',
-        "relativeRelationshipTwo": '',
-        "relativeRelationshipThree": '',
-        "relativeJobOne": '',
-        "relativeJobTwo": '',
-        "relativeJobThree": '',
-        "relativeLocationOne": '',
-        "relativeLocationTwo": '',
-        "relativeLocationThree": '',
-        "findOut": '',
-        "findOutEmployee": '',
-        "findOutSite": '',
-        "findOutOther": '',
-        "mcGillPosition": '', // mcgillPosition
-        "mcGillWork": '', // mcgillWork
-        "mcGillWorkHours": '',
-        "secondShift": 0,
-        "thirdShift": 0,
-        "startPayHourly": '',
-        "startPayYearly": '',
-        "startWorking": '',
-        "contactEmployer": 0,
-        "contactEmployerTime": '',
-        "plansGoals": ''    
-    }   
-  }
 
   public showLoader : boolean = false;
   public sub :any;
