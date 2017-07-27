@@ -47,8 +47,12 @@ export const routes: Routes = [
                 loadChildren: './employ/employ.module#EmployModule'
             },
             {
-                path: 'employ-details/:id',
+                path: 'employ/:id',
                 loadChildren: './employ/employ-details.module#EmployDetailsModule'
+            },
+            {
+                path: 'application/:code',
+                loadChildren: './employ/application.module#ApplicationModule'
             },
             {
                 path: 'contactus',
