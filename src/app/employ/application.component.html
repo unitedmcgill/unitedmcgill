@@ -1,14 +1,13 @@
 <div class="animated fadeIn">
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
-		<h4 class="card-title">Employment Application ({{application.code}})</h4>
-		<p>lastName: {{application.lastName}}</p>
-		<p>sectionA: locations: {{application.sectionA.locations}}<br />
-			         otherLocation: {{application.sectionA.otherLocation}}<br />
-			         agreeText: {{application.sectionA.agreeText}}<br />
-					 agreeTime: {{application.sectionA.agreeTime}}<br />
-		</p>
-		<p>sectionE: degreeTwo: {{application.sectionE.degreeTwo}}<br />
-		</p>
+		<h4 class="card-title">Employment Application ({{applicant.lastName}})</h4>
+		<form name="applicationForm" #applicationForm="ngForm">
+
+			<div class="offset-sm-2 col-sm-10">
+				<button class="btn btn-success" [disabled]="!applicationForm.form.valid" (click)="save()">Save</button>
+			</div>
+			</div>
+		</form>
 	</div>
 </div>

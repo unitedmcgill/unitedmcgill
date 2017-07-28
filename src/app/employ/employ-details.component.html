@@ -1,7 +1,67 @@
 <div class="animated fadeIn">
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
-		<h4 class="card-title">Employment Applicant ({{applicant.lastName}})</h4>
+		<h4 class="card-title">Employment Applicant (<span *ngIf="applicant.employmentAppId!=-1">{{applicant.employmentAppId}}</span><span *ngIf="applicant.employmentAppId==-1">New</span>)</h4>
+		<form name="applicantForm" #applicantForm="ngForm">
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label" for="firstName-input">First Name</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="firstName-input" [(ngModel)]="applicant.firstName" name="firstName" required #firstName="ngModel">
+					<div [hidden]="firstName.valid || firstName.pristine" 
+						class="alert alert-danger">
+						First Name is required
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label" for="lastName-input">Last Name</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="lastName-input" [(ngModel)]="applicant.lastName" name="lastName" required #lastName="ngModel">
+					<div [hidden]="lastName.valid || lastName.pristine" 
+						class="alert alert-danger">
+						Last Name is required
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label" for="email-input">Email</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="email-input" [(ngModel)]="applicant.email" name="email">
+				</div>
+			</div>	
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label" for="status-input">Status</label>
+				<div class="col-xs-10">
+					<select id="status-input" class="col-form-label" [(ngModel)]="applicant.status" name="status-input">
+						<option *ngFor="let st of statusTypes" class="col-xs-2" [ngValue]="st.value">{{st.display}}</option>
+					</select>
+				</div>
+			</div>						
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label">Created</label>
+				<div class="col-xs-10">
+					<span>{{applicant.created}}</span>
+				</div>
+			</div>	
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label">Updated</label>
+				<div class="col-xs-10">
+					<span>{{applicant.updated}}</span>
+				</div>
+			</div>	
+			<div class="form-group row">
+				<label class="col-xs-2 col-form-label">Code</label>
+				<div class="col-xs-10">
+					<span>{{applicant.code}}</span>
+				</div>
+			</div>	
+			<div class="offset-sm-2 col-sm-10">
+				<button class="btn btn-info" (click)="gotoEmployList()">Back</button>
+				<button class="btn btn-success" [disabled]="!applicantForm.form.valid" (click)="save()">Save</button>
+				<button class="btn btn-info" [disabled]="!applicantForm.form.valid" (click)="cancel()">Cancel</button>
+				<button class="btn btn-danger" [disabled]="!applicantForm.form.valid" (click)="delete()">Delete</button>
+			</div>
+
+		</form>
 	</div>
-	
 </div>

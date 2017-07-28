@@ -27,7 +27,6 @@ export class EmployComponent implements OnInit {
   }
 
   public selectedRow(i){
-    //alert(i);
     this.selectedId = i;
   }
 
@@ -53,6 +52,23 @@ export class EmployComponent implements OnInit {
         },
         // Finally
         () => this.showLoader = false);
+  }
+
+  public edit(){
+    if ( this.selectedId == -1 )
+    {
+      alert("Please select an applicant from the list first.");
+    }
+    else
+    {
+      let link = ['/employ/'+this.selectedId];
+      this.router.navigate(link);    
+    }
+  }
+
+  public createApplicant(){
+    let link = ['/employ/-1'];
+    this.router.navigate(link);    
   }
 
 }

@@ -8,9 +8,9 @@
             "url": "http://localhost:4200",
             "sourceMaps": true,
             "webRoot": "${workspaceRoot}",
-            "diagnosticLogging": false,
+            "trace": true,
             "sourceMapPathOverrides": {
-                "webpack:///c:/d-drive/project/angular2/unitedmcgill/*": "${workspaceRoot}/*"
+                "webpack:///./*":"${workspaceRoot}\\*" 
             },
             "runtimeArgs": [
                 "--disable-session-crashed-bubble",

@@ -10,11 +10,18 @@ import { IApplication, SectionA, SectionB, SectionC, SectionD, SectionE, Section
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
 
+  public statusTypes = [
+    { value: 'C', display: 'Current' },
+    { value: 'D', display: 'Deleted' },
+    { value: 'H', display: 'Hide' },
+    { value: 'K', display: 'Keep' }
+  ];
+  
   public application : IApplication = {
     employmentAppId : 0,
     lastName: '',
     firstName: '',
-    status: '',
+    status: this.statusTypes[0].value,
     code: '' ,
     sectionA : {
         employmentAppId: 0,
