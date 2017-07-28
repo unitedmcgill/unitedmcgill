@@ -6,6 +6,7 @@ import { EmployService }             from './employ.service';
 
 import { EmployComponent }          from './employ.component';
 import { EmployRoutingModule }      from './employ-routing.module';
+import { FilterPipe } from '../shared/filter.pipe';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { EmployRoutingModule }      from './employ-routing.module';
         TabsModule.forRoot()
     ],
     declarations: [ 
-        EmployComponent
+        EmployComponent,
+        FilterPipe
     ],
     providers:[EmployService]
 })

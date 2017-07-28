@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
-import { IEmploymentListItem } from '../models/employment';
+import { IEmploymentListItem} from '../models/employment';
 
 @Component({
   //selector: 'app-products',
@@ -10,14 +10,22 @@ import { IEmploymentListItem } from '../models/employment';
 })
 export class EmployDetailsComponent implements OnInit, OnDestroy {
 
+  public statusTypes = [
+    { value: 'C', display: 'Current' },
+    { value: 'D', display: 'Deleted' },
+    { value: 'H', display: 'Hide' },
+    { value: 'K', display: 'Keep' }
+  ];
+
   public applicant : IEmploymentListItem = {
-    employmentAppId : 0,
+    employmentAppId : -1,
     lastName: '',
     firstName: '',
-    status: '',
+    status: this.statusTypes[0].value,
     code: '' 
   };
 
+  public applicantCopy = null;
   public showLoader : boolean = false;
   public sub :any;
 
@@ -30,7 +38,15 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let id = Number.parseInt(params['id']);
-      this.getApplicant(id);
+      if ( id == -1 )
+      {
+        this.createApplicant();
+      }
+      else
+      {
+        this.getApplicant(id);               
+      }
+
     });
 
   }
@@ -52,6 +68,7 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
             // console.log(this.ductConvert);
             // const duct = JSON.stringify(data);
             this.applicant = data;
+            this.applicantCopy = Object.assign({}, this.applicant);
             // console.log(this.ductConvert);
           } else {
             console.log("error");
@@ -65,6 +82,109 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
         },
         // Finally
         () => this.showLoader = false);
+        
+  }
+
+  public cancel(){
+    this.applicant = this.applicantCopy;
+    this.applicant = Object.assign({}, this.applicantCopy);
+  }
+
+  private getNextCode(len)
+  {
+    var bits = 36;
+    var outStr = "", newStr;
+    while (outStr.length < len) {
+        newStr = Math.random().toString(bits).slice(2);
+        outStr += newStr.slice(0, Math.min(newStr.length, (len - outStr.length)));
+    }
+    return outStr.toLowerCase();
+  }
+
+  public createApplicant(){
+    
+    this.applicant = {
+        employmentAppId : -1,
+        lastName: '',
+        firstName: '',
+        status: this.statusTypes[0].value,
+        code: this.getNextCode(10)
+       }
+
+  }
+
+  public save(){
+    if ( this.applicant.employmentAppId == -1)
+    {
+      this.newApplicant(); 
+    }
+    else
+    {
+      this.saveApplicant();
+    }
+  }
+
+  private saveApplicant(){
+    this.showLoader = true;
+    this.employService.saveApplicant(this.applicant)
+      .subscribe((data: IEmploymentListItem) => {
+          if ( data ){
+            // console.log(data);
+            // console.log(this.ductConvert);
+            // const duct = JSON.stringify(data);
+            // Save was successfull so update the Copy
+            this.applicantCopy = Object.assign({}, this.applicant);
+            console.log(data);
+          } else {
+            console.log("error");
+          }
+        },
+        // On Error
+        (err:any) => {
+          console.log(err);
+          alert(err);
+          this.showLoader = false;
+        },
+        // Finally
+        () => {
+          this.showLoader = false;
+          alert("Applicant saved.");
+        });      
+  }
+
+  private newApplicant(){
+    this.showLoader = true;
+    this.employService.newApplicant(this.applicant)
+      .subscribe((data: IEmploymentListItem) => {
+          if ( data ){
+            // console.log(data);
+            // console.log(this.ductConvert);
+            // const duct = JSON.stringify(data);
+            // Save was successfull so update the Copy
+            this.applicant = data;  // We have the id now
+            this.applicantCopy = Object.assign({}, this.applicant);
+            console.log(data);
+          } else {
+            console.log("error");
+          }
+        },
+        // On Error
+        (err:any) => {
+          console.log(err);
+          alert(err);
+          this.showLoader = false;
+        },
+        // Finally
+        () => {
+          this.showLoader = false;
+          alert("Applicant "+this.applicant.employmentAppId+" created.");
+          this.gotoEmployList();
+        });      
+  }
+
+  public delete()
+  {
+    alert("Just set the Status to Delete and click Save instead.");
   }
 
   public gotoEmployList(){
