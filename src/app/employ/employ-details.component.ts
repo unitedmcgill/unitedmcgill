@@ -20,6 +20,7 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
   public applicant : IEmploymentListItem = {
     employmentAppId : -1,
     created : 0,
+    lastUpdate : 0,
     lastName: '',
     firstName: '',
     status: this.statusTypes[0].value,
@@ -29,6 +30,8 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
   public applicantCopy = null;
   public showLoader : boolean = false;
   public sub :any;
+  public created : Date;
+  public lastUpdate : Date;
 
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
@@ -70,6 +73,8 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
             // const duct = JSON.stringify(data);
             this.applicant = data;
             this.applicantCopy = Object.assign({}, this.applicant);
+            this.created = new Date(this.applicant.created*1000);
+            this.lastUpdate = new Date(this.applicant.lastUpdate*1000);
             // console.log(this.ductConvert);
           } else {
             console.log("error");
@@ -103,11 +108,11 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
   }
 
   public createApplicant(){
-    var d = new Date();
-    
+    this.created = new Date();
     this.applicant = {
         employmentAppId : -1,
-        created : Math.round(d.getTime() / 1000), // time() in php was seconds since the Epoch, Date gives ms
+        created : Math.round(this.created.getTime()/1000), // time() in php was seconds since the Epoch, Date gives ms
+        lastUpdate : 0,
         lastName: '',
         firstName: '',
         status: this.statusTypes[0].value,
@@ -129,6 +134,9 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
 
   private saveApplicant(){
     this.showLoader = true;
+    this.lastUpdate = new Date();
+    this.applicant.lastUpdate = Math.round( this.lastUpdate.getTime()/1000); // time() in php was seconds since the Epoch, Date gives ms
+    
     this.employService.saveApplicant(this.applicant)
       .subscribe((data: IEmploymentListItem) => {
           if ( data ){

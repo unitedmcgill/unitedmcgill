@@ -1,6 +1,7 @@
 export interface IApplication {
     employmentAppId : number,
-    created : number
+    created : number,
+    lastUpdate : number,
     lastName: string,
     firstName: string,
     status: string,

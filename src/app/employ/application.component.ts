@@ -20,6 +20,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public application : IApplication = {
     employmentAppId : 0,
     created : 0,
+    lastUpdate : 0,
     lastName: '',
     firstName: '',
     status: this.statusTypes[0].value,
@@ -534,7 +535,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             this.application = data;
             this.processLocationsIn();
             this.created = new Date(this.application.created*1000);  // time() in php was seconds since the Epoch, Date needs ms
-            //this.lastUpdate = new Date(this.application.lastUpdate);  
+            this.lastUpdate = new Date(this.application.lastUpdate*1000);  
+            console.log(this.lastUpdate);
             // console.log(this.ductConvert);
           } else {
             console.log("error");
@@ -558,8 +560,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
     this.showLoader = true;
     this.processLocationsOut();
-    //var d = new Date();
-    //this.application.lastUpdate = d.getTime(); // time() in php was seconds since the Epoch, Date gives ms
+    this.lastUpdate = new Date();
+    this.application.lastUpdate = Math.round(this.lastUpdate.getTime()/1000); // time() in php was seconds since the Epoch, Date gives ms
     this.employService.saveApplication(this.application)
       .subscribe((data: IApplication) => {
           if ( data ){
