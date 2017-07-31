@@ -16,7 +16,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let applicant of applicants | filter:searchTerm" (click)="selectedRow(applicant.employmentAppId)">
+				<tr *ngFor="let applicant of applicants | filter:searchTerm" (click)="selectedRow(applicant)">
 					<td>{{applicant.employmentAppId}}</td>
 					<td>{{applicant.lastName}}</td>
 					<td>{{applicant.firstName}}</td>
@@ -25,9 +25,11 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="col-xs-4">
-			<button class="btn btn-success" (click)="edit()">Edit <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
-			<button class="btn btn-info" (click)="createApplicant()">New</button>
+		<div class="col-xs-12">
+			<button class="btn btn-info" (click)="edit()">Edit Applicant <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
+			<button class="btn btn-info" (click)="editApplication()">Edit Application <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
+			<button class="btn btn-success" (click)="createApplicant()">New</button>
+			<button class="btn btn-warning" (click)="emailApplicant()">Email Applicant <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
 		</div>		
   	</div>
 </div>

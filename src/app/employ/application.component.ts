@@ -19,6 +19,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   
   public application : IApplication = {
     employmentAppId : 0,
+    created : 0,
     lastName: '',
     firstName: '',
     status: this.statusTypes[0].value,
@@ -448,6 +449,17 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   public showLoader : boolean = false;
   public sub :any;
+  public agree : string = "";
+  public created : Date;
+  public lastUpdate : Date;
+
+  public airsilence : boolean = false;
+  public airflow : boolean = false;
+  public airpressure : boolean = false;
+  public airclean : boolean = false;
+  public umc : boolean = false;
+  public tmc : boolean = false;
+  public airseal : boolean = false;
 
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
@@ -458,6 +470,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let code = params['code']; // Number.parseInt(params['id']);
+      this.application.code = code;
       this.getApplication(code);
     });
 
@@ -467,6 +480,48 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  private processLocationsIn(){
+    var locations = this.application.sectionA.locations;
+    if (locations[0] === '1') {
+        this.airsilence = true;
+    }
+    if (locations[1] === '1') {
+        this.airseal = true;
+    }
+    if (locations[2] === '1') {
+        this.airflow = true;
+    }
+    if (locations[3] === '1') {
+        this.airpressure = true;
+    }
+    // There is no 4
+    if (locations[5] === '1') {
+        this.airclean = true;
+    }
+    if (locations[6] === '1') {
+        this.umc = true;
+    }
+    if (locations[7] === '1') {
+        this.tmc = true;
+    }
+  }
+
+  private processLocationsOut(){
+    var location;
+    
+    location = this.airsilence ? '1' : '0';
+    location += this.airseal ? '1' : '0';
+    location += this.airflow ? '1' : '0';
+    location += this.airpressure ? '1' : '0';
+    location += '0'; // Not used
+    location += this.airclean ? '1' : '0';
+    location += this.umc ? '1' : '0';
+    location += this.tmc ? '1' : '0';
+
+    if (location !== this.application.sectionA.locations) {
+        this.application.sectionA.locations = location;
+    }
+  }
 
   public getApplication(code){
     this.showLoader = true;
@@ -477,6 +532,9 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             // console.log(this.ductConvert);
             // const duct = JSON.stringify(data);
             this.application = data;
+            this.processLocationsIn();
+            this.created = new Date(this.application.created*1000);  // time() in php was seconds since the Epoch, Date needs ms
+            //this.lastUpdate = new Date(this.application.lastUpdate);  
             // console.log(this.ductConvert);
           } else {
             console.log("error");
@@ -490,6 +548,42 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         },
         // Finally
         () => this.showLoader = false);
+  }
+
+  private saveApplication(){
+    if ( this.agree.length <= 0 ){
+      alert("You must type your initials in agreement to save the application.");
+      return;
+    }
+
+    this.showLoader = true;
+    this.processLocationsOut();
+    //var d = new Date();
+    //this.application.lastUpdate = d.getTime(); // time() in php was seconds since the Epoch, Date gives ms
+    this.employService.saveApplication(this.application)
+      .subscribe((data: IApplication) => {
+          if ( data ){
+            // console.log(data);
+            // console.log(this.ductConvert);
+            // const duct = JSON.stringify(data);
+            // Save was successfull so update the Copy
+            // this.application = Object.assign({}, this.application);
+            console.log(data);
+          } else {
+            console.log("error");
+          }
+        },
+        // On Error
+        (err:any) => {
+          console.log(err);
+          alert(err);
+          this.showLoader = false;
+        },
+        // Finally
+        () => {
+          this.showLoader = false;
+          alert("Application saved.");
+        });      
   }
 
   public gotoEmployList(){

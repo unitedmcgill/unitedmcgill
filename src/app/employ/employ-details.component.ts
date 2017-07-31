@@ -19,10 +19,11 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
 
   public applicant : IEmploymentListItem = {
     employmentAppId : -1,
+    created : 0,
     lastName: '',
     firstName: '',
     status: this.statusTypes[0].value,
-    code: '' 
+    code: ''
   };
 
   public applicantCopy = null;
@@ -102,9 +103,11 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
   }
 
   public createApplicant(){
+    var d = new Date();
     
     this.applicant = {
         employmentAppId : -1,
+        created : Math.round(d.getTime() / 1000), // time() in php was seconds since the Epoch, Date gives ms
         lastName: '',
         firstName: '',
         status: this.statusTypes[0].value,
