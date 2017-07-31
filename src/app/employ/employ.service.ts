@@ -126,7 +126,28 @@ export class EmployService{
         //alert(url + ":" + bodyString);
     }
 
-        public newApplicant(applicant : IEmploymentListItem) : Observable<IEmploymentListItem>{
+     public saveApplication(application : IApplication) : Observable<IApplication>{
+       
+        let bodyString = JSON.stringify(application); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let url = this.config.apiUrl+"/onlineapp"+"/"+application.employmentAppId;
+
+        return this.http.put(url, bodyString, {headers:headers})
+        .map((res:Response) => {
+            //let data = res.json();
+            //console.log('test: '+data);
+            // Fix enums
+            //let duct = DuctType[data.type];
+            //data.type = duct;
+
+            return res;
+        })      
+        .catch(this._handleError);
+       
+        //alert(url + ":" + bodyString);
+    }    
+
+    public newApplicant(applicant : IEmploymentListItem) : Observable<IEmploymentListItem>{
        
         let bodyString = JSON.stringify(applicant).replace('"employmentAppId":-1,',''); // Stringify payload
         // Remove "employmentAppId":-1,

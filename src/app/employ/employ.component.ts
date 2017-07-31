@@ -14,6 +14,7 @@ export class EmployComponent implements OnInit {
   public applicants : IEmploymentListItem[];
   public showLoader : boolean = false;
   public selectedId : number = -1;
+  public selectedApplicant : IEmploymentListItem; 
 
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
@@ -26,8 +27,9 @@ export class EmployComponent implements OnInit {
     this.getApplicants();
   }
 
-  public selectedRow(i){
-    this.selectedId = i;
+  public selectedRow(applicant:IEmploymentListItem){
+    this.selectedId = applicant.employmentAppId;
+    this.selectedApplicant = applicant;
   }
 
   public getApplicants(){
@@ -69,6 +71,42 @@ export class EmployComponent implements OnInit {
   public createApplicant(){
     let link = ['/employ/-1'];
     this.router.navigate(link);    
+  }
+
+  public editApplication(){
+    if ( this.selectedId == -1 )
+    {
+      alert("Please select an applicant from the list first.");
+    }
+    else
+    {
+      let link = ['/application/'+this.selectedApplicant.code];
+      this.router.navigate(link);
+    }
+  
+  }
+
+  public emailApplicant(){
+    if ( this.selectedId == -1 )
+    {
+      alert("Please select an applicant from the list first.");
+    }
+    else
+    {
+      var eol = "<br /><br />";
+      var msgbody = this.selectedApplicant.firstName + " " + this.selectedApplicant.lastName + ":" + eol;
+      msgbody += 'Thank you for your interest in the McGill Companies.  Below you will find the information necessary to start the application process.' + eol;
+      msgbody += 'Please visit this page to access your application: <a href="http://www.unitedmcgill.com/application/' + this.selectedApplicant.code + '">Online Employment Application Login</a> ' + eol;
+      msgbody += 'Your Online Application Code: ' + this.selectedApplicant.code + eol;
+      msgbody += 'If you need assistance, please contact the Personnel Services Department.' + eol;
+      msgbody += 'Thank you,<br />Personnel Services Department' + eol;
+      msgbody += 'United McGill Corporation<br />One Mission Park<br />Groveport, OH 43125<br />Phone: (614) 829-1200<br />Fax: (614) 836-9843<br />Email: <a href="mailto:personnel@unitedmcgill.com">Personnel@unitedmcgill.com</a><br />' + eol;
+      msgbody += 'The Company is an equal opportunity employer.' + eol;
+      msgbody += 'EEO/m/f/d/v' + eol;
+
+      alert(msgbody);
+    }
+
   }
 
 }

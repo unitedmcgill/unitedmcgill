@@ -1,13 +1,105 @@
 <div class="animated fadeIn">
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
-		<h4 class="card-title">Employment Application ({{applicant.lastName}})</h4>
+		<h4 class="card-title">Employment Application ({{application.code}})</h4>
 		<form name="applicationForm" #applicationForm="ngForm">
+			<tabset>
+				<tab heading="Section A">
+					<div class="card card-block card-outline-primary ">
+						<h6 class="card-header">A. &nbsp; Application Company & Agreement</h6><br />
+						<div class="card-text col-md-12">
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="tmc" name="tmc">
+								<label class="mcgill-checkbox-top-label"><b>The McGill Corporation</b><br />One Misson Park<br />Groveport, OH 43125</label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="umc" name="umc">
+								<label class="mcgill-checkbox-top-label"><b>United McGill Corporation</b><br />One Misson Park<br />Groveport, OH 43125</label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="airclean" name="airclean">
+								<label class="mcgill-checkbox-top-label"><b>McGill AirClean LLC</b><br />1777 Refugee Rd.<br />Columbus, OH 43207</label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="airpressure" name="airpressure">
+								<label class="mcgill-checkbox-top-label"><b>McGill AirPressure LLC</b><br />1777 Refugee Rd.<br />Columbus, OH 43207</label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="airflow" name="airflow">
+								<label class="mcgill-checkbox-top-label"><b>McGill AirFlow LLC</b></label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="airseal" name="airseal">
+								<label class="mcgill-checkbox-top-label"><b>McGill AirSeal LLC</b><br />2400 Fairwood Avenue<br />Columbus, OH 43207</label>
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" [(ngModel)]="airsilence" name="airsilence">
+								<label class="mcgill-checkbox-top-label"><b>McGill AirSilence LLC</b><br />2400 Fairwood Avenue<br />Columbus, OH 43207</label>
+							</div>						
+						</div>
+						<div class="card-text">
+							<p>&nbsp;</p>
+						</div>
+						<div class="card-text">
+							<p>1. <b>Truth of Answers</b>: By completing this Application for Employment, I attest that I have a sincere interest in being hired by one of the above listed McGill companies (the Company). My responses to the questions in this application are true, to the best of my knowledge. If any response of a material fact is found to be not true, I consent to the Company’s refusal to consider this application, or discharge of me if I am already employed.
+							</p><hr />
+							<p>2. <b>Before and/or after obtaining employment, I agree to</b>: (a) Promptly furnish any additional information reasonably requested by the Company; (b) Submit to a physical examination and substance abuse screening by a physician selected by the Company; (c) Take tests required by the Company; and (d) Comply with the provisions of the Immigration Reform and Control Act of 1986.
+							</p><hr />
+							<p>3. <b>Further Information from Others</b>: Before and/or after obtaining employment, (a) I authorize any person, firm, corporation or other entity to furnish any information requested by the Company or its agents, except if I specifically indicate that no contact be made with my present employer; (b) I understand that the information requested might include, but not be limited to, my employment, skills, work habits, ability to perform the essential functions of the job for which I have applied or am doing, academic records, criminal records, driving record, credit, bankruptcy proceedings, legal history, character, and reputation; (c) I release, discharge, and hold harmless the Company and its agents, and any party delivering the information pursuant to this authorization, from any liability, claims, charges, costs, or causes of action which I or my heirs, executors, or assigns may have as a result of the delivery, disclosure, nondisclosure or omission of any information in connection herewith; (d) I understand that information about me and my background may be obtained through interviews with others and requests to former employers, law enforcement agencies, academic institutions, credit reporting agencies, financial institutions, governmental agencies and the like; (e) I reserve the right to make a written request about the nature and scope of such investigation as allowed under the Fair Credit Reporting Act; and (f) The Company may provide specific information from my personnel file to other employers, any government agency, or any party with a bona fide interest in that information.
+							</p><hr />
+							<p>4. <b>Employment</b>: If employed, I agree: (a) To sign and abide by the Company’s Confidentiality, Noncompetition and Ownership Agreement and Legal Compliance Policy; (b) To comply with the Company’s policies and procedures and perform the duties assigned and other related or required duties at the level required; (c) That my employment is at will for no definite period of time and may be terminated at any time by either party, with or without cause; (d) That no Associate of the Company other than its President may enter into an employment agreement on behalf of the Company and that any such agreement by the President must be in writing and signed by the President; (e) That upon termination the Company may withhold from any pay due to me any monies and the value of property that I owe to the Company; and (f) To work a reasonable amount of overtime upon request.
+							</p><hr />
+							<p>5. <b>Validity of Application</b>: Although United McGill maintains resumes and applications for one year, there is no guarantee, nor does the applicant have the expectation, that the resume or application will be considered for any other positions during the year.
+						</div>						
+					</div>
+				</tab>
+				<tab heading="Section B">
+					<div class="card card-block card-outline-primary ">
+						<h6 class="card-header">B. &nbsp; Employment Desired</h6><br />
+					
+					</div>
+				</tab>
+				<tab heading="Section C">
+					<div class="card card-block card-outline-primary ">
+					</div>
+				</tab>
+				<tab heading="Section D"> 
+					<div class="card card-block card-outline-primary ">
+					</div>
+				</tab>
+				<tab heading="Section E">
+					<div class="card card-block card-outline-primary ">
+					</div>
+				</tab>
+				<tab heading="Section F">
+					<div class="card card-block card-outline-primary ">
+					</div>
+				</tab>
+			</tabset>
+			<div class="form-group row">
+				<label class="col-xs-12 col-form-label" for="accept-input">Please type your initials into the box below if you agree with the above statements (Section A).</label>
+			</div>
+			<div class="form-group row">
+				<div class="offset-xs-1 col-xs-3 form-group row">
+					<input type="text" class="form-control" [(ngModel)]="agree" id="accept-input" name="accept">
+				</div>
+				<div class="form-group row">
+					<button class="btn btn-success" (click)="saveApplication()">I Agree (Save)</button>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="card-text col-md-12">
+					<label class="col-form-label">Created:</label>
+					<span>{{created}}</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="card-text col-md-12">
+					<label class="col-form-label">Updated:</label>
+					<span>{{lastUpdate}}</span>
+				</div>
+			</div>
 
-			<div class="offset-sm-2 col-sm-10">
-				<button class="btn btn-success" [disabled]="!applicationForm.form.valid" (click)="save()">Save</button>
-			</div>
-			</div>
 		</form>
 	</div>
 </div>
