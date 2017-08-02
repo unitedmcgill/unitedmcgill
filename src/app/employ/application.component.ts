@@ -480,6 +480,13 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public workPart : boolean = false;
   public workSummer : boolean = false;
 
+  public workFirstFull : boolean = false;
+  public workFirstPart : boolean = false;
+  public workSecondFull : boolean = false;
+  public workSecondPart : boolean = false;
+  public workThirdFull : boolean = false;
+  public workThirdPart : boolean = false;
+
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
                   private router: Router) {
@@ -497,6 +504,55 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  private processWorkXIn(){
+    var work = this.application.sectionD.workFirst;
+    if (work[0] === '1') {
+      this.workFirstFull = true;
+    }
+    if (work[1] === '1') {
+      this.workFirstPart = true;
+    }  
+
+    var work = this.application.sectionD.workSecond;
+    if (work[0] === '1') {
+        this.workSecondFull = true;
+    }
+    if (work[1] === '1') {
+        this.workSecondPart = true;
+    }
+
+    var work = this.application.sectionD.workThird;
+    if (work[0] === '1') {
+        this.workThirdFull = true;
+    }
+    if (work[1] === '1') {
+        this.workThirdPart = true;
+    }    
+  }
+
+  private processWorkXOut(){
+    var work = this.workFirstFull ? '1' : '0';
+    work += this.workFirstPart ? '1' : '0';
+
+    if (work !== this.application.sectionD.workFirst) {
+        this.application.sectionD.workFirst = work;
+    }    
+
+    var work = this.workSecondFull ? '1' : '0';
+    work += this.workSecondPart ? '1' : '0';
+
+    if (work !== this.application.sectionD.workSecond) {
+        this.application.sectionD.workSecond = work;
+    }    
+
+    var work = this.workThirdFull ? '1' : '0';
+    work += this.workThirdPart ? '1' : '0';
+
+    if (work !== this.application.sectionD.workThird) {
+        this.application.sectionD.workThird = work;
+    }    
   }
 
   private processWorkIn(){
@@ -620,6 +676,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             this.processLocationsIn();
             this.processFindOutIn();
             this.processWorkIn();
+            this.processWorkXIn();
             this.created = new Date(this.application.created*1000);  // time() in php was seconds since the Epoch, Date needs ms
             this.lastUpdate = new Date(this.application.lastUpdate*1000);  
             console.log(this.lastUpdate);
@@ -647,7 +704,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.showLoader = true;
     this.processLocationsOut();
     this.processFindOutOut();
-    this.processWorkIn();
+    this.processWorkOut();
+    this.processWorkXOut();
     this.lastUpdate = new Date();
     this.application.lastUpdate = Math.round(this.lastUpdate.getTime()/1000); // time() in php was seconds since the Epoch, Date gives ms
     this.employService.saveApplication(this.application)
