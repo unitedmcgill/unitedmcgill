@@ -10,6 +10,11 @@ import { IApplication, SectionA, SectionB, SectionC, SectionD, SectionE, Section
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
 
+  public yesnoInt = [
+    { value: 1, display: 'Yes'},
+    { value: 0, display: 'No'}
+  ];
+
   public statusTypes = [
     { value: 'C', display: 'Current' },
     { value: 'D', display: 'Deleted' },
@@ -462,6 +467,19 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public tmc : boolean = false;
   public airseal : boolean = false;
 
+  public findOutOther : boolean = false;
+  public findOutInternet : boolean = false;
+  public findOutCollege : boolean = false;
+  public findOutRecruit : boolean = false;
+  public findOutEmp : boolean = false;
+  public findOutRelative : boolean = false;
+  public findOutAgent : boolean = false;
+  public findOutNews : boolean = false;
+  
+  public workFull : boolean = false;
+  public workPart : boolean = false;
+  public workSummer : boolean = false;
+
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
                   private router: Router) {
@@ -479,6 +497,72 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  private processWorkIn(){
+    var work = this.application.sectionB.mcGillWork;
+    if (work[0] === '1') {
+        this.workSummer = true;
+    }
+    if (work[1] === '1') {
+        this.workPart = true;
+    }
+    if (work[2] === '1') {
+        this.workFull = true;
+    }    
+  }
+
+  public processWorkOut(){
+    var work = this.workSummer ? '1' : '0';
+    work += this.workPart ? '1' : '0';
+    work += this.workFull ? '1' : '0';
+
+    if (work !== this.application.sectionB.mcGillWork) {
+        this.application.sectionB.mcGillWork = work;
+    }    
+  }
+
+  private processFindOutIn(){
+    var findout = this.application.sectionB.findOut;
+    if (findout[0] === '1') {
+        this.findOutOther = true;
+    }
+    if (findout[1] === '1') {
+        this.findOutInternet = true;             
+    }
+    if (findout[2] === '1') {
+        this.findOutCollege = true;
+    }
+    if (findout[3] === '1') {
+        this.findOutRecruit = true;
+    }
+    if (findout[4] === '1') {
+        this.findOutEmp = true;
+    }
+    if (findout[5] === '1') {              
+        this.findOutRelative = true;
+    }
+    if (findout[6] === '1') {
+        this.findOutAgent = true;
+    }
+    if (findout[7] === '1') {
+        this.findOutNews = true;
+    }
+  }
+
+  private processFindOutOut(){
+    var findout = this.findOutOther ? '1' : '0';
+    findout += this.findOutInternet ? '1' : '0';
+    findout += this.findOutCollege ? '1' : '0';
+    findout += this.findOutRecruit ? '1' : '0';
+    findout += this.findOutEmp ? '1' : '0';
+    findout += this.findOutRelative ? '1' : '0';
+    findout += this.findOutAgent ? '1' : '0';
+    findout += this.findOutNews ? '1' : '0';
+
+    if (findout !== this.application.sectionB.findOut) {
+        this.application.sectionB.findOut = findout;
+    }
   }
 
   private processLocationsIn(){
@@ -534,6 +618,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             // const duct = JSON.stringify(data);
             this.application = data;
             this.processLocationsIn();
+            this.processFindOutIn();
+            this.processWorkIn();
             this.created = new Date(this.application.created*1000);  // time() in php was seconds since the Epoch, Date needs ms
             this.lastUpdate = new Date(this.application.lastUpdate*1000);  
             console.log(this.lastUpdate);
@@ -560,6 +646,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
     this.showLoader = true;
     this.processLocationsOut();
+    this.processFindOutOut();
+    this.processWorkIn();
     this.lastUpdate = new Date();
     this.application.lastUpdate = Math.round(this.lastUpdate.getTime()/1000); // time() in php was seconds since the Epoch, Date gives ms
     this.employService.saveApplication(this.application)
