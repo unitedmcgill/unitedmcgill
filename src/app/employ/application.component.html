@@ -1128,8 +1128,320 @@
 						</div>
 					</div>
 				</tab>
-				<tab heading="Section E">
+				<tab heading="Section E"> 
 					<div class="card card-block card-outline-primary ">
+						<h6 class="card-header">E. &nbsp; Education Record</h6><br />
+						<div class="card-text">
+							<p>If you attended more than two colleges, please put three below, replacing the "High School" section with one of them. Put the high school and other school information in the section "Other Schools". </p>
+						</div>
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-8 col-form-label">1. High School</label>
+							<div class="col-xs-9">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
+								<input class="col-xs-7" id="schoolNameOne" [(ngModel)]="application.sectionE.schoolNameOne" name="schoolNameOne" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
+								<label class="col-xs-1 col-form-label">city:</label>
+								<input class="col-xs-3" id="schoolCityOne" [(ngModel)]="application.sectionE.schoolCityOne" name="schoolCityOne" >
+								<label class="col-xs-1 col-form-label">state:</label>
+								<input class="col-xs-2" maxlength="2" id="schoolStateOne" [(ngModel)]="application.sectionE.schoolStateOne" name="schoolStateOne" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Credit hours earned: </label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="highSchoolHours" [(ngModel)]="application.sectionE.highSchoolHours" name="highSchoolHours" ></textarea>							
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Did you graduate?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="graduateOne" [(ngModel)]="application.sectionE.graduateOne" name="graduateOne" [value]="answer.value">{{answer.display}}
+								</div>
+								<label class="col-xs-1 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GED?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="graduateGed" [(ngModel)]="application.sectionE.graduateGed" name="graduateGed" [value]="answer.value">{{answer.display}}
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. If you left a school prior to graduation, or dropped out for a time, please explain why.</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="leftPriorOne" [(ngModel)]="application.sectionE.leftPriorOne" name="leftPriorOne" ></textarea>							
+							</div><br />
+							<div class="col-xs-12  mt-1">
+								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Grade point average (transcript required)</label>
+								<input type="number" min="0" max="99" class="col-xs-1" id="gpaOne" [(ngModel)]="application.sectionE.gpaOne" name="gpaOne" >
+								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
+								<input maxlength="2" class="col-xs-1" id="gradeOne" [(ngModel)]="application.sectionE.gradeOne" name="gradeOne" >
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Written transcript release on file?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="transcriptOne" [(ngModel)]="application.sectionE.transcriptOne" name="transcriptOne" [value]="answer.value">{{answer.display}}
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h.  Fields of study (Thesis)</label>
+								<label class="col-xs-1 col-form-label">major:</label>
+								<input class="col-xs-3" id="majorOne" [(ngModel)]="application.sectionE.majorOne" name="majorOne" >
+								<label class="col-xs-1 col-form-label">minor:</label>
+								<input class="col-xs-3" maxlength="2" id="minorOne" [(ngModel)]="application.sectionE.minorOne" name="minorOne" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i. Office, honors, and awards</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="honorsOne" [(ngModel)]="application.sectionE.honorsOne" name="honorsOne" ></textarea>							
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Extracurricular activities*</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="activitiesOne" [(ngModel)]="application.sectionE.activitiesOne" name="activitiesOne" ></textarea>							
+								<span class="col-xs-12"><b>*Note:</b> You are not required to list any activities which would reveal your race, color, gender, national origin, disability, age, or religion.</span>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k. What work related accomplishment gave you the greatest sense of personal satisfaction?</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="accomplishmentsOne" [(ngModel)]="application.sectionE.accomplishmentsOne" name="accomplishmentsOne" ></textarea>							
+							</div><br />
+						</div>
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-8 col-form-label">2. College</label>
+							<div class="col-xs-9">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
+								<input class="col-xs-7" id="schoolNameTwo" [(ngModel)]="application.sectionE.schoolNameTwo" name="schoolNameTwo" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
+								<label class="col-xs-1 col-form-label">city:</label>
+								<input class="col-xs-3" id="schoolCityTwo" [(ngModel)]="application.sectionE.schoolCityTwo" name="schoolCityTwo" >
+								<label class="col-xs-1 col-form-label">state:</label>
+								<input class="col-xs-2" maxlength="2" id="schoolStateTwo" [(ngModel)]="application.sectionE.schoolStateTwo" name="schoolStateTwo" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates of attendance::</label><br />
+								<div>
+									From month: 
+									<input type="number" min="1" max="12" id="e1-startMonthTwo" [(ngModel)]="application.sectionE.startMonthTwo" name="startMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-startYearTwo" [(ngModel)]="application.sectionE.startYearTwo" name="startYearTwo" >
+									&nbsp;To month/year:
+									<input type="number" min="1" max="12" id="e1-endMonthTwo" [(ngModel)]="application.sectionE.endMonthTwo" name="endMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-endYearTwo" [(ngModel)]="application.sectionE.endYearTwo" name="endYearTwo" >							
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Credit hours earned: </label>
+								<div class="col-xs-4">
+									<label class="col-form-label">Semester hours:</label>
+									<input id="semesterHoursTwo" [(ngModel)]="application.sectionE.semesterHoursTwo" name="semesterHoursTwo" >								
+								</div>
+								<div class="col-xs-4">
+									<label class="col-form-label">Trimester hours:</label>
+									<input  id="trimesterHoursTwo" [(ngModel)]="application.sectionE.trimesterHoursTwo" name="trimesterHoursTwo" >
+								</div>
+								<div class="col-xs-4">
+									<label class="col-form-label">Quarter hours:</label>
+									<input id="quarterHoursTwo" [(ngModel)]="application.sectionE.quarterHoursTwo" name="quarterHoursTwo" >
+								</div>
+							</div>
+							<div class="col-xs-12 mt-1">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Did you graduate?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="graduateTwo" [(ngModel)]="application.sectionE.graduateTwo" name="graduateTwo" [value]="answer.value">{{answer.display}}
+								</div>
+								<div>
+									month/year: 
+									<input type="number" min="1" max="12" id="e1-graduateMonthTwo" [(ngModel)]="application.sectionE.graduateMonthTwo" name="graduateMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-endYearTwo" [(ngModel)]="application.sectionE.endYearTwo" name="endYearTwo" >							
+									&nbsp;Degree:
+									<input id="e1-degreeTwo" [(ngModel)]="application.sectionE.degreeTwo" name="degreeTwo" >							
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. If you left a school prior to graduation, or dropped out for a time, please explain why.</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="leftPriorTwo" [(ngModel)]="application.sectionE.leftPriorTwo" name="leftPriorTwo" ></textarea>							
+							</div><br />
+							<div class="col-xs-12  mt-1">
+								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Grade point average (transcript required)</label>
+								<input type="number" min="0" max="99" class="col-xs-1" id="gpaTwo" [(ngModel)]="application.sectionE.gpaTwo" name="gpaTwo" >
+								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
+								<input maxlength="2" class="col-xs-1" id="gradeTwo" [(ngModel)]="application.sectionE.gradeTwo" name="gradeTwo" >
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h. Written transcript release on file?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="transcriptTwo" [(ngModel)]="application.sectionE.transcriptTwo" name="transcriptTwo" [value]="answer.value">{{answer.display}}
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.  Fields of study (Thesis)</label>
+								<label class="col-xs-1 col-form-label">major:</label>
+								<input class="col-xs-3" id="majorTwo" [(ngModel)]="application.sectionE.majorTwo" name="majorTwo" >
+								<label class="col-xs-1 col-form-label">minor:</label>
+								<input class="col-xs-3" maxlength="2" id="minorTwo" [(ngModel)]="application.sectionE.minorTwo" name="minorTwo" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Office, honors, and awards</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="honorsTwo" [(ngModel)]="application.sectionE.honorsTwo" name="honorsTwo" ></textarea>							
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k. Extracurricular activities*</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="activitiesTwo" [(ngModel)]="application.sectionE.activitiesTwo" name="activitiesTwo" ></textarea>							
+								<span class="col-xs-12"><b>*Note:</b> You are not required to list any activities which would reveal your race, color, gender, national origin, disability, age, or religion.</span>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l. What work related accomplishment gave you the greatest sense of personal satisfaction?</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="accomplishmentsTwo" [(ngModel)]="application.sectionE.accomplishmentsTwo" name="accomplishmentsTwo" ></textarea>							
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. Portion of total educaiton expenses from:</label><br />
+								<div class="col-xs-4">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scholarship (or Grant): 
+									<input type="number" min="1" max="100" id="e1-scholarshipTwo" [(ngModel)]="application.sectionE.scholarshipTwo" name="scholarshipTwo" >%
+								</div>
+								<div class="col-xs-2">
+									Loan: 
+									<input type="number" min="1" max="100" id="e1-loanTwo" [(ngModel)]="application.sectionE.loanTwo" name="loanTwo" >
+									%
+								</div>
+								<div class="col-xs-2">
+									Work: 
+									<input type="number" min="1" max="100" id="e1-workTwo" [(ngModel)]="application.sectionE.workTwo" name="workTwo" >
+									%
+								</div>
+								<div class="col-xs-2">
+									Family: 
+									<input type="number" min="1" max="100" id="e1-familyTwo" [(ngModel)]="application.sectionE.familyTwo" name="familyTwo" >
+									%
+								</div>
+							</div>						
+						</div>	
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-8 col-form-label">3. College (or other school)</label>
+							<div class="col-xs-9">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
+								<input class="col-xs-7" id="schoolNameThree" [(ngModel)]="application.sectionE.schoolNameThree" name="schoolNameThree" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
+								<label class="col-xs-1 col-form-label">city:</label>
+								<input class="col-xs-3" id="schoolCityThree" [(ngModel)]="application.sectionE.schoolCityThree" name="schoolCityThree" >
+								<label class="col-xs-1 col-form-label">state:</label>
+								<input class="col-xs-2" maxlength="2" id="schoolStateThree" [(ngModel)]="application.sectionE.schoolStateThree" name="schoolStateThree" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates of attendance::</label><br />
+								<div>
+									From month: 
+									<input type="number" min="1" max="12" id="e1-startMonthThree" [(ngModel)]="application.sectionE.startMonthThree" name="startMonthThree" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-startYearThree" [(ngModel)]="application.sectionE.startYearThree" name="startYearThree" >
+									&nbsp;To month/year:
+									<input type="number" min="1" max="12" id="e1-endMonthThree" [(ngModel)]="application.sectionE.endMonthThree" name="endMonthThree" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-endYearThree" [(ngModel)]="application.sectionE.endYearThree" name="endYearThree" >							
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Credit hours earned: </label>
+								<div class="col-xs-4">
+									<label class="col-form-label">Semester hours:</label>
+									<input id="semesterHoursThree" [(ngModel)]="application.sectionE.semesterHoursThree" name="semesterHoursThree" >								
+								</div>
+								<div class="col-xs-4">
+									<label class="col-form-label">Trimester hours:</label>
+									<input  id="trimesterHoursThree" [(ngModel)]="application.sectionE.trimesterHoursThree" name="trimesterHoursThree" >
+								</div>
+								<div class="col-xs-4">
+									<label class="col-form-label">Quarter hours:</label>
+									<input id="quarterHoursThree" [(ngModel)]="application.sectionE.quarterHoursThree" name="quarterHoursThree" >
+								</div>
+							</div>
+							<div class="col-xs-12 mt-1">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Did you graduate?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="graduateThree" [(ngModel)]="application.sectionE.graduateThree" name="graduateThree" [value]="answer.value">{{answer.display}}
+								</div>
+								<div>
+									month/year: 
+									<input type="number" min="1" max="12" id="e1-graduateMonthThree" [(ngModel)]="application.sectionE.graduateMonthThree" name="graduateMonthThree" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-endYearThree" [(ngModel)]="application.sectionE.endYearThree" name="endYearThree" >							
+									&nbsp;Degree:
+									<input id="e1-degreeThree" [(ngModel)]="application.sectionE.degreeThree" name="degreeThree" >							
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. If you left a school prior to graduation, or dropped out for a time, please explain why.</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="leftPriorThree" [(ngModel)]="application.sectionE.leftPriorThree" name="leftPriorThree" ></textarea>							
+							</div><br />
+							<div class="col-xs-12  mt-1">
+								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Grade point average (transcript required)</label>
+								<input type="number" min="0" max="99" class="col-xs-1" id="gpaThree" [(ngModel)]="application.sectionE.gpaThree" name="gpaThree" >
+								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
+								<input maxlength="2" class="col-xs-1" id="gradeThree" [(ngModel)]="application.sectionE.gradeThree" name="gradeThree" >
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h. Written transcript release on file?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="transcriptThree" [(ngModel)]="application.sectionE.transcriptThree" name="transcriptThree" [value]="answer.value">{{answer.display}}
+								</div>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.  Fields of study (Thesis)</label>
+								<label class="col-xs-1 col-form-label">major:</label>
+								<input class="col-xs-3" id="majorThree" [(ngModel)]="application.sectionE.majorThree" name="majorThree" >
+								<label class="col-xs-1 col-form-label">minor:</label>
+								<input class="col-xs-3" maxlength="2" id="minorThree" [(ngModel)]="application.sectionE.minorThree" name="minorThree" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Office, honors, and awards</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="honorsThree" [(ngModel)]="application.sectionE.honorsThree" name="honorsThree" ></textarea>							
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k. Extracurricular activities*</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="activitiesThree" [(ngModel)]="application.sectionE.activitiesThree" name="activitiesThree" ></textarea>							
+								<span class="col-xs-12"><b>*Note:</b> You are not required to list any activities which would reveal your race, color, gender, national origin, disability, age, or religion.</span>
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l. What work related accomplishment gave you the greatest sense of personal satisfaction?</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="accomplishmentsThree" [(ngModel)]="application.sectionE.accomplishmentsThree" name="accomplishmentsThree" ></textarea>							
+							</div><br />
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. Portion of total educaiton expenses from:</label><br />
+								<div class="col-xs-4">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scholarship (or Grant): 
+									<input type="number" min="1" max="100" id="e1-scholarshipThree" [(ngModel)]="application.sectionE.scholarshipThree" name="scholarshipThree" >%
+								</div>
+								<div class="col-xs-2">
+									Loan: 
+									<input type="number" min="1" max="100" id="e1-loanThree" [(ngModel)]="application.sectionE.loanThree" name="loanThree" >
+									%
+								</div>
+								<div class="col-xs-2">
+									Work: 
+									<input type="number" min="1" max="100" id="e1-workThree" [(ngModel)]="application.sectionE.workThree" name="workThree" >
+									%
+								</div>
+								<div class="col-xs-2">
+									Family: 
+									<input type="number" min="1" max="100" id="e1-familyThree" [(ngModel)]="application.sectionE.familyThree" name="familyThree" >
+									%
+								</div>
+							</div>						
+						</div>							
 					</div>
 				</tab>
 				<tab heading="Section F">
