@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IApplication, SectionA, SectionB, SectionC, SectionD, SectionE, SectionF } from '../models/application';
+import { Values } from '../models/values';
 
 @Component({
   //selector: 'app-products',
@@ -487,6 +488,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public workThirdFull : boolean = false;
   public workThirdPart : boolean = false;
 
+  public thePDF : string = '';
+
     constructor(  private route: ActivatedRoute,
                   private employService: EmployService,
                   private router: Router) {
@@ -737,6 +740,36 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public gotoEmployList(){
     let link = ['/employ'];
     this.router.navigate(link);
+  }
+
+  public generatePDF(){
+    this.showLoader = true;
+    this.employService.generatePDF(this.application)
+      .subscribe((data: Values) => {
+          if ( data ){
+            // console.log(data);
+            // console.log(this.ductConvert);
+            // const duct = JSON.stringify(data);
+            // Save was successfull so update the Copy
+            // this.application = Object.assign({}, this.application);
+            console.log(data);
+            // Remove extra part of this path reference from src
+            this.thePDF = data.value.substring(data.value.indexOf("\pdf"));
+          } else {
+            console.log("error");
+          }
+        },
+        // On Error
+        (err:any) => {
+          console.log(err);
+          alert(err);
+          this.showLoader = false;
+        },
+        // Finally
+        () => {
+          this.showLoader = false;
+          //alert("Application saved.");
+        });      
   }
 
 }

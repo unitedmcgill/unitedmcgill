@@ -2,7 +2,7 @@
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
 		<h4 class="card-title">Employment Application ({{application.code}})</h4>
-		<form name="applicationForm" #applicationForm="ngForm">
+		<form name="applicationForm" #applicationForm="ngForm" novalidate>
 			<tabset>
 				<tab heading="Section A">
 					<div class="card card-block card-outline-primary ">
@@ -583,7 +583,7 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting: 
-									<input type="number" min="1" max="12" id="e1-wageStartFirst" [(ngModel)]="application.sectionD.wageStartFirst" name="wageStartFirst" >
+									<input type="number" min="1" max="12" id="abc" [(ngModel)]="application.sectionD.wageStartFirst" name="wageStartFirst" >
 									per
 									<input class="mcgill-input-medium" id="e1-wageStartUnitFirst" [(ngModel)]="application.sectionD.wageStartUnitFirst" name="wageStartUnitFirst" >
 									&nbsp;Ending:
@@ -1170,7 +1170,7 @@
 							</div><br />
 							<div class="col-xs-12  mt-1">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Grade point average (transcript required)</label>
-								<input type="number" min="0" max="99" class="col-xs-1" id="gpaOne" [(ngModel)]="application.sectionE.gpaOne" name="gpaOne" >
+								<input type="number" min="0" max="99" class="col-xs-1" id="abc1" [(ngModel)]="application.sectionE.gpaOne" name="gpaOne" >
 								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
 								<input maxlength="2" class="col-xs-1" id="gradeOne" [(ngModel)]="application.sectionE.gradeOne" name="gradeOne" >
 							</div>
@@ -1267,7 +1267,7 @@
 							</div><br />
 							<div class="col-xs-12  mt-1">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Grade point average (transcript required)</label>
-								<input type="number" min="0" max="99" class="col-xs-1" id="gpaTwo" [(ngModel)]="application.sectionE.gpaTwo" name="gpaTwo" >
+								<input type="number" min="0" max="99" class="col-xs-1" id="abc2" [(ngModel)]="application.sectionE.gpaTwo" name="gpaTwo" >
 								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
 								<input maxlength="2" class="col-xs-1" id="gradeTwo" [(ngModel)]="application.sectionE.gradeTwo" name="gradeTwo" >
 							</div>
@@ -1441,11 +1441,405 @@
 									%
 								</div>
 							</div>						
-						</div>							
+						</div>	
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-12 col-form-label">4. Other Schools</label>
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Type of school</label>
+								<input class="col-xs-4" id="typeOne" [(ngModel)]="application.sectionE.typeOne" name="typeOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name of school</label>
+								<input class="col-xs-4" id="nameOne" [(ngModel)]="application.sectionE.nameOne" name="nameOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-4 col-form-label">Location of school</label>
+								<input class="col-xs-4" id="schoolLocationOne" [(ngModel)]="application.sectionE.schoolLocationOne" name="schoolLocationOne" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-2 col-form-label">Dates attended:</label><br />
+								<div>
+									From month: 
+									<input type="number" min="1" max="12" id="e1-attendedStartMonthOne" [(ngModel)]="application.sectionE.attendedStartMonthOne" name="attendedStartMonthOne" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-attendedStartYearOne" [(ngModel)]="application.sectionE.attendedStartYearOne" name="attendedStartYearOne" >
+									&nbsp;To month/year:
+									<input type="number" min="1" max="12" id="e1-attendedEndMonthOne" [(ngModel)]="application.sectionE.attendedEndMonthOne" name="attendedEndMonthOne" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-attendedEndYearOne" [(ngModel)]="application.sectionE.attendedEndYearOne" name="attendedEndYearOne" >							
+								</div>
+							</div><br />
+							<div class="col-xs-7 mt-1">
+								<label class="col-xs-4 col-form-label">Courses studied:</label>
+								<input class="col-xs-4" id="coursesOne" [(ngModel)]="application.sectionE.coursesOne" name="coursesOne" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Graduated or complete study?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="completeOne" [(ngModel)]="application.sectionE.completeOne" name="completeOne" [value]="answer.value">{{answer.display}}
+								</div>
+								<div>
+									&nbsp;Date: 
+									<input type="number" min="1" max="12" id="e1-completeMonthOne" [(ngModel)]="application.sectionE.completeMonthOne" name="completeMonthOne" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-completeYearOne" [(ngModel)]="application.sectionE.completeYearOne" name="completeYearOne" >
+								</div>
+							</div>
+						</div>												
+						<hr />
+						<div class="form-group row">
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Type of school</label>
+								<input class="col-xs-4" id="typeTwo" [(ngModel)]="application.sectionE.typeTwo" name="typeTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name of school</label>
+								<input class="col-xs-4" id="nameTwo" [(ngModel)]="application.sectionE.nameTwo" name="nameTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-4 col-form-label">Location of school</label>
+								<input class="col-xs-4" id="schoolLocationTwo" [(ngModel)]="application.sectionE.schoolLocationTwo" name="schoolLocationTwo" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-2 col-form-label">Dates attended:</label><br />
+								<div>
+									From month: 
+									<input type="number" min="1" max="12" id="e1-attendedStartMonthTwo" [(ngModel)]="application.sectionE.attendedStartMonthTwo" name="attendedStartMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-attendedStartYearTwo" [(ngModel)]="application.sectionE.attendedStartYearTwo" name="attendedStartYearTwo" >
+									&nbsp;To month/year:
+									<input type="number" min="1" max="12" id="e1-attendedEndMonthTwo" [(ngModel)]="application.sectionE.attendedEndMonthTwo" name="attendedEndMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-attendedEndYearTwo" [(ngModel)]="application.sectionE.attendedEndYearTwo" name="attendedEndYearTwo" >							
+								</div>
+							</div><br />
+							<div class="col-xs-7 mt-1">
+								<label class="col-xs-4 col-form-label">Courses studied:</label>
+								<input class="col-xs-4" id="coursesTwo" [(ngModel)]="application.sectionE.coursesTwo" name="coursesTwo" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Graduated or complete study?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="completeTwo" [(ngModel)]="application.sectionE.completeTwo" name="completeTwo" [value]="answer.value">{{answer.display}}
+								</div>
+								<div>
+									&nbsp;Date: 
+									<input type="number" min="1" max="12" id="e1-completeMonthTwo" [(ngModel)]="application.sectionE.completeMonthTwo" name="completeMonthTwo" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-completeYearTwo" [(ngModel)]="application.sectionE.completeYearTwo" name="completeYearTwo" >
+								</div>
+							</div>
+						</div>												
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-12 col-form-label">5. Educational References</label>
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="referenceNameOne" [(ngModel)]="application.sectionE.referenceNameOne" name="referenceNameOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="referencePositionOne" [(ngModel)]="application.sectionE.referencePositionOne" name="referencePositionOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="referenceSchoolOne" [(ngModel)]="application.sectionE.referenceSchoolOne" name="referenceSchoolOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="referenceTelephoneOne" [(ngModel)]="application.sectionE.referenceTelephoneOne" name="referenceTelephoneOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="referenceEmailOne" [(ngModel)]="application.sectionE.referenceEmailOne" name="referenceEmailOne" >
+							</div>						
+						</div>
+						<hr />
+						<div class="form-group row">
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="referenceNameTwo" [(ngModel)]="application.sectionE.referenceNameTwo" name="referenceNameTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="referencePositionTwo" [(ngModel)]="application.sectionE.referencePositionTwo" name="referencePositionTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="referenceSchoolTwo" [(ngModel)]="application.sectionE.referenceSchoolTwo" name="referenceSchoolTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="referenceTelephoneTwo" [(ngModel)]="application.sectionE.referenceTelephoneTwo" name="referenceTelephoneTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="referenceEmailTwo" [(ngModel)]="application.sectionE.referenceEmailTwo" name="referenceEmailTwo" >
+							</div>						
+						</div>
+						<hr />
+						<div class="form-group row">
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="referenceNameThree" [(ngModel)]="application.sectionE.referenceNameThree" name="referenceNameThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="referencePositionThree" [(ngModel)]="application.sectionE.referencePositionThree" name="referencePositionThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="referenceSchoolThree" [(ngModel)]="application.sectionE.referenceSchoolThree" name="referenceSchoolThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="referenceTelephoneThree" [(ngModel)]="application.sectionE.referenceTelephoneThree" name="referenceTelephoneThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="referenceEmailThree" [(ngModel)]="application.sectionE.referenceEmailThree" name="referenceEmailThree" >
+							</div>						
+						</div>
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-12 col-form-label">6. Special Skills (if required for the job for which you are applying)</label>
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Foreign language(s):</label>
+								<div class="col-xs-3">
+									Read:
+									<input id="languageRead" [(ngModel)]="application.sectionE.languageRead" name="languageRead" >
+								</div>
+								<div class="col-xs-3">
+									Write:
+									<input id="languageWrite" [(ngModel)]="application.sectionE.languageWrite" name="languageWrite" >
+								</div>
+								<div class="col-xs-3">
+									Speak:
+									<input id="languageSpeak" [(ngModel)]="application.sectionE.languageSpeak" name="languageSpeak" >
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-2 col-form-label">Typing:</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="typing" [(ngModel)]="application.sectionE.typing" name="typing" [value]="answer.value">{{answer.display}}
+								</div>
+								<div class="col-xs-4">
+									Speed:
+									<input id="speed" [(ngModel)]="application.sectionE.speed" name="speed" >
+									wpm
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Calculator keyboard:</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="calculator" [(ngModel)]="application.sectionE.calculator" name="calculator" [value]="answer.value">{{answer.display}}
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Transcribing tape dictation?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="dictation" [(ngModel)]="application.sectionE.dictation" name="dictation" [value]="answer.value">{{answer.display}}
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-3 col-form-label">Word processing?</label>
+								<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
+									<input type="radio" id="wordProcessing" [(ngModel)]="application.sectionE.wordProcessing" name="wordProcessing" [value]="answer.value">{{answer.display}}
+								</div>
+								<div class="col-xs-4">
+									Name of software:
+									<input id="wordProcessingName" [(ngModel)]="application.sectionE.wordProcessingName" name="wordProcessingName" >
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-4 col-form-label">Apprenticeship or similar training?</label>
+								<input class="col-xs-8" id="apprenticeship" [(ngModel)]="application.sectionE.apprenticeship" name="apprenticeship" >
+							</div>						
+							<div class="col-xs-12">
+								<div class="col-xs-1">
+									&nbsp;
+								</div>
+								<div class="col-xs-4">
+									When?
+									<input id="apprenticeshipTime" [(ngModel)]="application.sectionE.apprenticeshipTime" name="apprenticeshipTime" >
+								</div>
+								<div class="col-xs-4">
+									Where?
+									<input id="apprenticeshipLocation" [(ngModel)]="application.sectionE.apprenticeshipLocation" name="apprenticeshipLocation" >
+								</div>
+							</div>						
+							<div class="col-xs-12 mt-1">
+								<label class="col-xs-3 col-form-label">Special machine skills:</label>
+								<input class="col-xs-9" id="machineSkills" [(ngModel)]="application.sectionE.machineSkills" name="machineSkills" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">Other training programs:</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="otherTraining" [(ngModel)]="application.sectionE.otherTraining" name="otherTraining" ></textarea>							
+							</div>
+						</div>
+						<hr />
+						<div class="form-group row">
+							<label class="col-xs-12 col-form-label">7. Professional Licenses and Certification</label>
+							<div class="col-xs-12">
+								<label class="col-xs-4 ">Engineer-in-training completed?</label>
+								<div class="col-xs-1 " *ngFor="let answer of yesnoInt">
+									<input type="radio" id="engineerTraining" [(ngModel)]="application.sectionE.engineerTraining" name="engineerTraining" [value]="answer.value">{{answer.display}}
+								</div>
+								<div class="col-xs-3">
+									State:
+									<input id="engineerTrainingState" [(ngModel)]="application.sectionE.engineerTrainingState" name="engineerTrainingState" >
+								</div>
+								<div class="col-xs-3">
+									Date:
+									<input id="engineerTrainingDate" [(ngModel)]="application.sectionE.engineerTrainingDate" name="engineerTrainingDate" >
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-4 ">Registered Professional Engineer?</label>
+								<div class="col-xs-1 " *ngFor="let answer of yesnoInt">
+									<input type="radio" id="professionalEngineer" [(ngModel)]="application.sectionE.professionalEngineer" name="professionalEngineer" [value]="answer.value">{{answer.display}}
+								</div>
+								<div class="col-xs-3">
+									State:
+									<input id="professionalState" [(ngModel)]="application.sectionE.professionalState" name="professionalState" >
+								</div>
+								<div class="col-xs-3">
+									Lic.#(s):
+									<input id="professionalLicenses" [(ngModel)]="application.sectionE.professionalLicenses" name="professionalLicenses" >
+								</div>
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">Other professional licenses or certifications:</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="otherLicenses" [(ngModel)]="application.sectionE.otherLicenses" name="otherLicenses" ></textarea>							
+							</div>
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">Memberships in professional organizations (Organizations which reveal race, ethnicity, gender, religion, disability, or age need not be listed):</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="memberships" [(ngModel)]="application.sectionE.memberships" name="memberships" ></textarea>							
+							</div>
+						</div>
 					</div>
 				</tab>
 				<tab heading="Section F">
+					<h6 class="card-header">F. &nbsp; Military Record</h6><br />
 					<div class="card card-block card-outline-primary ">
+						<label class="col-xs-4 ">Were or are you in the U.S. military service?</label>
+						<div class="col-xs-1 " *ngFor="let answer of yesnoInt">
+							<input type="radio" id="military" [(ngModel)]="application.sectionE.military" name="military" [value]="answer.value">{{answer.display}}
+						</div>
+						<div *ngIf="application.sectionE.military == 1" class="form-group row">	
+							<div class="col-xs-12">
+								<label class="col-xs-2 col-form-label">When?</label><br />
+								<div>
+									From month: 
+									<input type="number" min="1" max="12" id="e1-militaryStartMonth" [(ngModel)]="application.sectionE.militaryStartMonth" name="militaryStartMonth" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-militaryStartYear" [(ngModel)]="application.sectionE.militaryStartYear" name="militaryStartYear" >
+									&nbsp;To month/year:
+									<input type="number" min="1" max="12" id="e1-militaryEndMonth" [(ngModel)]="application.sectionE.militaryEndMonth" name="militaryEndMonth" >
+									/
+									<input type="number" min="1" max="9999"  id="e1-militaryEndYear" [(ngModel)]="application.sectionE.militaryEndYear" name="militaryEndYear" >							
+								</div>
+							</div><br />
+							<div class="col-xs-7 mt-1">
+								<label class="col-xs-3 col-form-label">Service:</label>
+								<input class="col-xs-4" id="service" [(ngModel)]="application.sectionE.service" name="service" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Branch:</label>
+								<input class="col-xs-4" id="branch" [(ngModel)]="application.sectionE.branch" name="branch" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Rank on entry:</label>
+								<input class="col-xs-4" id="startRank" [(ngModel)]="application.sectionE.startRank" name="startRank" >
+							</div>						
+							<div class="col-xs-8">
+								<label class="col-xs-4 col-form-label">Rank on separation:</label>
+								<input class="col-xs-4" id="endRank" [(ngModel)]="application.sectionE.endRank" name="endRank" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">Principal assignments and duties:</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="principleDuties" [(ngModel)]="application.sectionE.principleDuties" name="principleDuties" ></textarea>							
+							</div>
+							<div class="col-xs-12 mt-1">
+								<label class="col-xs-4 col-form-label">Education or training received:</label>
+								<input class="col-xs-8" id="militaryEducation" [(ngModel)]="application.sectionE.militaryEducation" name="militaryEducation" >
+							</div>						
+							<div class="col-xs-12">
+								<label class="col-xs-12 col-form-label">Military honors received:</label>
+								<label class="col-xs-1 col-form-label">&nbsp;</label>
+								<textarea rows="3" class="col-xs-10 col-form-label" id="militaryHonors" [(ngModel)]="application.sectionE.militaryHonors" name="militaryHonors" ></textarea>							
+							</div>											
+						</div>				
+						<div *ngIf="application.sectionE.military == 1" class="form-group row">	
+							<label class="col-xs-12 col-form-label">2. Military References</label>
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="militaryNameOne" [(ngModel)]="application.sectionE.militaryNameOne" name="militaryNameOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="militaryPositionOne" [(ngModel)]="application.sectionE.militaryPositionOne" name="militaryPositionOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="militarySchoolOne" [(ngModel)]="application.sectionE.militarySchoolOne" name="militarySchoolOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="militaryTelephoneOne" [(ngModel)]="application.sectionE.militaryTelephoneOne" name="militaryTelephoneOne" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="militaryEmailOne" [(ngModel)]="application.sectionE.militaryEmailOne" name="militaryEmailOne" >
+							</div>										
+							<hr class="col-xs-12"/>
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="militaryNameTwo" [(ngModel)]="application.sectionE.militaryNameTwo" name="militaryNameTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="militaryPositionTwo" [(ngModel)]="application.sectionE.militaryPositionTwo" name="militaryPositionTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="militarySchoolTwo" [(ngModel)]="application.sectionE.militarySchoolTwo" name="militarySchoolTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="militaryTelephoneTwo" [(ngModel)]="application.sectionE.militaryTelephoneTwo" name="militaryTelephoneTwo" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="militaryEmailTwo" [(ngModel)]="application.sectionE.militaryEmailTwo" name="militaryEmailTwo" >
+							</div>										
+							<hr class="col-xs-12"/>
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Name:</label>
+								<input class="col-xs-4" id="militaryNameThree" [(ngModel)]="application.sectionE.militaryNameThree" name="militaryNameThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Position:</label>
+								<input class="col-xs-4" id="militaryPositionThree" [(ngModel)]="application.sectionE.militaryPositionThree" name="militaryPositionThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">School:</label>
+								<input class="col-xs-4" id="militarySchoolThree" [(ngModel)]="application.sectionE.militarySchoolThree" name="militarySchoolThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">Telephone:</label>
+								<input class="col-xs-4" id="militaryTelephoneThree" [(ngModel)]="application.sectionE.militaryTelephoneThree" name="militaryTelephoneThree" >
+							</div>						
+							<div class="col-xs-7">
+								<label class="col-xs-3 col-form-label">E-mail:</label>
+								<input class="col-xs-4" id="militaryEmailThree" [(ngModel)]="application.sectionE.militaryEmailThree" name="militaryEmailThree" >
+							</div>																								
+						</div>
 					</div>
 				</tab>
 			</tabset>
@@ -1458,6 +1852,8 @@
 				</div>
 				<div class="form-group row">
 					<button class="btn btn-success" (click)="saveApplication()">I Agree (Save)</button>
+					<button class="btn btn-info" (click)="generatePDF()">Generate PDF</button>
+					 <a *ngIf="thePDF != ''" href="{{thePDF}}" target="_blank">Click here to view PDF</a> 
 				</div>
 			</div>
 			<div class="form-group row">

@@ -23,6 +23,11 @@ import { FullLayoutComponent }          from './layouts/full-layout.component';
 // My Components (Move to modules that need them...)
 import { ConfigService }                from "./services/config.service";
 
+// Authentication
+import { AuthGuard } from './shared/authguard';
+import { AuthenticationService } from './services/auth.service';
+import { LoginComponent } from './login/login.component';
+
 // Init the config service
 export function initConfig(config: ConfigService){
  return () => config.load() 
@@ -42,11 +47,14 @@ export function initConfig(config: ConfigService){
         NAV_DROPDOWN_DIRECTIVES,
         BreadcrumbsComponent,
         SIDEBAR_TOGGLE_DIRECTIVES,
-        AsideToggleDirective
+        AsideToggleDirective,
+        LoginComponent
     ],
     providers: [
         LoaderService,
         ConfigService,
+        AuthGuard,
+        AuthenticationService,
         {
             provide: APP_INITIALIZER,
             useFactory: initConfig,
