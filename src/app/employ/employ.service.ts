@@ -4,6 +4,7 @@ import { ConfigService } from "../services/config.service";
 import { Observable } from 'rxjs/Observable';
 import { IEmploymentListItem } from '../models/employment';
 import { IApplication, SectionA, SectionB } from '../models/application';
+import { Values } from '../models/values';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -156,6 +157,27 @@ export class EmployService{
         let url = this.config.apiUrl+"/applicant";
 
         return this.http.post(url, bodyString, {headers:headers})
+        .map((res:Response) => {
+            let data = res.json();
+            //console.log('test: '+data);
+            // Fix enums
+            //let duct = DuctType[data.type];
+            //data.type = duct;
+
+            return data;
+        })      
+        .catch(this._handleError);
+       
+        //alert(url + ":" + bodyString);
+    }
+
+    //public saveApplication(application : IApplication) : Observable<IApplication>{
+    public generatePDF(application : IApplication) : Observable<Values> {
+        let bodyString = JSON.stringify(application); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let url = this.config.apiUrl+"/generatepdf";     
+
+        return this.http.put(url, bodyString, {headers:headers})
         .map((res:Response) => {
             let data = res.json();
             //console.log('test: '+data);

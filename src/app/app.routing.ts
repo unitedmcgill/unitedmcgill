@@ -2,6 +2,9 @@ import { NgModule }                 from '@angular/core';
 import { Routes,
          RouterModule }             from '@angular/router';
 
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './shared/authguard';
+
 //Layouts
 import { FullLayoutComponent }      from './layouts/full-layout.component';
 
@@ -44,7 +47,8 @@ export const routes: Routes = [
             },
             {
                 path: 'employ',
-                loadChildren: './employ/employ.module#EmployModule'
+                loadChildren: './employ/employ.module#EmployModule',
+                canActivate: [AuthGuard]
             },
             {
                 path: 'employ/:id',
@@ -57,6 +61,9 @@ export const routes: Routes = [
             {
                 path: 'contactus',
                 loadChildren: './contactus/contactus.module#ContactUsModule'
+            },
+            {   path: 'login',
+                component: LoginComponent 
             }
         ]
     }

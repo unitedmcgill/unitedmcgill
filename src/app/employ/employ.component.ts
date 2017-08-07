@@ -109,4 +109,10 @@ export class EmployComponent implements OnInit {
 
   }
 
+  public logout() {
+    localStorage.removeItem('currentUser');
+    alert("You are logged out!");
+    let link = ['/dashboard'];
+    this.router.navigate(link);
+  }
 }

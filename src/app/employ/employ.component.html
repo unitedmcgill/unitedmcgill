@@ -30,6 +30,7 @@
 			<button class="btn btn-info" (click)="editApplication()">Edit Application <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
 			<button class="btn btn-success" (click)="createApplicant()">New</button>
 			<button class="btn btn-warning" (click)="emailApplicant()">Email Applicant <span *ngIf="selectedId!=-1">{{selectedId}}</span></button>
+			<button class="btn btn-danger" (click)="logout()">Log Out</button>
 		</div>		
   	</div>
 </div>
