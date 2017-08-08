@@ -33,8 +33,15 @@
     "chart.js": "2.5.0",
     "ng2-bootstrap": "1.4.0",
     "ng2-charts": "1.5.0",
+<<<<<<< HEAD
     "moment": "2.17.1",
     "angular2-jwt": "0.2.3"
+=======
+    "moment": "2.17.1"
+  
+    
+    
+>>>>>>> 0b8072006c20381f379fce7f1a2f7d3d49ee32f1
   },
   "devDependencies": {
     "@angular/cli": "^1.0.0-rc.4",
