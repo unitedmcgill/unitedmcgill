@@ -100,7 +100,6 @@ export class EmployComponent implements OnInit {
     }
     else
     {
-
       var eol = "<br /><br />";
       var msgbody = this.selectedApplicant.firstName + " " + this.selectedApplicant.lastName + ":" + eol;
       msgbody += 'Thank you for your interest in the McGill Companies.  Below you will find the information necessary to start the application process.' + eol;
