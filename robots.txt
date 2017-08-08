@@ -1,4 +1,4 @@
-User-agent: *
+User-agent: * 
 
 # The sitemap must be an absolute URL
 sitemap: http://beta.unitedmcgill.com/sitemap.xml
