@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IEmploymentListItem } from '../models/employment';
 import { AuthenticationService } from '../services/auth.service';
+import { ContactUs } from '../models/contact-us';
 
 @Component({
   //selector: 'app-products',
@@ -50,8 +51,12 @@ export class EmployComponent implements OnInit {
         },
         // On Error
         (err:any) => {
-          console.log(err);
-          alert(err);
+          if (err.status == 401){
+            alert("401:  Your session has probably expired.  Logout and login again.");
+          }
+          else{
+            alert(err);
+          }
           this.showLoader = false;
         },
         // Finally
@@ -95,6 +100,7 @@ export class EmployComponent implements OnInit {
     }
     else
     {
+
       var eol = "<br /><br />";
       var msgbody = this.selectedApplicant.firstName + " " + this.selectedApplicant.lastName + ":" + eol;
       msgbody += 'Thank you for your interest in the McGill Companies.  Below you will find the information necessary to start the application process.' + eol;
@@ -106,7 +112,13 @@ export class EmployComponent implements OnInit {
       msgbody += 'The Company is an equal opportunity employer.' + eol;
       msgbody += 'EEO/m/f/d/v' + eol;
 
-      alert(msgbody);
+      //alert(msgbody);
+      var contact = new ContactUs();
+      contact.Email = this.selectedApplicant.email;
+      contact.Name = this.selectedApplicant.firstName + ' ' + this.selectedApplicant.lastName;
+      contact.theMessage = msgbody;
+      
+      this.employService.emailApplicant(contact);
     }
 
   }

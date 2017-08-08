@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { IEmploymentListItem } from '../models/employment';
 import { IApplication, SectionA, SectionB } from '../models/application';
 import { Values } from '../models/values';
+import { AuthenticationService } from '../services/auth.service';
+import { ContactUs } from '../models/contact-us';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -15,7 +17,8 @@ export class EmployService{
 
     private config : any;
 
-    constructor(private configService: ConfigService, private http: Http){
+    constructor(    private authService: AuthenticationService,
+                    private configService: ConfigService, private http: Http){
         this.config = configService.config;
     }
 
@@ -48,8 +51,10 @@ export class EmployService{
         //let bodyString = JSON.stringify(''); // Stringify payload
         //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/applicant";
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(url)//, bodyString, {headers:headers})
+        return this.http.get(url, options)//, bodyString, {headers:headers})
         .map((res:Response) => {
             let data = res.json();
             //console.log('test: '+data);
@@ -69,8 +74,10 @@ export class EmployService{
         //let bodyString = JSON.stringify(''); // Stringify payload
         //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/applicant"+"/"+id;
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(url)//, bodyString, {headers:headers})
+        return this.http.get(url, options)//, bodyString, {headers:headers})
         .map((res:Response) => {
             let data = res.json();
             //console.log('test: '+data);
@@ -88,10 +95,13 @@ export class EmployService{
     public saveApplicant(applicant : IEmploymentListItem) : Observable<IEmploymentListItem>{
        
         let bodyString = JSON.stringify(applicant); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        // let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/applicant"+"/"+applicant.employmentAppId;
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token,
+                                    'Content-Type': 'application/json'});
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.put(url, bodyString, {headers:headers})
+        return this.http.put(url, bodyString, options)
         .map((res:Response) => {
             //let data = res.json();
             //console.log('test: '+data);
@@ -153,10 +163,12 @@ export class EmployService{
         let bodyString = JSON.stringify(applicant).replace('"employmentAppId":-1,',''); // Stringify payload
         // Remove "employmentAppId":-1,
         
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/applicant";
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token,
+                                    'Content-Type': 'application/json'});
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(url, bodyString, {headers:headers})
+        return this.http.post(url, bodyString, options)
         .map((res:Response) => {
             let data = res.json();
             //console.log('test: '+data);
@@ -192,9 +204,34 @@ export class EmployService{
         //alert(url + ":" + bodyString);
     }
 
+    public emailApplicant(contact : ContactUs){
+       
+        let bodyString = JSON.stringify(contact); // Stringify payload
+        let url = this.config.apiUrl+"/emailapplicant";
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token,
+                                    'Content-Type': 'application/json'});
+        let options = new RequestOptions({ headers: headers });
+
+        //let options = new RequestOptions({ headers: headers, method: "post" }); // Create a request option
+        //.map((response:Response) => response.json())
+        // .map((res:Response) => {
+        //     console.log(res.json());
+        //     return res.json();})
+
+        this.http.post(url, bodyString, options)
+        .map((res:Response) => res.json())      
+        .catch(this._handleError)
+        .subscribe(
+                data => console.log(data),
+                err => alert(err)
+            );
+       
+        //alert(url + ":" + bodyString);
+    }  
+
     private _handleError(error:any){
         console.error(error);
-        return Observable.throw(error._body);
+        return Observable.throw(error);
     }
 
     private extractData(res: Response) {

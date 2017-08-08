@@ -5,6 +5,8 @@ export interface IEmploymentListItem {
     lastName: string,
     firstName: string,
     status: string,
-    code: string
+    code: string,
+    email: string, 
+    emailSent: number
 }
 

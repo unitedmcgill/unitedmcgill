@@ -24,7 +24,9 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
     lastName: '',
     firstName: '',
     status: this.statusTypes[0].value,
-    code: ''
+    code: '',
+    email: '',
+    emailSent: 0
   };
 
   public applicantCopy = null;
@@ -82,8 +84,12 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
         },
         // On Error
         (err:any) => {
-          console.log(err);
-          alert(err);
+          if (err.status == 401){
+            alert("401:  Your session has probably expired.  Logout and login again.");
+          }
+          else{
+            alert(err);
+          }
           this.showLoader = false;
         },
         // Finally
@@ -116,7 +122,9 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
         lastName: '',
         firstName: '',
         status: this.statusTypes[0].value,
-        code: this.getNextCode(10)
+        code: this.getNextCode(10),
+        email : '',
+        emailSent : 0
        }
 
   }
@@ -152,8 +160,12 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
         },
         // On Error
         (err:any) => {
-          console.log(err);
-          alert(err);
+          if (err.status == 401){
+            alert("401:  Your session has probably expired.  Logout and login again.");
+          }
+          else{
+            alert(err);
+          }
           this.showLoader = false;
         },
         // Finally
@@ -181,8 +193,12 @@ export class EmployDetailsComponent implements OnInit, OnDestroy {
         },
         // On Error
         (err:any) => {
-          console.log(err);
-          alert(err);
+          if (err.status == 401){
+            alert("401:  Your session has probably expired.  Logout and login again.");
+          }
+          else{
+            alert(err);
+          }
           this.showLoader = false;
         },
         // Finally
