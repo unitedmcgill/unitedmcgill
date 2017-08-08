@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
             //return false;
         }
         
+        // Save the intended naviation link for use later if authenticated
         this.authService.url = state.url;
         
         // not logged in so redirect to login page

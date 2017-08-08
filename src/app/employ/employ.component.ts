@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IEmploymentListItem } from '../models/employment';
+import { AuthenticationService } from '../services/auth.service';
 
 @Component({
   //selector: 'app-products',
@@ -16,7 +17,8 @@ export class EmployComponent implements OnInit {
   public selectedId : number = -1;
   public selectedApplicant : IEmploymentListItem; 
 
-    constructor(  private route: ActivatedRoute,
+    constructor(  private authService : AuthenticationService,
+                  private route: ActivatedRoute,
                   private employService: EmployService,
                   private router: Router) {
     //this.active = true;
@@ -110,8 +112,7 @@ export class EmployComponent implements OnInit {
   }
 
   public logout() {
-    localStorage.removeItem('currentUser');
-    alert("You are logged out!");
+    this.authService.logout();
     let link = ['/dashboard'];
     this.router.navigate(link);
   }

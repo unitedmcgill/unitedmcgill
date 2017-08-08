@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
@@ -7,6 +7,8 @@ import { ApplicationUser } from "../models/applicationuser";
  
 @Injectable()
 export class AuthenticationService {
+    @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+
     public url : string;
     public token: string;
     private config : any;
@@ -35,11 +37,15 @@ export class AuthenticationService {
  
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify({ username: applicationUser.userName, token: token }));
+
+                    // Update the header with username
+                    this.getLoggedInName.emit(applicationUser.userName);
  
                     // return true to indicate successful login
                     return true;
                 } else {
                     // return false to indicate failed login
+                    this.getLoggedInName.emit("");
                     return false;
                 }
             });
@@ -49,5 +55,8 @@ export class AuthenticationService {
         // clear token remove user from local storage to log user out
         this.token = null;
         localStorage.removeItem('currentUser');
+
+        // Update the header
+        this.getLoggedInName.emit("");
     }
 }
