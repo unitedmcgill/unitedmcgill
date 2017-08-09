@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/auth.service';
 })
 export class FullLayoutComponent implements OnInit {
     userName : string;
+    public showEmploymentApp : boolean = false;
 
     constructor( private authService : AuthenticationService) {
         authService.getLoggedInName.subscribe(name => this.changeName(name));
@@ -28,5 +29,12 @@ export class FullLayoutComponent implements OnInit {
             let obj = JSON.parse(user);
             this.userName = obj["username"];
         }
+
+        // Internal or External user
+        this.authService.checkUser().subscribe((result:string) => {
+          if ( result == "1"){
+            this.showEmploymentApp = true;
+          }
+        })
     }
 }

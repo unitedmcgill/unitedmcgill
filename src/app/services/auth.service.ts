@@ -59,4 +59,19 @@ export class AuthenticationService {
         // Update the header
         this.getLoggedInName.emit("");
     }
+
+    checkUser() : Observable<string>{
+    let url = this.config.apiUrl+"/checkuser";
+        return this.http.get(url).map((res: Response) => {
+            let result = res.json();
+            //TODO you can do stuff with the values here if you want
+            return result;
+        })
+        .catch(this._handleError);
+    }
+
+    private _handleError(error:any){
+        console.error(error);
+        return Observable.throw(error);
+    }
 }
