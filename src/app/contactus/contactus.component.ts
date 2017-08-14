@@ -31,7 +31,7 @@ export class ContactUsComponent implements OnInit {
   public onSend(){
     //console.log(this.config.apiUrl);
     //alert(JSON.stringify(this.config));
-
+     this.contact.forWebsiteDomain = "UMC";
     this.contactUsService.sendMessage(this.contact);
 
     // Clear the form since we are doing *ngIf="active" on the form tag
