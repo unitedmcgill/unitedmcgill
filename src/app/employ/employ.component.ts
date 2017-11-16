@@ -17,8 +17,15 @@ export class EmployComponent implements OnInit {
   public showLoader : boolean = false;
   public selectedId : number = -1;
   public selectedApplicant : IEmploymentListItem; 
+  public statusTypes = [
+    { value: 'C', display: 'Current' },
+    { value: 'D', display: 'Deleted' },
+    { value: 'H', display: 'Hide' },
+    { value: 'K', display: 'Keep' }
+  ];
+  public selectedType = this.statusTypes[0].value;
 
-    constructor(  private authService : AuthenticationService,
+  constructor(  private authService : AuthenticationService,
                   private route: ActivatedRoute,
                   private employService: EmployService,
                   private router: Router) {
@@ -126,5 +133,14 @@ export class EmployComponent implements OnInit {
     this.authService.logout();
     let link = ['/dashboard'];
     this.router.navigate(link);
+  }
+
+  public MakeDate(number){
+    var theDate = new Date(number*1000);
+    var month = theDate.getMonth()+1;
+    var day = theDate.getDate();
+    var year = theDate.getFullYear();
+    if ( year == 1969 ) return '-';
+    return month + '/' + day + '/' + year;
   }
 }
