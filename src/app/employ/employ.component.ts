@@ -110,7 +110,7 @@ export class EmployComponent implements OnInit {
       var eol = "<br /><br />";
       var msgbody = this.selectedApplicant.firstName + " " + this.selectedApplicant.lastName + ":" + eol;
       msgbody += 'Thank you for your interest in the McGill Companies.  Below you will find the information necessary to start the application process.' + eol;
-      msgbody += 'Please visit this page to access your application: <a href="http://www.unitedmcgill.com/application/' + this.selectedApplicant.code + '">Online Employment Application Login</a> ' + eol;
+      msgbody += 'Please visit this page to access your application: <a href="http://beta.unitedmcgill.com/application/' + this.selectedApplicant.code + '">Online Employment Application Login</a> ' + eol;
       msgbody += 'Your Online Application Code: ' + this.selectedApplicant.code + eol;
       msgbody += 'If you need assistance, please contact the Personnel Services Department.' + eol;
       msgbody += 'Thank you,<br />Personnel Services Department' + eol;
