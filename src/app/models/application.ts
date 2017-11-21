@@ -125,7 +125,10 @@ export type SectionC = {
         licenseExplain: string,
         insurance: number,
         crime: number,
-        crimeExplain: string        
+        crimeExplain: string,
+        licenseExpirationOne: string,
+        licenseExpirationTwo: string,
+        licenseExpirationThree: string        
 }
 
 export type SectionD = {

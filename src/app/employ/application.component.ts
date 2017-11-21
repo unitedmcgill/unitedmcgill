@@ -140,7 +140,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         licenseExplain: '',
         insurance: 0,
         crime: 0,
-        crimeExplain: ''        
+        crimeExplain: '',
+        licenseExpirationOne: '',
+        licenseExpirationTwo: '',
+        licenseExpirationThree: ''   
     },
     sectionD : {
         employmentAppId: 0,
