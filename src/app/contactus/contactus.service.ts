@@ -38,7 +38,7 @@ export class ContactUsService{
                 //     })
     }
 
-    public sendMessage(contact : ContactUs){
+    public sendMessage(contact : ContactUs) : Observable<ContactUs> {
        
         let bodyString = JSON.stringify(contact); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -49,13 +49,9 @@ export class ContactUsService{
         //     console.log(res.json());
         //     return res.json();})
 
-        this.http.post(url, bodyString, {headers:headers})
-        .map((res:Response) => res.json())      
-        .catch(this._handleError)
-        .subscribe(
-                data => console.log(data),
-                err => console.log(err)
-            );
+        return this.http.post(url, bodyString, {headers:headers})
+        .map((res:Response) => {return res;})      
+        .catch(this._handleError);
        
         //alert(url + ":" + bodyString);
     }

@@ -124,7 +124,30 @@ export class EmployComponent implements OnInit {
       contact.Name = this.selectedApplicant.firstName + ' ' + this.selectedApplicant.lastName;
       contact.theMessage = msgbody;
       
-      this.employService.emailApplicant(contact);
+      this.employService.emailApplicant(contact)
+      .subscribe((contact: ContactUs) => {
+        if ( contact ){
+          // console.log(data);
+          // console.log(this.ductConvert);
+          // const duct = JSON.stringify(data);
+          // Save was successfull so update the Copy
+          // this.application = Object.assign({}, this.application);
+          console.log(contact);
+        } else {
+          console.log("error");
+        }
+      },
+      // On Error
+      (err:any) => {
+        console.log(err);
+        alert(err);
+        this.showLoader = false;
+      },
+      // Finally
+      () => {
+        this.showLoader = false;
+        alert("Applicant email sent.");
+      });            
     }
 
   }

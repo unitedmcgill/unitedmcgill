@@ -204,7 +204,7 @@ export class EmployService{
         //alert(url + ":" + bodyString);
     }
 
-    public emailApplicant(contact : ContactUs){
+    public emailApplicant(contact : ContactUs) : Observable<ContactUs> {
        
         let bodyString = JSON.stringify(contact); // Stringify payload
         let url = this.config.apiUrl+"/emailapplicant";
@@ -218,16 +218,30 @@ export class EmployService{
         //     console.log(res.json());
         //     return res.json();})
 
-        this.http.post(url, bodyString, options)
-        .map((res:Response) => res.json())      
-        .catch(this._handleError)
-        .subscribe(
-                data => console.log(data),
-                err => alert(err)
-            );
+        return this.http.post(url, bodyString, options)
+        .map((res:Response) => {return res;})      
+        .catch(this._handleError);
        
         //alert(url + ":" + bodyString);
     }  
+
+    public notifyPersonnel(contact : ContactUs ) : Observable<ContactUs> {
+        let bodyString = JSON.stringify(contact); // Stringify payload
+        let url = this.config.apiUrl+"/notifypersonnel";
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token,
+                                    'Content-Type': 'application/json'});
+        let options = new RequestOptions({ headers: headers });
+
+        //let options = new RequestOptions({ headers: headers, method: "post" }); // Create a request option
+        //.map((response:Response) => response.json())
+        // .map((res:Response) => {
+        //     console.log(res.json());
+        //     return res.json();})
+
+        return this.http.post(url, bodyString, options)
+        .map((res:Response) => {return res;})      
+        .catch(this._handleError);        
+    }
 
     private _handleError(error:any){
         console.error(error);

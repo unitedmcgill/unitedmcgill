@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { EmployService } from './employ.service';
 import { IApplication, SectionA, SectionB, SectionC, SectionD, SectionE, SectionF } from '../models/application';
 import { Values } from '../models/values';
+import { ContactUs } from '../models/contact-us';
 
 @Component({
   //selector: 'app-products',
@@ -737,7 +738,45 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         () => {
           this.showLoader = false;
           alert("Application saved.");
+          this.notifyPersonnel();
         });      
+  }
+
+  public notifyPersonnel(){
+    var eol = "<br /><br />";
+    var contact = new ContactUs();
+    contact.Email = "kcauley@unitedmcgill.com";
+    contact.Name = "Kathy Cauley";
+    contact.Company = this.application.employmentAppId + ':' + this.application.lastName;
+    var msgbody = 'Employment application id#' + this.application.employmentAppId + ' for '+ this.application.lastName;
+    msgbody += ' has been updated.  The application may not be completed!  This message only indicates the applicant signed and saved';
+    msgbody += ' the form to have the system generate this email notice to you.' + eol;
+    contact.theMessage = msgbody;
+    
+    this.employService.notifyPersonnel(contact)
+    .subscribe((contact: ContactUs) => {
+      if ( contact ){
+        // console.log(data);
+        // console.log(this.ductConvert);
+        // const duct = JSON.stringify(data);
+        // Save was successfull so update the Copy
+        // this.application = Object.assign({}, this.application);
+        console.log(contact);
+      } else {
+        console.log("error");
+      }
+    },
+    // On Error
+    (err:any) => {
+      console.log(err);
+      alert(err);
+      this.showLoader = false;
+    },
+    // Finally
+    () => {
+      //this.showLoader = false;
+      //alert("Applicant email sent.");
+    });                
   }
 
   public gotoEmployList(){
