@@ -679,7 +679,33 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             // console.log(data);
             // console.log(this.ductConvert);
             // const duct = JSON.stringify(data);
-            this.application = data;
+            if ( data.sectionA != null ){
+              this.application.sectionA = data.sectionA;
+            }
+            if ( data.sectionB != null ){
+              this.application.sectionB = data.sectionB;
+            }
+            if ( data.sectionC != null ){
+              this.application.sectionC = data.sectionC;
+            }
+            if ( data.sectionD != null ){
+              this.application.sectionD = data.sectionD;
+            }
+            if ( data.sectionE != null ){
+              this.application.sectionE = data.sectionE;
+            }
+            if ( data.sectionF != null ){
+              this.application.sectionF = data.sectionF;
+            }
+
+            this.application.code = data.code;
+            this.application.created = data.created;
+            this.application.employmentAppId = data.employmentAppId;
+            this.application.firstName = data.firstName;
+            this.application.lastName = data.lastName;
+            this.application.lastUpdate = data.lastUpdate;
+            //this.application = data;
+
             this.processLocationsIn();
             this.processFindOutIn();
             this.processWorkIn();
