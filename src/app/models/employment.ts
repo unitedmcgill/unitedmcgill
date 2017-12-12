@@ -1,3 +1,5 @@
+import { SectionA, SectionB, SectionC, SectionD, SectionE, SectionF } from '../models/application';
+
 export interface IEmploymentListItem {
     employmentAppId : number,
     created : number,
@@ -8,5 +10,11 @@ export interface IEmploymentListItem {
     code: string,
     email: string, 
     emailSent: number
+    sectionA : SectionA,
+    sectionB : SectionB,
+    sectionC : SectionC,
+    sectionD : SectionD,
+    sectionE : SectionE,
+    sectionF : SectionF    
 }
 
