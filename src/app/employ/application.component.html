@@ -222,8 +222,8 @@
 							<div class="col-xs-2">
 								<label class="">Third shift?</label>
 							</div>
-							<div class="col-xs-1" *ngFor="let answer of yesnoInt">
-								<input type="radio" id="rf-work" [(ngModel)]="application.sectionB.secondShift" name="work" [value]="answer.value">{{answer.display}}
+							<div class="col-xs-1" *ngFor="let answer2 of yesnoInt">
+								<input type="radio" id="rf-work2" [(ngModel)]="application.sectionB.thirdShift" name="work2" [value]="answer2.value">{{answer2.display}}
 							</div>
 						</div>	
 						<hr />				
@@ -1255,7 +1255,7 @@
 									month/year: 
 									<input type="number" min="1" max="12" id="e1-graduateMonthTwo" [(ngModel)]="application.sectionE.graduateMonthTwo" name="graduateMonthTwo" >
 									/
-									<input type="number" min="1" max="9999"  id="e1-endYearTwo" [(ngModel)]="application.sectionE.endYearTwo" name="endYearTwo" >							
+									<input type="number" min="1" max="9999"  id="e1-graduateYearTwo" [(ngModel)]="application.sectionE.graduateYearTwo " name="graduateYearTwo" >							
 									&nbsp;Degree:
 									<input id="e1-degreeTwo" [(ngModel)]="application.sectionE.degreeTwo" name="degreeTwo" >							
 								</div>
@@ -1374,7 +1374,7 @@
 									month/year: 
 									<input type="number" min="1" max="12" id="e1-graduateMonthThree" [(ngModel)]="application.sectionE.graduateMonthThree" name="graduateMonthThree" >
 									/
-									<input type="number" min="1" max="9999"  id="e1-endYearThree" [(ngModel)]="application.sectionE.endYearThree" name="endYearThree" >							
+									<input type="number" min="1" max="9999"  id="e1-graduateYearThree" [(ngModel)]="application.sectionE.graduateYearThree" name="graduateYearThree" >							
 									&nbsp;Degree:
 									<input id="e1-degreeThree" [(ngModel)]="application.sectionE.degreeThree" name="degreeThree" >							
 								</div>
