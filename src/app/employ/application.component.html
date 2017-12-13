@@ -2,7 +2,7 @@
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
 		<h4 class="card-title">Employment Application ({{application.code}})</h4>
-		<form name="applicationForm" #applicationForm="ngForm" novalidate>
+		<form name="applicationForm" #applicationForm="ngForm" (ngSubmit)="saveApplication()" novalidate>
 			<tabset>
 				<tab heading="Section A">
 					<div class="card card-block card-outline-primary ">
@@ -65,25 +65,25 @@
 						<div *ngIf="application.sectionB.employBefore == 1" class="form-group row">
 							<div>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. If yes, When? From month/year: 
-								<input type="number" min="1" max="12" id="eb4-beforeStartMonth" [(ngModel)]="application.sectionB.beforeStartMonth" name="beforeStartMonth" >
+								<input class="mcgill-input-small" type="text" id="eb4-beforeStartMonth" [(ngModel)]="application.sectionB.beforeStartMonth" name="beforeStartMonth" maxlength="2" >
 								/
-								<input type="number" min="1" max="99" id="eb4-beforeStartYear" [(ngModel)]="application.sectionB.beforeStartYear" name="beforeStartYear" >
+								<input class="mcgill-input-small" type="text" id="eb4-beforeStartYear" [(ngModel)]="application.sectionB.beforeStartYear" name="beforeStartYear" maxlength="2" >
 								&nbsp;To month/year:
-								<input type="number" min="1" max="12" id="eb4-beforeEndMonth" [(ngModel)]="application.sectionB.beforeEndMonth" name="beforeEndMonth" >
+								<input class="mcgill-input-small" type="text" id="eb4-beforeEndMonth" [(ngModel)]="application.sectionB.beforeEndMonth" name="beforeEndMonth" maxlength="2" >
 								/
-								<input type="number" min="1" max="99" id="eb4-beforeEndYear" [(ngModel)]="application.sectionB.beforeEndYear" name="beforeEndYear" >							
+								<input class="mcgill-input-small" type="text" id="eb4-beforeEndYear" [(ngModel)]="application.sectionB.beforeEndYear" name="beforeEndYear" maxlength="2" >							
 							</div>
 						</div>					
 						<div *ngIf="application.sectionB.employBefore == 1" class="form-group row">
 							<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;c. If yes, What was your job?</label>
-							<input class="col-xs-8" id="eb4-beforeJob" [(ngModel)]="application.sectionB.beforeJob" name="beforeJob" >
+							<input class="col-xs-8" id="eb4-beforeJob" [(ngModel)]="application.sectionB.beforeJob" name="beforeJob" maxlength="27" >
 						</div>					
 						<div *ngIf="application.sectionB.employBefore == 1" class="form-group row">
 							<div>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d.  If yes, Who was your immediate supervisor? 
-								<input id="eb4-beforeSupervisor" [(ngModel)]="application.sectionB.beforeSupervisor" name="beforeSupervisor" >
+								<input id="eb4-beforeSupervisor" [(ngModel)]="application.sectionB.beforeSupervisor" name="beforeSupervisor" maxlength="25" >
 								&nbsp;If yes, Who was the manager?
-								<input id="eb4-beforeManager" [(ngModel)]="application.sectionB.beforeManager" name="beforeManager" >							
+								<input id="eb4-beforeManager" [(ngModel)]="application.sectionB.beforeManager" name="beforeManager" maxlength="30" >							
 							</div>
 						</div>					
 						<div *ngIf="application.sectionB.employBefore == 1" class="form-group row">
@@ -99,11 +99,11 @@
 						</div>					
 						<div *ngIf="application.sectionB.applyBefore == 1" class="form-group row">
 							<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;b. If yes, When (date)?</label>
-							<input class="col-xs-4" id="ab4-applyDate" [(ngModel)]="application.sectionB.applyDate" name="applyDate" >
+							<input class="col-xs-4" id="ab4-applyDate" [(ngModel)]="application.sectionB.applyDate" name="applyDate" maxlength="30">
 						</div>					
 						<div *ngIf="application.sectionB.applyBefore == 1" class="form-group row">
 							<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;c. If yes, For what job?</label>
-							<input class="col-xs-4" id="ab4-beforeJob" [(ngModel)]="application.sectionB.beforeJob" name="beforeJob" >
+							<input class="col-xs-4" id="ab4-beforeJob" [(ngModel)]="application.sectionB.beforeJob" name="beforeJob" maxlength="80" >
 						</div>		
 						<hr />			
 						<div class="form-group row">
@@ -116,35 +116,35 @@
 							<div class="col-xs-12">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Name:
-								<input id="rf-relativeNameOne" [(ngModel)]="application.sectionB.relativeNameOne" name="relativeNameOne" >
+								<input id="rf-relativeNameOne" [(ngModel)]="application.sectionB.relativeNameOne" name="relativeNameOne" maxlength="30">
 								&nbsp;Relationship:
-								<input id="rf-relativeRelationshipOne" [(ngModel)]="application.sectionB.relativeRelationshipOne" name="relativeRelationshipOne" >							
+								<input id="rf-relativeRelationshipOne" [(ngModel)]="application.sectionB.relativeRelationshipOne" name="relativeRelationshipOne" maxlength="20" >							
 								&nbsp;Job:
-								<input id="rf-relativeJobOne" [(ngModel)]="application.sectionB.relativeJobOne" name="relativeJobOne" >							
+								<input id="rf-relativeJobOne" [(ngModel)]="application.sectionB.relativeJobOne" name="relativeJobOne" maxlength="20" >							
 								&nbsp;Location:
-								<input id="rf-relativeLocationOne" [(ngModel)]="application.sectionB.relativeLocationOne" name="relativeLocationOne" >							
+								<input id="rf-relativeLocationOne" [(ngModel)]="application.sectionB.relativeLocationOne" name="relativeLocationOne" maxlength="25">							
 							</div>
 							<div class="col-xs-12">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Name:
-								<input id="rf-relativeNameTwo" [(ngModel)]="application.sectionB.relativeNameTwo" name="relativeNameTwo" >
+								<input id="rf-relativeNameTwo" [(ngModel)]="application.sectionB.relativeNameTwo" name="relativeNameTwo" maxlength="30">
 								&nbsp;Relationship:
-								<input id="rf-relativeRelationshipTwo" [(ngModel)]="application.sectionB.relativeRelationshipTwo" name="relativeRelationshipTwo" >							
+								<input id="rf-relativeRelationshipTwo" [(ngModel)]="application.sectionB.relativeRelationshipTwo" name="relativeRelationshipTwo" maxlength="20">							
 								&nbsp;Job:
-								<input id="rf-relativeJobTwo" [(ngModel)]="application.sectionB.relativeJobTwo" name="relativeJobTwo" >							
+								<input id="rf-relativeJobTwo" [(ngModel)]="application.sectionB.relativeJobTwo" name="relativeJobTwo" maxlength="20">							
 								&nbsp;Location:
-								<input id="rf-relativeLocationTwo" [(ngModel)]="application.sectionB.relativeLocationTwo" name="relativeLocationTwo" >							
+								<input id="rf-relativeLocationTwo" [(ngModel)]="application.sectionB.relativeLocationTwo" name="relativeLocationTwo" maxlength="25" >							
 							</div>
 							<div class="col-xs-12">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Name:
-								<input id="rf-relativeNameThree" [(ngModel)]="application.sectionB.relativeNameThree" name="relativeNameThree" >
+								<input id="rf-relativeNameThree" [(ngModel)]="application.sectionB.relativeNameThree" name="relativeNameThree" maxlength="30" >
 								&nbsp;Relationship:
-								<input id="rf-relativeRelationshipThree" [(ngModel)]="application.sectionB.relativeRelationshipThree" name="relativeRelationshipThree" >							
+								<input id="rf-relativeRelationshipThree" [(ngModel)]="application.sectionB.relativeRelationshipThree" name="relativeRelationshipThree" maxlength="20">							
 								&nbsp;Job:
-								<input id="rf-relativeJobThree" [(ngModel)]="application.sectionB.relativeJobThree" name="relativeJobThree" >							
+								<input id="rf-relativeJobThree" [(ngModel)]="application.sectionB.relativeJobThree" name="relativeJobThree" maxlength="20">							
 								&nbsp;Location:
-								<input id="rf-relativeLocationThree" [(ngModel)]="application.sectionB.relativeLocationThree" name="relativeLocationThree" >							
+								<input id="rf-relativeLocationThree" [(ngModel)]="application.sectionB.relativeLocationThree" name="relativeLocationThree" maxlength="25" >							
 							</div>
 						</div>
 						<hr />					
@@ -165,7 +165,7 @@
 							<div class="col-xs-4">
 								<input id="emp" type="checkbox" [(ngModel)]="findOutEmp" name="emp"/>
 								<label class="mcgill-checkbox-top-label" for="emp">Present employee:</label>
-								<input [(ngModel)]="application.sectionB.findOutEmployee" name="findemp"/>
+								<input [(ngModel)]="application.sectionB.findOutEmployee" name="findemp" maxlength="25"/>
 							</div>
 							<div class="col-xs-4">
 								<input id="recruit" type="checkbox" [(ngModel)]="findOutRecruit" name="recruit"/>
@@ -178,18 +178,18 @@
 							<div class="col-xs-4">
 								<input id="internet" type="checkbox" [(ngModel)]="findOutInternet" name="internet"/>
 								<label class="mcgill-checkbox-top-label" for="internet">Internet site:</label>
-								<input [(ngModel)]="application.sectionB.findOutSite" name="findinternet"/>
+								<input [(ngModel)]="application.sectionB.findOutSite" name="findinternet" maxlength="43"/>
 							</div>
 							<div class="col-xs-4">
 								<input id="other" type="checkbox" [(ngModel)]="findOutOther" name="other"/>
 								<label class="mcgill-checkbox-top-label" for="other">Other:</label>
-								<input [(ngModel)]="application.sectionB.findOutOther" name="findother"/>
+								<input [(ngModel)]="application.sectionB.findOutOther" name="findother" maxlength="50"/>
 							</div>
 						</div>	
 						<hr />				
 						<div class="form-group row">
 							<label class="col-xs-6 col-form-label">5. Position for which you are applying:</label>
-							<input class="col-xs-4" id="applypos" [(ngModel)]="application.sectionB.mcGillPosition" name="applypos" />
+							<input class="col-xs-4" id="applypos" [(ngModel)]="application.sectionB.mcGillPosition" name="applypos" maxlength="75"/>
 						</div>		
 						<hr />			
 						<div class="form-group row">
@@ -201,7 +201,7 @@
 							<div class="col-xs-4">
 								<input id="workPart" type="checkbox" [(ngModel)]="workPart" name="workPart"/>
 								<label class="mcgill-checkbox-top-label" for="workPart">Part time? hours/week:</label>
-								<input [(ngModel)]="application.sectionB.mcGillWorkHours" name="workPartEntry"/>
+								<input [(ngModel)]="application.sectionB.mcGillWorkHours" name="workPartEntry" maxlength="3"/>
 							</div>
 							<div class="col-xs-4">
 								<input id="workSummer" type="checkbox" [(ngModel)]="workSummer" name="workSummer"/>
@@ -230,16 +230,16 @@
 						<div class="form-group row">
 							<label class="col-xs-4 col-form-label">8. What pay do you want to start:</label>
 							<div class="col-xs-8">
-								<input [(ngModel)]="application.sectionB.startPayHourly" name="startPayHourly"/>
+								<input [(ngModel)]="application.sectionB.startPayHourly" name="startPayHourly" maxlength="6"/>
 								<label for="startPayHourly">/hour or $</label>
-								<input [(ngModel)]="application.sectionB.startPayYearly" name="startPayYearly"/>
+								<input [(ngModel)]="application.sectionB.startPayYearly" name="startPayYearly" maxlength="6"/>
 								<label for="startPayYearly">/year</label>
 							</div>
 						</div>	
 						<hr />
 						<div class="form-group row">
 							<label class="col-xs-7 col-form-label">9. When would you be able to begin working at the Company?</label>
-							<input class="col-xs-5" [(ngModel)]="application.sectionB.startWorking" name="startWorking"/>
+							<input class="col-xs-5" [(ngModel)]="application.sectionB.startWorking" name="startWorking" maxlength="55"/>
 						</div>	
 						<hr />
 						<div class="form-group row">
@@ -262,16 +262,20 @@
 					<h6 class="card-header">C. &nbsp; Personal Information</h6><br />
 						<div class="form-group row">
 							<label class="col-xs-4 col-form-label">1. a. Name (last, first, middle): </label>
-							<input class="col-xs-8" id="fullName" [(ngModel)]="application.sectionC.fullName" name="fullName" >
+							<input class="col-xs-8" id="fullName" [(ngModel)]="application.sectionC.fullName" name="fullName" maxlength="75">
 						</div>					
 						<div class="form-group row">
 							<label class="col-xs-6 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;b. Prior name, or other names used (for reference purposes): </label>
-							<input class="col-xs-6" id="otherName" [(ngModel)]="application.sectionC.otherName" name="otherName" >
+							<input class="col-xs-6" id="otherName" [(ngModel)]="application.sectionC.otherName" name="otherName" maxlength="55" >
 						</div>		
 						<hr />			
 						<div class="form-group row">
 							<label class="col-xs-6 col-form-label">2. SSN (No dashs or spaces): </label>
-							<input class="col-xs-4" type="number" id="ssn" [(ngModel)]="application.sectionC.ssn" name="ssn" #ssn="ngModel">
+							<input class="col-xs-4" id="ssn" [(ngModel)]="application.sectionC.ssn" name="ssn" #ssn="ngModel" required maxlength="9">
+							<div [hidden]="ssn.valid" 
+								class="alert alert-danger">
+								SSN is required
+							</div>
 						</div>	
 						<hr />				
 						<div class="form-group row">
@@ -298,30 +302,30 @@
 						<hr />			
 						<div class="form-group row">
 							<label class="col-xs-7 col-form-label">5. Present address: (Distance from McGill facility of employment, miles)</label>
-							<input class="col-xs-1" type="number" id="presentMiles" [(ngModel)]="application.sectionC.presentMiles" name="presentMiles" >
+							<input class="col-xs-1" id="presentMiles" [(ngModel)]="application.sectionC.presentMiles" name="presentMiles" maxlength="4" >
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Street:</label>
-								<input class="col-xs-6" id="presentStreet" [(ngModel)]="application.sectionC.presentStreet" name="presentStreet" >
+								<input class="col-xs-6" id="presentStreet" [(ngModel)]="application.sectionC.presentStreet" name="presentStreet" maxlength="30" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">City:</label>
-								<input class="col-xs-6" id="presentCity" [(ngModel)]="application.sectionC.presentCity" name="presentCity" >
+								<input class="col-xs-6" id="presentCity" [(ngModel)]="application.sectionC.presentCity" name="presentCity" maxlength="20" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">State:</label>
-								<input class="col-xs-6" maxlength="2" id="presentState" [(ngModel)]="application.sectionC.presentState" name="presentState" >
+								<input class="col-xs-6" maxlength="2" id="presentState" [(ngModel)]="application.sectionC.presentState" name="presentState" maxlength="2" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Zip:</label>
-								<input class="col-xs-6" maxlength="5" id="presentZip" [(ngModel)]="application.sectionC.presentZip" name="presentZip" >
+								<input class="col-xs-6" maxlength="5" id="presentZip" [(ngModel)]="application.sectionC.presentZip" name="presentZip" maxlength="5" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Telephone:</label>
-								<input class="col-xs-6"  id="presentTelephone" [(ngModel)]="application.sectionC.presentTelephone" name="presentTelephone" >
+								<input class="col-xs-6"  id="presentTelephone" [(ngModel)]="application.sectionC.presentTelephone" name="presentTelephone" maxlength="12">
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Email:</label>
-								<input class="col-xs-6" id="presentEmail" [(ngModel)]="application.sectionC.presentEmail" name="presentEmail" >
+								<input class="col-xs-6" id="presentEmail" [(ngModel)]="application.sectionC.presentEmail" name="presentEmail" maxlength="30" >
 							</div>
 						</div>
 						<hr />									
@@ -329,9 +333,9 @@
 							<label class="col-xs-5 col-form-label">6. How long have you been at your present address?</label>
 							<div class="col-xs-4 col-form-label">
 								<label for="presentStartMonth">&nbsp;&nbsp;&nbsp;Since: month</label>
-								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.presentStartMonth" name="presentStartMonth"/>
+								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.presentStartMonth" name="presentStartMonth" maxlength="3"/>
 								<label for="presentStartYear">year</label>
-								<input class="mcgill-input-medium" [(ngModel)]="application.sectionC.presentStartYear" name="presentStartYear"/>
+								<input class="mcgill-input-medium" [(ngModel)]="application.sectionC.presentStartYear" name="presentStartYear" maxlength="4" />
 							</div>
 						</div>
 						<hr />	
@@ -339,27 +343,27 @@
 							<label class="col-xs-7 col-form-label">7. Permanent address: (if different)</label>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Street:</label>
-								<input class="col-xs-6" id="permanentStreet" [(ngModel)]="application.sectionC.permanentStreet" name="permanentStreet" >
+								<input class="col-xs-6" id="permanentStreet" [(ngModel)]="application.sectionC.permanentStreet" name="permanentStreet" maxlength="30" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">City:</label>
-								<input class="col-xs-6" id="permanentCity" [(ngModel)]="application.sectionC.permanentCity" name="permanentCity" >
+								<input class="col-xs-6" id="permanentCity" [(ngModel)]="application.sectionC.permanentCity" name="permanentCity" maxlength="20" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">State:</label>
-								<input class="col-xs-6" maxlength="2" id="permanentState" [(ngModel)]="application.sectionC.permanentState" name="permanentState" >
+								<input class="col-xs-6" maxlength="2" id="permanentState" [(ngModel)]="application.sectionC.permanentState" name="permanentState" maxlength="2" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Zip:</label>
-								<input class="col-xs-6" maxlength="5" id="permanentZip" [(ngModel)]="application.sectionC.permanentZip" name="permanentZip" >
+								<input class="col-xs-6" maxlength="5" id="permanentZip" [(ngModel)]="application.sectionC.permanentZip" name="permanentZip" maxlength="5" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Telephone:</label>
-								<input class="col-xs-6"  id="permanentTelephone" [(ngModel)]="application.sectionC.permanentTelephone" name="permanentTelephone" >
+								<input class="col-xs-6"  id="permanentTelephone" [(ngModel)]="application.sectionC.permanentTelephone" name="permanentTelephone" maxlength="12" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Email:</label>
-								<input class="col-xs-6" id="permanentEmail" [(ngModel)]="application.sectionC.permanentEmail" name="permanentEmail" >
+								<input class="col-xs-6" id="permanentEmail" [(ngModel)]="application.sectionC.permanentEmail" name="permanentEmail" maxlength="30" >
 							</div>
 						</div>
 						<hr />									
@@ -367,53 +371,53 @@
 							<label class="col-xs-7 col-form-label">8. Previous addresses</label>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Street:</label>
-								<input class="col-xs-6" id="previousStreetOne" [(ngModel)]="application.sectionC.previousStreetOne" name="previousStreetOne" >
+								<input class="col-xs-6" id="previousStreetOne" [(ngModel)]="application.sectionC.previousStreetOne" name="previousStreetOne" maxlength="30" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">City:</label>
-								<input class="col-xs-6" id="previousCityOne" [(ngModel)]="application.sectionC.previousCityOne" name="previousCityOne" >
+								<input class="col-xs-6" id="previousCityOne" [(ngModel)]="application.sectionC.previousCityOne" name="previousCityOne" maxlength="20" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">State:</label>
-								<input class="col-xs-6" maxlength="2" id="previousStateOne" [(ngModel)]="application.sectionC.previousStateOne" name="previousStateOne" >
+								<input class="col-xs-6" maxlength="2" id="previousStateOne" [(ngModel)]="application.sectionC.previousStateOne" name="previousStateOne" maxlength="2" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Zip:</label>
-								<input class="col-xs-6" maxlength="5" id="previousZipOne" [(ngModel)]="application.sectionC.previousZipOne" name="previousZipOne" >
+								<input class="col-xs-6" maxlength="5" id="previousZipOne" [(ngModel)]="application.sectionC.previousZipOne" name="previousZipOne" maxlength="5" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Telephone:</label>
-								<input class="col-xs-6"  id="previousTelephoneOne" [(ngModel)]="application.sectionC.previousTelephoneOne" name="previousTelephoneOne" >
+								<input class="col-xs-6"  id="previousTelephoneOne" [(ngModel)]="application.sectionC.previousTelephoneOne" name="previousTelephoneOne" maxlength="12" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Email:</label>
-								<input class="col-xs-6" id="previousEmailOne" [(ngModel)]="application.sectionC.previousEmailOne" name="previousEmailOne" >
+								<input class="col-xs-6" id="previousEmailOne" [(ngModel)]="application.sectionC.previousEmailOne" name="previousEmailOne" maxlength="30" >
 							</div>
 						</div>	
 						<div class="form-group row">
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Street:</label>
-								<input class="col-xs-6" id="previousStreetTwo" [(ngModel)]="application.sectionC.previousStreetTwo" name="previousStreetTwo" >
+								<input class="col-xs-6" id="previousStreetTwo" [(ngModel)]="application.sectionC.previousStreetTwo" name="previousStreetTwo" maxlength="30" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">City:</label>
-								<input class="col-xs-6" id="previousCityTwo" [(ngModel)]="application.sectionC.previousCityTwo" name="previousCityTwo" >
+								<input class="col-xs-6" id="previousCityTwo" [(ngModel)]="application.sectionC.previousCityTwo" name="previousCityTwo" maxlength="20" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">State:</label>
-								<input class="col-xs-6" maxlength="2" id="previousStateTwo" [(ngModel)]="application.sectionC.previousStateTwo" name="previousStateTwo" >
+								<input class="col-xs-6" maxlength="2" id="previousStateTwo" [(ngModel)]="application.sectionC.previousStateTwo" name="previousStateTwo" maxlength="2" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Zip:</label>
-								<input class="col-xs-6" maxlength="5" id="previousZipTwo" [(ngModel)]="application.sectionC.previousZipTwo" name="previousZipTwo" >
+								<input class="col-xs-6" maxlength="5" id="previousZipTwo" [(ngModel)]="application.sectionC.previousZipTwo" name="previousZipTwo" maxlength="5" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Telephone:</label>
-								<input class="col-xs-6"  id="previousTelephoneTwo" [(ngModel)]="application.sectionC.previousTelephoneTwo" name="previousTelephoneTwo" >
+								<input class="col-xs-6"  id="previousTelephoneTwo" [(ngModel)]="application.sectionC.previousTelephoneTwo" name="previousTelephoneTwo" maxlength="12" >
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 col-form-label">Email:</label>
-								<input class="col-xs-6" id="previousEmailTwo" [(ngModel)]="application.sectionC.previousEmailTwo" name="previousEmailTwo" >
+								<input class="col-xs-6" id="previousEmailTwo" [(ngModel)]="application.sectionC.previousEmailTwo" name="previousEmailTwo" maxlength="30" >
 							</div>
 						</div>		
 						<hr />
@@ -431,19 +435,19 @@
 							<label class="col-xs-8 col-form-label">10. If employed by the Company, whom should we notify in case of emergency?</label>
 							<div class="col-xs-9">
 								<label class="col-xs-2 col-form-label">Name:</label>
-								<input class="col-xs-7" id="emergencyName" [(ngModel)]="application.sectionC.emergencyName" name="emergencyName" >
+								<input class="col-xs-7" id="emergencyName" [(ngModel)]="application.sectionC.emergencyName" name="emergencyName" maxlength="50" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-2 col-form-label">Relationship:</label>
-								<input class="col-xs-7" id="emergencyRelationship" [(ngModel)]="application.sectionC.emergencyRelationship" name="emergencyRelationship" >
+								<input class="col-xs-7" id="emergencyRelationship" [(ngModel)]="application.sectionC.emergencyRelationship" name="emergencyRelationship" maxlength="15" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-2 col-form-label">Telephone:</label>
-								<input class="col-xs-7"  id="emergencyTelephone" [(ngModel)]="application.sectionC.emergencyTelephone" name="emergencyTelephone" >
+								<input class="col-xs-7"  id="emergencyTelephone" [(ngModel)]="application.sectionC.emergencyTelephone" name="emergencyTelephone" maxlength="12" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-2 col-form-label">Address:</label>
-								<input class="col-xs-7" id="emergencyAddress" [(ngModel)]="application.sectionC.emergencyAddress" name="emergencyAddress" >
+								<input class="col-xs-7" id="emergencyAddress" [(ngModel)]="application.sectionC.emergencyAddress" name="emergencyAddress" maxlength="90" >
 							</div>
 						</div>	
 						<hr />										
@@ -455,11 +459,11 @@
 						</div>					
 						<div *ngIf="application.sectionC.travel == 1" class="form-group row">
 							<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. If yes, maximum percentage of the work week?</label>
-							<input class="col-xs-1" [(ngModel)]="application.sectionC.travelPercentage" name="travelPercentage"/>
+							<input class="col-xs-1" [(ngModel)]="application.sectionC.travelPercentage" name="travelPercentage" maxlength="4" />
 						</div>					
 						<div *ngIf="application.sectionC.travel == 1" class="form-group row">
 							<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Please comment:</label>
-							<input class="col-xs-9" [(ngModel)]="application.sectionC.travelComment" name="travelComment"/>
+							<input class="col-xs-9" [(ngModel)]="application.sectionC.travelComment" name="travelComment" maxlength="80" />
 						</div>					
 						<hr />
 						<div class="form-group row">
@@ -470,38 +474,38 @@
 						</div>			
 						<div *ngIf="application.sectionC.relocate == 1" class="form-group row">
 							<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. If yes, what restrictions are there in time and area?</label>
-							<input class="col-xs-7" [(ngModel)]="application.sectionC.relocateRestrictions" name="relocateRestrictions"/>
+							<input class="col-xs-7" [(ngModel)]="application.sectionC.relocateRestrictions" name="relocateRestrictions" maxlength="60" />
 						</div>
 						<hr />					
 						<div class="form-group row">
 							<label class="col-xs-5 col-form-label">13. a. What is your means of transportation to work?</label>
-							<input class="col-xs-5" [(ngModel)]="application.sectionC.transportation" name="transportation"/>
+							<input class="col-xs-5" [(ngModel)]="application.sectionC.transportation" name="transportation" maxlength="60" />
 						</div>					
 						<div class="form-group row">
 							<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Please list all your valid driver's licenses:</label>
 							<div class="col-xs-6 col-form-label" >
 								<label for="licenseStateOne">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state:</label>
-								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateOne" name="licenseStateOne"/>
+								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateOne" name="licenseStateOne" maxlength="2" />
 								<label for="licenseNumberOne">number:</label>
-								<input [(ngModel)]="application.sectionC.licenseNumberOne" name="licenseNumberOne"/>
+								<input [(ngModel)]="application.sectionC.licenseNumberOne" name="licenseNumberOne" maxlength="12" />
 								<label for="licenseExpirationOne">expire:</label>
-								<input [(ngModel)]="application.sectionC.licenseExpirationOne" name="licenseExpirationOne"/>
+								<input [(ngModel)]="application.sectionC.licenseExpirationOne" name="licenseExpirationOne" maxlength="10" />
 							</div>
 							<div class="col-xs-6 col-form-label" >
 								<label for="licenseStateTwo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state:</label>
-								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateTwo" name="licenseStateTwo"/>
+								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateTwo" name="licenseStateTwo" maxlength="2" />
 								<label for="licenseNumberTwo">number:</label>
-								<input [(ngModel)]="application.sectionC.licenseNumberTwo" name="licenseNumberTwo"/>
+								<input [(ngModel)]="application.sectionC.licenseNumberTwo" name="licenseNumberTwo" maxlength="12" />
 								<label for="licenseExpirationTwo">expire:</label>
-								<input [(ngModel)]="application.sectionC.licenseExpirationTwo" name="licenseExpirationTwo"/>
+								<input [(ngModel)]="application.sectionC.licenseExpirationTwo" name="licenseExpirationTwo"  maxlength="10" />
 							</div>
 							<div class="col-xs-6 col-form-label" >
 								<label for="licenseStateThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state:</label>
-								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateThree" name="licenseStateThree"/>
+								<input class="mcgill-input-small" [(ngModel)]="application.sectionC.licenseStateThree" name="licenseStateThree" maxlength="2" />
 								<label for="licenseNumberThree">number:</label>
-								<input [(ngModel)]="application.sectionC.licenseNumberThree" name="licenseNumberThree"/>
+								<input [(ngModel)]="application.sectionC.licenseNumberThree" name="licenseNumberThree" maxlength="12" />
 								<label for="licenseExpirationThree">expire:</label>
-								<input [(ngModel)]="application.sectionC.licenseExpirationThree" name="licenseExpirationThree"/>
+								<input [(ngModel)]="application.sectionC.licenseExpirationThree" name="licenseExpirationThree"  maxlength="10"/>
 							</div>
 						</div>	
 						<div class="form-group row">
@@ -512,11 +516,11 @@
 						</div>					
 						<div *ngIf="application.sectionC.licenseSuspended == 1" class="form-group row">
 							<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If yes, when?</label>
-							<input class="col-xs-3" [(ngModel)]="application.sectionC.licenseWhen" name="licenseWhen"/>
+							<input class="col-xs-3" [(ngModel)]="application.sectionC.licenseWhen" name="licenseWhen" maxlength="30" />
 						</div>					
 						<div *ngIf="application.sectionC.licenseSuspended == 1" class="form-group row">
 							<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If yes, please explain:</label>
-							<input class="col-xs-9" [(ngModel)]="application.sectionC.licenseExplain" name="licenseExplain"/>
+							<input class="col-xs-9" [(ngModel)]="application.sectionC.licenseExplain" name="licenseExplain" maxlength="75" />
 						</div>					
 						<div class="form-group row">
 							<label class="col-xs-10 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Do you have liability insurance on your car? (If required for the position for which you are applying)</label>
@@ -551,15 +555,15 @@
 							<label class="col-xs-8 col-form-label">1. Most recent employer</label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of employer:</label>
-								<input class="col-xs-7" id="employerFirst" [(ngModel)]="application.sectionD.employerFirst" name="employerFirst" >
+								<input class="col-xs-7" id="employerFirst" [(ngModel)]="application.sectionD.employerFirst" name="employerFirst" maxlength="60" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Telephone:</label>
-								<input class="col-xs-7"  id="telephoneFirst" [(ngModel)]="application.sectionD.telephoneFirst" name="telephoneFirst" >
+								<input class="col-xs-7"  id="telephoneFirst" [(ngModel)]="application.sectionD.telephoneFirst" name="telephoneFirst" maxlength="12"  >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Business address:</label>
-								<input class="col-xs-7" id="addressFirst" [(ngModel)]="application.sectionD.addressFirst" name="addressFirst" >
+								<input class="col-xs-7" id="addressFirst" [(ngModel)]="application.sectionD.addressFirst" name="addressFirst" maxlength="85" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Description of business and products:</label>
@@ -570,26 +574,26 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Dates of employment:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting month: 
-									<input type="number" min="1" max="12" id="e1-startMonthFirst" [(ngModel)]="application.sectionD.startMonthFirst" name="startMonthFirst" >
+									<input class="mcgill-input-small" type="text" id="e1-startMonthFirst" [(ngModel)]="application.sectionD.startMonthFirst" name="startMonthFirst" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-startYearFirst" [(ngModel)]="application.sectionD.startYearFirst" name="startYearFirst" >
+									<input class="mcgill-input-small" type="text" id="e1-startYearFirst" [(ngModel)]="application.sectionD.startYearFirst" name="startYearFirst" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-endMonthFirst" [(ngModel)]="application.sectionD.endMonthFirst" name="endMonthFirst" >
+									<input class="mcgill-input-small" type="text" id="e1-endMonthFirst" [(ngModel)]="application.sectionD.endMonthFirst" name="endMonthFirst" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-endYearFirst" [(ngModel)]="application.sectionD.endYearFirst" name="endYearFirst" >							
+									<input class="mcgill-input-small" type="text" id="e1-endYearFirst" [(ngModel)]="application.sectionD.endYearFirst" name="endYearFirst" maxlength="2" >							
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting: 
-									<input type="number" min="1" max="12" id="abc" [(ngModel)]="application.sectionD.wageStartFirst" name="wageStartFirst" >
+									<input class="mcgill-input-small" type="text" id="abc" [(ngModel)]="application.sectionD.wageStartFirst" name="wageStartFirst" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageStartUnitFirst" [(ngModel)]="application.sectionD.wageStartUnitFirst" name="wageStartUnitFirst" >
+									<input class="mcgill-input-medium" id="e1-wageStartUnitFirst" [(ngModel)]="application.sectionD.wageStartUnitFirst" name="wageStartUnitFirst" maxlength="5">
 									&nbsp;Ending:
-									<input type="number" min="1" max="12" id="e1-wageEndFirst" [(ngModel)]="application.sectionD.wageEndFirst" name="wageEndFirst" >
+									<input class="mcgill-input-medium" id="e1-wageEndFirst" [(ngModel)]="application.sectionD.wageEndFirst" name="wageEndFirst" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageEndUnitFirst" [(ngModel)]="application.sectionD.wageEndUnitFirst" name="wageEndUnitFirst" >							
+									<input class="mcgill-input-medium" id="e1-wageEndUnitFirst" [(ngModel)]="application.sectionD.wageEndUnitFirst" name="wageEndUnitFirst" maxlength="5" >							
 								</div><br />
 							</div>					
 							<div class="col-xs-9">
@@ -604,20 +608,20 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i. Last increase:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month: 
-									<input type="number" min="1" max="12" id="e1-raiseMonthFirst" [(ngModel)]="application.sectionD.raiseMonthFirst" name="raiseMonthFirst" >
+									<input type="text" class="mcgill-input-small" id="e1-raiseMonthFirst" [(ngModel)]="application.sectionD.raiseMonthFirst" name="raiseMonthFirst" maxlength="3" >
 									year
-									<input type="number" min="1" max="99" id="e1-raiseYearFirst" [(ngModel)]="application.sectionD.raiseYearFirst" name="raiseYearFirst" >
+									<input type="text" class="mcgill-input-small" id="e1-raiseYearFirst" [(ngModel)]="application.sectionD.raiseYearFirst" name="raiseYearFirst" maxlength="4" >
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Addition income from incentive plan(s):</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ 
-									<input type="number" min="1" max="999999" id="e1-additionWageFirst" [(ngModel)]="application.sectionD.additionWageFirst" name="additionWageFirst" >
+									<input class="mcgill-input-medium" id="e1-additionWageFirst" [(ngModel)]="application.sectionD.additionWageFirst" name="additionWageFirst" maxlength="6"  >
 									per
-									<input class="mcgill-input-medium" id="e1-additionUnitFirst" [(ngModel)]="application.sectionD.additionUnitFirst" name="additionUnitFirst" >
+									<input class="mcgill-input-medium" id="e1-additionUnitFirst" [(ngModel)]="application.sectionD.additionUnitFirst" name="additionUnitFirst" maxlength="5" >
 									&nbsp;please explain:
-									<input id="e1-additionExplainFirst" [(ngModel)]="application.sectionD.additionExplainFirst" name="additionExplainFirst" >
+									<input id="e1-additionExplainFirst" [(ngModel)]="application.sectionD.additionExplainFirst" name="additionExplainFirst" maxlength="40" >
 								</div><br />
 							</div>					
 							<div class="col-xs-12">
@@ -626,26 +630,26 @@
 									<input type="radio" id="healthCareFirst" [(ngModel)]="application.sectionC.healthCareFirst" name="healthCareFirst" [value]="answer.value">{{answer.display}}
 								</div>
 								&nbsp;other paid benefits:
-								<input id="e1-otherBenefitsFirst" [(ngModel)]="application.sectionD.otherBenefitsFirst" name="otherBenefitsFirst" >
+								<input id="e1-otherBenefitsFirst" [(ngModel)]="application.sectionD.otherBenefitsFirst" name="otherBenefitsFirst" maxlength="55" >
 							</div><br />
 							<div class="col-xs-12">
 								<label class="col-xs-3 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l: Worked</label>
 								<div class="col-xs-9">
-									<input id="workFirstFull" type="checkbox" [(ngModel)]="workFirstFull" name="workFirstFull"/>
+									<input id="workFirstFull" type="checkbox" [(ngModel)]="workFirstFull" name="workFirstFull" />
 									<label class="mcgill-checkbox-top-label" for="workFirstFull">Full time?&nbsp;&nbsp;</label>
 									<input id="workFirstPart" type="checkbox" [(ngModel)]="workFirstPart" name="workFirstPart"/>
-									<label class="mcgill-checkbox-top-label" for="workFirstPart">Part time? &nbsp;&nbsp;hours/week:</label>
-									<input [(ngModel)]="application.sectionD.workHoursFirst" name="workFirstPartEntry"/>
+									<label class="mcgill-checkbox-top-label" for="workHoursFirst">Part time? &nbsp;&nbsp;hours/week:</label>
+									<input [(ngModel)]="application.sectionD.workHoursFirst" name="workHoursFirst" maxlength="3" />
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. How did you obtain this employment?</label>
-								<input class="col-xs-6" id="obtainFirst" [(ngModel)]="application.sectionD.obtainFirst" name="obtainFirst" >
+								<input class="col-xs-6" id="obtainFirst" [(ngModel)]="application.sectionD.obtainFirst" name="obtainFirst" maxlength="35" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n. Your immediate supervisor's name and title (and telephone number and e-mail if not still there): </label>
 								<label class="col-xs-1 col-form-label">&nbsp;</label>
-								<input class="col-xs-8" id="supervisorFirst" [(ngModel)]="application.sectionD.supervisorFirst" name="supervisorFirst" >
+								<input class="col-xs-8" id="supervisorFirst" [(ngModel)]="application.sectionD.supervisorFirst" name="supervisorFirst" maxlength="80" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o. Other names for references (with title, telephone number, and e-mail): </label>
@@ -673,15 +677,15 @@
 							<label class="col-xs-8 col-form-label">2. Second most recent employer </label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of employer:</label>
-								<input class="col-xs-7" id="employerSecond" [(ngModel)]="application.sectionD.employerSecond" name="employerSecond" >
+								<input class="col-xs-7" id="employerSecond" [(ngModel)]="application.sectionD.employerSecond" name="employerSecond" maxlength="60" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Telephone:</label>
-								<input class="col-xs-7"  id="telephoneSecond" [(ngModel)]="application.sectionD.telephoneSecond" name="telephoneSecond" >
+								<input class="col-xs-7"  id="telephoneSecond" [(ngModel)]="application.sectionD.telephoneSecond" name="telephoneSecond" maxlength="12"  >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Business address:</label>
-								<input class="col-xs-7" id="addressSecond" [(ngModel)]="application.sectionD.addressSecond" name="addressSecond" >
+								<input class="col-xs-7" id="addressSecond" [(ngModel)]="application.sectionD.addressSecond" name="addressSecond" maxlength="85" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Description of business and products:</label>
@@ -692,26 +696,26 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Dates of employment:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting month: 
-									<input type="number" min="1" max="12" id="e1-startMonthSecond" [(ngModel)]="application.sectionD.startMonthSecond" name="startMonthSecond" >
+									<input class="mcgill-input-small" id="e1-startMonthSecond" [(ngModel)]="application.sectionD.startMonthSecond" name="startMonthSecond" maxlength="3" >
 									/
-									<input type="number" min="1" max="99"  id="e1-startYearSecond" [(ngModel)]="application.sectionD.startYearSecond" name="startYearSecond" >
+									<input class="mcgill-input-small"  id="e1-startYearSecond" [(ngModel)]="application.sectionD.startYearSecond" name="startYearSecond" maxlength="4" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-endMonthSecond" [(ngModel)]="application.sectionD.endMonthSecond" name="endMonthSecond" >
+									<input class="mcgill-input-small" id="e1-endMonthSecond" [(ngModel)]="application.sectionD.endMonthSecond" name="endMonthSecond" maxlength="3" >
 									/
-									<input type="number" min="1" max="99"  id="e1-endYearSecond" [(ngModel)]="application.sectionD.endYearSecond" name="endYearSecond" >							
+									<input class="mcgill-input-small" id="e1-endYearSecond" [(ngModel)]="application.sectionD.endYearSecond" name="endYearSecond" maxlength="4" >							
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting: 
-									<input type="number" min="1" max="12" id="e1-wageStartSecond" [(ngModel)]="application.sectionD.wageStartSecond" name="wageStartSecond" >
+									<input class="mcgill-input-small" id="e1-wageStartSecond" [(ngModel)]="application.sectionD.wageStartSecond" name="wageStartSecond" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageStartUnitSecond" [(ngModel)]="application.sectionD.wageStartUnitSecond" name="wageStartUnitSecond" >
+									<input class="mcgill-input-medium" id="e1-wageStartUnitSecond" [(ngModel)]="application.sectionD.wageStartUnitSecond" name="wageStartUnitSecond" maxlength="5" >
 									&nbsp;Ending:
-									<input type="number" min="1" max="12" id="e1-wageEndSecond" [(ngModel)]="application.sectionD.wageEndSecond" name="wageEndSecond" >
+									<input class="mcgill-input-small" id="e1-wageEndSecond" [(ngModel)]="application.sectionD.wageEndSecond" name="wageEndSecond" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageEndUnitSecond" [(ngModel)]="application.sectionD.wageEndUnitSecond" name="wageEndUnitSecond" >							
+									<input class="mcgill-input-medium" id="e1-wageEndUnitSecond" [(ngModel)]="application.sectionD.wageEndUnitSecond" name="wageEndUnitSecond" maxlength="5" >							
 								</div><br />
 							</div>					
 							<div class="col-xs-9">
@@ -726,20 +730,20 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i. Last increase:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month: 
-									<input type="number" min="1" max="12" id="e1-raiseMonthSecond" [(ngModel)]="application.sectionD.raiseMonthSecond" name="raiseMonthSecond" >
+									<input class="mcgill-input-small" id="e1-raiseMonthSecond" [(ngModel)]="application.sectionD.raiseMonthSecond" name="raiseMonthSecond" maxlength="3" >
 									year
-									<input type="number" min="1" max="99" id="e1-raiseYearSecond" [(ngModel)]="application.sectionD.raiseYearSecond" name="raiseYearSecond" >
+									<input class="mcgill-input-small" id="e1-raiseYearSecond" [(ngModel)]="application.sectionD.raiseYearSecond" name="raiseYearSecond" maxlength="4" >
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Addition income from incentive plan(s):</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ 
-									<input type="number" min="1" max="999999" id="e1-additionWageSecond" [(ngModel)]="application.sectionD.additionWageSecond" name="additionWageSecond" >
+									<input class="mcgill-input-medium" id="e1-additionWageSecond" [(ngModel)]="application.sectionD.additionWageSecond" name="additionWageSecond" maxlength="6"  >
 									per
-									<input class="mcgill-input-medium" id="e1-additionUnitSecond" [(ngModel)]="application.sectionD.additionUnitSecond" name="additionUnitSecond" >
+									<input class="mcgill-input-medium" id="e1-additionUnitSecond" [(ngModel)]="application.sectionD.additionUnitSecond" name="additionUnitSecond" maxlength="5" >
 									&nbsp;please explain:
-									<input id="e1-additionExplainSecond" [(ngModel)]="application.sectionD.additionExplainSecond" name="additionExplainSecond" >
+									<input id="e1-additionExplainSecond" [(ngModel)]="application.sectionD.additionExplainSecond" name="additionExplainSecond" maxlength="40">
 								</div><br />
 							</div>					
 							<div class="col-xs-12">
@@ -748,7 +752,7 @@
 									<input type="radio" id="healthCareSecond" [(ngModel)]="application.sectionC.healthCareSecond" name="healthCareSecond" [value]="answer.value">{{answer.display}}
 								</div>
 								&nbsp;other paid benefits:
-								<input id="e1-otherBenefitsSecond" [(ngModel)]="application.sectionD.otherBenefitsSecond" name="otherBenefitsSecond" >
+								<input id="e1-otherBenefitsSecond" [(ngModel)]="application.sectionD.otherBenefitsSecond" name="otherBenefitsSecond" maxlength="55"  >
 							</div><br />
 							<div class="col-xs-12">
 								<label class="col-xs-3 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l: Worked</label>
@@ -757,17 +761,17 @@
 									<label class="mcgill-checkbox-top-label" for="workSecondFull">Full time?&nbsp;&nbsp;</label>
 									<input id="workSecondPart" type="checkbox" [(ngModel)]="workSecondPart" name="workSecondPart"/>
 									<label class="mcgill-checkbox-top-label" for="workSecondPart">Part time? &nbsp;&nbsp;hours/week:</label>
-									<input [(ngModel)]="application.sectionD.workHoursFirst" name="workSecondPartEntry"/>
+									<input [(ngModel)]="application.sectionD.workHoursFirst" name="workSecondPartEntry" maxlength="3" />
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. How did you obtain this employment?</label>
-								<input class="col-xs-6" id="obtainSecond" [(ngModel)]="application.sectionD.obtainSecond" name="obtainSecond" >
+								<input class="col-xs-6" id="obtainSecond" [(ngModel)]="application.sectionD.obtainSecond" name="obtainSecond" maxlength="35"  >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n. Your immediate supervisor's name and title (and telephone number and e-mail if not still there): </label>
 								<label class="col-xs-1 col-form-label">&nbsp;</label>
-								<input class="col-xs-8" id="supervisorSecond" [(ngModel)]="application.sectionD.supervisorSecond" name="supervisorSecond" >
+								<input class="col-xs-8" id="supervisorSecond" [(ngModel)]="application.sectionD.supervisorSecond" name="supervisorSecond" maxlength="80" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o. Other names for references (with title, telephone number, and e-mail): </label>
@@ -795,15 +799,15 @@
 							<label class="col-xs-8 col-form-label">3. Third most recent employer </label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of employer:</label>
-								<input class="col-xs-7" id="employerThird" [(ngModel)]="application.sectionD.employerThird" name="employerThird" >
+								<input class="col-xs-7" id="employerThird" [(ngModel)]="application.sectionD.employerThird" name="employerThird" maxlength="60" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Telephone:</label>
-								<input class="col-xs-7"  id="telephoneThird" [(ngModel)]="application.sectionD.telephoneThird" name="telephoneThird" >
+								<input class="col-xs-7"  id="telephoneThird" [(ngModel)]="application.sectionD.telephoneThird" name="telephoneThird" maxlength="12" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Business address:</label>
-								<input class="col-xs-7" id="addressThird" [(ngModel)]="application.sectionD.addressThird" name="addressThird" >
+								<input class="col-xs-7" id="addressThird" [(ngModel)]="application.sectionD.addressThird" name="addressThird" maxlength="85" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Description of business and products:</label>
@@ -814,26 +818,26 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Dates of employment:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting month: 
-									<input type="number" min="1" max="12" id="e1-startMonthThird" [(ngModel)]="application.sectionD.startMonthThird" name="startMonthThird" >
+									<input class="mcgill-input-small" id="e1-startMonthThird" [(ngModel)]="application.sectionD.startMonthThird" name="startMonthThird" maxlength="3" >
 									/
-									<input type="number" min="1" max="99"  id="e1-startYearThird" [(ngModel)]="application.sectionD.startYearThird" name="startYearThird" >
+									<input class="mcgill-input-small" id="e1-startYearThird" [(ngModel)]="application.sectionD.startYearThird" name="startYearThird" maxlength="4" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-endMonthThird" [(ngModel)]="application.sectionD.endMonthThird" name="endMonthThird" >
+									<input class="mcgill-input-small" id="e1-endMonthThird" [(ngModel)]="application.sectionD.endMonthThird" name="endMonthThird" maxlength="3" >
 									/
-									<input type="number" min="1" max="99"  id="e1-endYearThird" [(ngModel)]="application.sectionD.endYearThird" name="endYearThird" >							
+									<input class="mcgill-input-small" id="e1-endYearThird" [(ngModel)]="application.sectionD.endYearThird" name="endYearThird" maxlength="4" >							
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting: 
-									<input type="number" min="1" max="12" id="e1-wageStartThird" [(ngModel)]="application.sectionD.wageStartThird" name="wageStartThird" >
+									<input class="mcgill-input-medium" id="e1-wageStartThird" [(ngModel)]="application.sectionD.wageStartThird" name="wageStartThird" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageStartUnitThird" [(ngModel)]="application.sectionD.wageStartUnitThird" name="wageStartUnitThird" >
+									<input class="mcgill-input-medium" id="e1-wageStartUnitThird" [(ngModel)]="application.sectionD.wageStartUnitThird" name="wageStartUnitThird" maxlength="5" >
 									&nbsp;Ending:
-									<input type="number" min="1" max="12" id="e1-wageEndThird" [(ngModel)]="application.sectionD.wageEndThird" name="wageEndThird" >
+									<input class="mcgill-input-small" id="e1-wageEndThird" [(ngModel)]="application.sectionD.wageEndThird" name="wageEndThird" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-wageEndUnitThird" [(ngModel)]="application.sectionD.wageEndUnitThird" name="wageEndUnitThird" >							
+									<input class="mcgill-input-medium" id="e1-wageEndUnitThird" [(ngModel)]="application.sectionD.wageEndUnitThird" name="wageEndUnitThird" maxlength="5" >							
 								</div><br />
 							</div>					
 							<div class="col-xs-9">
@@ -842,26 +846,26 @@
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h. Department:</label>
-								<input class="col-xs-7" id="departmentThird" [(ngModel)]="application.sectionD.departmentThird" name="departmentThird" >
+								<input class="col-xs-7" id="departmentThird" [(ngModel)]="application.sectionD.departmentThird" name="departmentThird"  >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i. Last increase:</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month: 
-									<input type="number" min="1" max="12" id="e1-raiseMonthThird" [(ngModel)]="application.sectionD.raiseMonthThird" name="raiseMonthThird" >
+									<input class="mcgill-input-small" id="e1-raiseMonthThird" [(ngModel)]="application.sectionD.raiseMonthThird" name="raiseMonthThird" maxlength="3"  >
 									year
-									<input type="number" min="1" max="99" id="e1-raiseYearThird" [(ngModel)]="application.sectionD.raiseYearThird" name="raiseYearThird" >
+									<input class="mcgill-input-small" id="e1-raiseYearThird" [(ngModel)]="application.sectionD.raiseYearThird" name="raiseYearThird" maxlength="4" >
 								</div>
 							</div>					
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Addition income from incentive plan(s):</label><br />
 								<div>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ 
-									<input type="number" min="1" max="999999" id="e1-additionWageThird" [(ngModel)]="application.sectionD.additionWageThird" name="additionWageThird" >
+									<input class="mcgill-input-medium" id="e1-additionWageThird" [(ngModel)]="application.sectionD.additionWageThird" name="additionWageThird" maxlength="6" >
 									per
-									<input class="mcgill-input-medium" id="e1-additionUnitThird" [(ngModel)]="application.sectionD.additionUnitThird" name="additionUnitThird" >
+									<input class="mcgill-input-medium" id="e1-additionUnitThird" [(ngModel)]="application.sectionD.additionUnitThird" name="additionUnitThird" maxlength="5" >
 									&nbsp;please explain:
-									<input id="e1-additionExplainThird" [(ngModel)]="application.sectionD.additionExplainThird" name="additionExplainThird" >
+									<input id="e1-additionExplainThird" [(ngModel)]="application.sectionD.additionExplainThird" name="additionExplainThird" maxlength="40" >
 								</div><br />
 							</div>					
 							<div class="col-xs-12">
@@ -870,7 +874,7 @@
 									<input type="radio" id="healthCareThird" [(ngModel)]="application.sectionC.healthCareThird" name="healthCareThird" [value]="answer.value">{{answer.display}}
 								</div>
 								&nbsp;other paid benefits:
-								<input id="e1-otherBenefitsThird" [(ngModel)]="application.sectionD.otherBenefitsThird" name="otherBenefitsThird" >
+								<input id="e1-otherBenefitsThird" [(ngModel)]="application.sectionD.otherBenefitsThird" name="otherBenefitsThird" maxlength="55" >
 							</div><br />
 							<div class="col-xs-12">
 								<label class="col-xs-3 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l: Worked</label>
@@ -878,18 +882,18 @@
 									<input id="workThirdFull" type="checkbox" [(ngModel)]="workThirdFull" name="workThirdFull"/>
 									<label class="mcgill-checkbox-top-label" for="workThirdFull">Full time?&nbsp;&nbsp;</label>
 									<input id="workThirdPart" type="checkbox" [(ngModel)]="workThirdPart" name="workThirdPart"/>
-									<label class="mcgill-checkbox-top-label" for="workThirdPart">Part time? &nbsp;&nbsp;hours/week:</label>
-									<input [(ngModel)]="application.sectionD.workHoursFirst" name="workThirdPartEntry"/>
+									<label class="mcgill-checkbox-top-label" for="workHoursThird">Part time? &nbsp;&nbsp;hours/week:</label>
+									<input [(ngModel)]="application.sectionD.workHoursThird" name="workHoursThird" maxlength="3" />
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. How did you obtain this employment?</label>
-								<input class="col-xs-6" id="obtainThird" [(ngModel)]="application.sectionD.obtainThird" name="obtainThird" >
+								<input class="col-xs-6" id="obtainThird" [(ngModel)]="application.sectionD.obtainThird" name="obtainThird" maxlength="35" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n. Your immediate supervisor's name and title (and telephone number and e-mail if not still there): </label>
 								<label class="col-xs-1 col-form-label">&nbsp;</label>
-								<input class="col-xs-8" id="supervisorThird" [(ngModel)]="application.sectionD.supervisorThird" name="supervisorThird" >
+								<input class="col-xs-8" id="supervisorThird" [(ngModel)]="application.sectionD.supervisorThird" name="supervisorThird" maxlength="80" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o. Other names for references (with title, telephone number, and e-mail): </label>
@@ -917,42 +921,42 @@
 							<label class="col-xs-8 col-form-label">4. Other employment</label>						
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of company:</label>
-								<input class="col-xs-7" id="otherCompanyOne" [(ngModel)]="application.sectionD.otherCompanyOne" name="otherCompanyOne" >
+								<input class="col-xs-7" id="otherCompanyOne" [(ngModel)]="application.sectionD.otherCompanyOne" name="otherCompanyOne" maxlength="23" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Business address:</label>
-								<input class="col-xs-7"  id="otherAddressOne" [(ngModel)]="application.sectionD.otherAddressOne" name="otherAddressOne" >
+								<input class="col-xs-7"  id="otherAddressOne" [(ngModel)]="application.sectionD.otherAddressOne" name="otherAddressOne" maxlength="23" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates employed:</label><br />
 								<div>
 									Starting month: 
-									<input type="number" min="1" max="12" id="e1-otherStartMonthOne" [(ngModel)]="application.sectionD.otherStartMonthOne" name="otherStartMonthOne" >
+									<input class="mcgill-input-small" id="e1-otherStartMonthOne" [(ngModel)]="application.sectionD.otherStartMonthOne" name="otherStartMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherStartYearOne" [(ngModel)]="application.sectionD.otherStartYearOne" name="otherStartYearOne" >
+									<input class="mcgill-input-small" id="e1-otherStartYearOne" [(ngModel)]="application.sectionD.otherStartYearOne" name="otherStartYearOne" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-otherEndMonthOne" [(ngModel)]="application.sectionD.otherEndMonthOne" name="otherEndMonthOne" >
+									<input class="mcgill-input-small" id="e1-otherEndMonthOne" [(ngModel)]="application.sectionD.otherEndMonthOne" name="otherEndMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherEndYearOne" [(ngModel)]="application.sectionD.otherEndYearOne" name="otherEndYearOne" >							
+									<input class="mcgill-input-small"  id="e1-otherEndYearOne" [(ngModel)]="application.sectionD.otherEndYearOne" name="otherEndYearOne" maxlength="2" >							
 									&nbsp;Hours per week:
-									<input type="number" min="1" max="999" id="e1-otherHoursOne" [(ngModel)]="application.sectionD.otherHoursOne" name="otherHoursOne" >
+									<input class="mcgill-input-small" id="e1-otherHoursOne" [(ngModel)]="application.sectionD.otherHoursOne" name="otherHoursOne" maxlength="3" >
 								</div>
 							</div><br />	
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Position you held:</label>
-								<input class="col-xs-7"  id="otherPositionOne" [(ngModel)]="application.sectionD.otherPositionOne" name="otherPositionOne" >
+								<input class="col-xs-7"  id="otherPositionOne" [(ngModel)]="application.sectionD.otherPositionOne" name="otherPositionOne" maxlength="20" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Name of supervisor:</label>
-								<input class="col-xs-7"  id="otherSupervisorOne" [(ngModel)]="application.sectionD.otherSupervisorOne" name="otherSupervisorOne" >
+								<input class="col-xs-7"  id="otherSupervisorOne" [(ngModel)]="application.sectionD.otherSupervisorOne" name="otherSupervisorOne" maxlength="20" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage when left:</label>
 								<div class="col-xs-8">
 									<label for="otherWageOne">$</label>
-									<input [(ngModel)]="application.sectionD.otherWageOne" name="otherWageOne"/>
+									<input [(ngModel)]="application.sectionD.otherWageOne" name="otherWageOne" maxlength="6" />
 									<label for="otherUnitOne"> per </label>
-									<input [(ngModel)]="application.sectionD.otherUnitOne" name="otherUnitOne"/>
+									<input [(ngModel)]="application.sectionD.otherUnitOne" name="otherUnitOne" maxlength="4" />
 								</div>
 							</div>	
 							<div class="col-xs-9">
@@ -962,42 +966,42 @@
 							<div class="col-xs-12"><hr /></div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of company:</label>
-								<input class="col-xs-7" id="otherCompanyTwo" [(ngModel)]="application.sectionD.otherCompanyTwo" name="otherCompanyTwo" >
+								<input class="col-xs-7" id="otherCompanyTwo" [(ngModel)]="application.sectionD.otherCompanyTwo" name="otherCompanyTwo" maxlength="23" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Business address:</label>
-								<input class="col-xs-7"  id="otherAddressTwo" [(ngModel)]="application.sectionD.otherAddressTwo" name="otherAddressTwo" >
+								<input class="col-xs-7"  id="otherAddressTwo" [(ngModel)]="application.sectionD.otherAddressTwo" name="otherAddressTwo" maxlength="23" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates employed:</label><br />
 								<div>
 									Starting month: 
-									<input type="number" min="1" max="12" id="e1-otherStartMonthTwo" [(ngModel)]="application.sectionD.otherStartMonthTwo" name="otherStartMonthTwo" >
+									<input class="mcgill-input-small" id="e1-otherStartMonthTwo" [(ngModel)]="application.sectionD.otherStartMonthTwo" name="otherStartMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherStartYearTwo" [(ngModel)]="application.sectionD.otherStartYearTwo" name="otherStartYearTwo" >
+									<input class="mcgill-input-small"  id="e1-otherStartYearTwo" [(ngModel)]="application.sectionD.otherStartYearTwo" name="otherStartYearTwo" maxlength="2"  >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-otherEndMonthTwo" [(ngModel)]="application.sectionD.otherEndMonthTwo" name="otherEndMonthTwo" >
+									<input class="mcgill-input-small" id="e1-otherEndMonthTwo" [(ngModel)]="application.sectionD.otherEndMonthTwo" name="otherEndMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherEndYearTwo" [(ngModel)]="application.sectionD.otherEndYearTwo" name="otherEndYearTwo" >							
+									<input class="mcgill-input-small"  id="e1-otherEndYearTwo" [(ngModel)]="application.sectionD.otherEndYearTwo" name="otherEndYearTwo" maxlength="2" >							
 									&nbsp;Hours per week:
-									<input type="number" min="1" max="999" id="e1-otherHoursTwo" [(ngModel)]="application.sectionD.otherHoursTwo" name="otherHoursTwo" >
+									<input class="mcgill-input-small" id="e1-otherHoursTwo" [(ngModel)]="application.sectionD.otherHoursTwo" name="otherHoursTwo" maxlength="3" >
 								</div>
 							</div><br />	
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Position you held:</label>
-								<input class="col-xs-7"  id="otherPositionTwo" [(ngModel)]="application.sectionD.otherPositionTwo" name="otherPositionTwo" >
+								<input class="col-xs-7"  id="otherPositionTwo" [(ngModel)]="application.sectionD.otherPositionTwo" name="otherPositionTwo" maxlength="20" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Name of supervisor:</label>
-								<input class="col-xs-7"  id="otherSupervisorTwo" [(ngModel)]="application.sectionD.otherSupervisorTwo" name="otherSupervisorTwo" >
+								<input class="col-xs-7"  id="otherSupervisorTwo" [(ngModel)]="application.sectionD.otherSupervisorTwo" name="otherSupervisorTwo" maxlength="20" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage when left:</label>
 								<div class="col-xs-8">
 									<label for="otherWageTwo">$</label>
-									<input [(ngModel)]="application.sectionD.otherWageTwo" name="otherWageTwo"/>
+									<input [(ngModel)]="application.sectionD.otherWageTwo" name="otherWageTwo" maxlength="6" />
 									<label for="otherUnitTwo"> per </label>
-									<input [(ngModel)]="application.sectionD.otherUnitTwo" name="otherUnitTwo"/>
+									<input [(ngModel)]="application.sectionD.otherUnitTwo" name="otherUnitTwo" maxlength="4" />
 								</div>
 							</div>	
 							<div class="col-xs-9">
@@ -1007,42 +1011,42 @@
 							<div class="col-xs-12"><hr /></div>						
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of company:</label>
-								<input class="col-xs-7" id="otherCompanyThree" [(ngModel)]="application.sectionD.otherCompanyThree" name="otherCompanyThree" >
+								<input class="col-xs-7" id="otherCompanyThree" [(ngModel)]="application.sectionD.otherCompanyThree" name="otherCompanyThree" maxlength="23" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Business address:</label>
-								<input class="col-xs-7"  id="otherAddressThree" [(ngModel)]="application.sectionD.otherAddressThree" name="otherAddressThree" >
+								<input class="col-xs-7"  id="otherAddressThree" [(ngModel)]="application.sectionD.otherAddressThree" name="otherAddressThree" maxlength="23"  >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates employed:</label><br />
 								<div>
 									Starting month: 
-									<input type="number" min="1" max="12" id="e1-otherStartMonthThree" [(ngModel)]="application.sectionD.otherStartMonthThree" name="otherStartMonthThree" >
+									<input class="mcgill-input-small" id="e1-otherStartMonthThree" [(ngModel)]="application.sectionD.otherStartMonthThree" name="otherStartMonthThree" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherStartYearThree" [(ngModel)]="application.sectionD.otherStartYearThree" name="otherStartYearThree" >
+									<input class="mcgill-input-small"  id="e1-otherStartYearThree" [(ngModel)]="application.sectionD.otherStartYearThree" name="otherStartYearThree" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-otherEndMonthThree" [(ngModel)]="application.sectionD.otherEndMonthThree" name="otherEndMonthThree" >
+									<input class="mcgill-input-small" id="e1-otherEndMonthThree" [(ngModel)]="application.sectionD.otherEndMonthThree" name="otherEndMonthThree" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-otherEndYearThree" [(ngModel)]="application.sectionD.otherEndYearThree" name="otherEndYearThree" >							
+									<input class="mcgill-input-small"  id="e1-otherEndYearThree" [(ngModel)]="application.sectionD.otherEndYearThree" name="otherEndYearThree" maxlength="2" >							
 									&nbsp;Hours per week:
-									<input type="number" min="1" max="999" id="e1-otherHoursThree" [(ngModel)]="application.sectionD.otherHoursThree" name="otherHoursThree" >
+									<input class="mcgill-input-small" id="e1-otherHoursThree" [(ngModel)]="application.sectionD.otherHoursThree" name="otherHoursThree" maxlength="3" >
 								</div>
 							</div><br />	
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Position you held:</label>
-								<input class="col-xs-7"  id="otherPositionThree" [(ngModel)]="application.sectionD.otherPositionThree" name="otherPositionThree" >
+								<input class="col-xs-7"  id="otherPositionThree" [(ngModel)]="application.sectionD.otherPositionThree" name="otherPositionThree" maxlength="20" >
 							</div>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Name of supervisor:</label>
-								<input class="col-xs-7"  id="otherSupervisorThree" [(ngModel)]="application.sectionD.otherSupervisorThree" name="otherSupervisorThree" >
+								<input class="col-xs-7"  id="otherSupervisorThree" [(ngModel)]="application.sectionD.otherSupervisorThree" name="otherSupervisorThree" maxlength="20" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Base salary or wage when left:</label>
 								<div class="col-xs-8">
 									<label for="otherWageThree">$</label>
-									<input [(ngModel)]="application.sectionD.otherWageThree" name="otherWageThree"/>
+									<input [(ngModel)]="application.sectionD.otherWageThree" name="otherWageThree" maxlength="6" />
 									<label for="otherUnitThree"> per </label>
-									<input [(ngModel)]="application.sectionD.otherUnitThree" name="otherUnitThree"/>
+									<input [(ngModel)]="application.sectionD.otherUnitThree" name="otherUnitThree" maxlength="4" />
 								</div>
 							</div>	
 							<div class="col-xs-9">
@@ -1058,23 +1062,23 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Dates unemployed:</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-unemployedStartMonthOne" [(ngModel)]="application.sectionD.unemployedStartMonthOne" name="unemployedStartMonthOne" >
+									<input class="mcgill-input-small" id="e1-unemployedStartMonthOne" [(ngModel)]="application.sectionD.unemployedStartMonthOne" name="unemployedStartMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedStartYearOne" [(ngModel)]="application.sectionD.unemployedStartYearOne" name="unemployedStartYearOne" >
+									<input class="mcgill-input-small"  id="e1-unemployedStartYearOne" [(ngModel)]="application.sectionD.unemployedStartYearOne" name="unemployedStartYearOne" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-unemployedEndMonthOne" [(ngModel)]="application.sectionD.unemployedEndMonthOne" name="unemployedEndMonthOne" >
+									<input class="mcgill-input-small" id="e1-unemployedEndMonthOne" [(ngModel)]="application.sectionD.unemployedEndMonthOne" name="unemployedEndMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedEndYearOne" [(ngModel)]="application.sectionD.unemployedEndYearOne" name="unemployedEndYearOne" >							
+									<input class="mcgill-input-small"  id="e1-unemployedEndYearOne" [(ngModel)]="application.sectionD.unemployedEndYearOne" name="unemployedEndYearOne" maxlength="2" >							
 									&nbsp;No. of weeks:
-									<input type="number" min="1" max="999" id="e1-unemployedWeeksOne" [(ngModel)]="application.sectionD.unemployedWeeksOne" name="unemployedWeeksOne" >
+									<input class="mcgill-input-small" id="e1-unemployedWeeksOne" [(ngModel)]="application.sectionD.unemployedWeeksOne" name="unemployedWeeksOne" maxlength="8" >
 								</div><br />
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;b. How did you spend your time?</label>
-									<input class="col-xs-7"  id="unemployedTimeOne" [(ngModel)]="application.sectionD.unemployedTimeOne" name="unemployedTimeOne" >
+									<input class="col-xs-7"  id="unemployedTimeOne" [(ngModel)]="application.sectionD.unemployedTimeOne" name="unemployedTimeOne" maxlength="35" >
 								</div>
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;c. How did you finance yourself?</label>
-									<input class="col-xs-7"  id="unemployedFinanceOne" [(ngModel)]="application.sectionD.unemployedFinanceOne" name="unemployedFinanceOne" >
+									<input class="col-xs-7"  id="unemployedFinanceOne" [(ngModel)]="application.sectionD.unemployedFinanceOne" name="unemployedFinanceOne" maxlength="33" >
 								</div>
 							</div>
 							<div class="col-xs-12"><hr /></div>
@@ -1082,23 +1086,23 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Dates unemployed:</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-unemployedStartMonthTwo" [(ngModel)]="application.sectionD.unemployedStartMonthTwo" name="unemployedStartMonthTwo" >
+									<input class="mcgill-input-small" id="e1-unemployedStartMonthTwo" [(ngModel)]="application.sectionD.unemployedStartMonthTwo" name="unemployedStartMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedStartYearTwo" [(ngModel)]="application.sectionD.unemployedStartYearTwo" name="unemployedStartYearTwo" >
+									<input class="mcgill-input-small"  id="e1-unemployedStartYearTwo" [(ngModel)]="application.sectionD.unemployedStartYearTwo" name="unemployedStartYearTwo" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-unemployedEndMonthTwo" [(ngModel)]="application.sectionD.unemployedEndMonthTwo" name="unemployedEndMonthTwo" >
+									<input class="mcgill-input-small" id="e1-unemployedEndMonthTwo" [(ngModel)]="application.sectionD.unemployedEndMonthTwo" name="unemployedEndMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedEndYearTwo" [(ngModel)]="application.sectionD.unemployedEndYearTwo" name="unemployedEndYearTwo" >							
+									<input class="mcgill-input-small"  id="e1-unemployedEndYearTwo" [(ngModel)]="application.sectionD.unemployedEndYearTwo" name="unemployedEndYearTwo" maxlength="2" >							
 									&nbsp;No. of weeks:
-									<input type="number" min="1" max="999" id="e1-unemployedWeeksTwo" [(ngModel)]="application.sectionD.unemployedWeeksTwo" name="unemployedWeeksTwo" >
+									<input class="mcgill-input-small" id="e1-unemployedWeeksTwo" [(ngModel)]="application.sectionD.unemployedWeeksTwo" name="unemployedWeeksTwo" maxlength="3" >
 								</div><br />
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;b. How did you spend your time?</label>
-									<input class="col-xs-7"  id="unemployedTimeTwo" [(ngModel)]="application.sectionD.unemployedTimeTwo" name="unemployedTimeTwo" >
+									<input class="col-xs-7"  id="unemployedTimeTwo" [(ngModel)]="application.sectionD.unemployedTimeTwo" name="unemployedTimeTwo" maxlength="35" >
 								</div>
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;c. How did you finance yourself?</label>
-									<input class="col-xs-7"  id="unemployedFinanceTwo" [(ngModel)]="application.sectionD.unemployedFinanceTwo" name="unemployedFinanceTwo" >
+									<input class="col-xs-7"  id="unemployedFinanceTwo" [(ngModel)]="application.sectionD.unemployedFinanceTwo" name="unemployedFinanceTwo" maxlength="33" >
 								</div>
 							</div>
 							<div class="col-xs-12"><hr /></div>
@@ -1106,23 +1110,23 @@
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Dates unemployed:</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-unemployedStartMonthThree" [(ngModel)]="application.sectionD.unemployedStartMonthThree" name="unemployedStartMonthThree" >
+									<input class="mcgill-input-small" id="e1-unemployedStartMonthThree" [(ngModel)]="application.sectionD.unemployedStartMonthThree" name="unemployedStartMonthThree" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedStartYearThree" [(ngModel)]="application.sectionD.unemployedStartYearThree" name="unemployedStartYearThree" >
+									<input class="mcgill-input-small"  id="e1-unemployedStartYearThree" [(ngModel)]="application.sectionD.unemployedStartYearThree" name="unemployedStartYearThree" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-unemployedEndMonthThree" [(ngModel)]="application.sectionD.unemployedEndMonthThree" name="unemployedEndMonthThree" >
+									<input class="mcgill-input-small" id="e1-unemployedEndMonthThree" [(ngModel)]="application.sectionD.unemployedEndMonthThree" name="unemployedEndMonthThree" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-unemployedEndYearThree" [(ngModel)]="application.sectionD.unemployedEndYearThree" name="unemployedEndYearThree" >							
+									<input class="mcgill-input-small"  id="e1-unemployedEndYearThree" [(ngModel)]="application.sectionD.unemployedEndYearThree" name="unemployedEndYearThree" maxlength="2" >							
 									&nbsp;No. of weeks:
-									<input type="number" min="1" max="999" id="e1-unemployedWeeksThree" [(ngModel)]="application.sectionD.unemployedWeeksThree" name="unemployedWeeksThree" >
+									<input class="mcgill-input-small" id="e1-unemployedWeeksThree" [(ngModel)]="application.sectionD.unemployedWeeksThree" name="unemployedWeeksThree" maxlength="3" >
 								</div><br />
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;b. How did you spend your time?</label>
-									<input class="col-xs-7"  id="unemployedTimeThree" [(ngModel)]="application.sectionD.unemployedTimeThree" name="unemployedTimeThree" >
+									<input class="col-xs-7"  id="unemployedTimeThree" [(ngModel)]="application.sectionD.unemployedTimeThree" name="unemployedTimeThree" maxlength="35" >
 								</div>
 								<div class="col-xs-12">
 									<label class="col-xs-4 col-form-label">&nbsp;&nbsp;c. How did you finance yourself?</label>
-									<input class="col-xs-7"  id="unemployedFinanceThree" [(ngModel)]="application.sectionD.unemployedFinanceThree" name="unemployedFinanceThree" >
+									<input class="col-xs-7"  id="unemployedFinanceThree" [(ngModel)]="application.sectionD.unemployedFinanceThree" name="unemployedFinanceThree" maxlength="33" >
 								</div>
 							</div>
 						</div>
@@ -1139,14 +1143,14 @@
 							<label class="col-xs-8 col-form-label">1. High School</label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
-								<input class="col-xs-7" id="schoolNameOne" [(ngModel)]="application.sectionE.schoolNameOne" name="schoolNameOne" >
+								<input class="col-xs-7" id="schoolNameOne" [(ngModel)]="application.sectionE.schoolNameOne" name="schoolNameOne" maxlength="27" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
 								<label class="col-xs-1 col-form-label">city:</label>
-								<input class="col-xs-3" id="schoolCityOne" [(ngModel)]="application.sectionE.schoolCityOne" name="schoolCityOne" >
+								<input class="col-xs-3" id="schoolCityOne" [(ngModel)]="application.sectionE.schoolCityOne" name="schoolCityOne" maxlength="10" >
 								<label class="col-xs-1 col-form-label">state:</label>
-								<input class="col-xs-2" maxlength="2" id="schoolStateOne" [(ngModel)]="application.sectionE.schoolStateOne" name="schoolStateOne" >
+								<input class="col-xs-2" maxlength="2" id="schoolStateOne" [(ngModel)]="application.sectionE.schoolStateOne" name="schoolStateOne" maxlength="2" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Credit hours earned: </label>
@@ -1170,9 +1174,9 @@
 							</div><br />
 							<div class="col-xs-12  mt-1">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f. Grade point average (transcript required)</label>
-								<input type="number" min="0" max="99" class="col-xs-1" id="abc1" [(ngModel)]="application.sectionE.gpaOne" name="gpaOne" >
+								<input class="mcgill-input-small" class="col-xs-1" id="abc1" [(ngModel)]="application.sectionE.gpaOne" name="gpaOne" maxlength="10" >
 								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
-								<input maxlength="2" class="col-xs-1" id="gradeOne" [(ngModel)]="application.sectionE.gradeOne" name="gradeOne" >
+								<input class="col-xs-1" id="gradeOne" [(ngModel)]="application.sectionE.gradeOne" name="gradeOne" maxlength="4" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Written transcript release on file?</label>
@@ -1183,9 +1187,9 @@
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h.  Fields of study (Thesis)</label>
 								<label class="col-xs-1 col-form-label">major:</label>
-								<input class="col-xs-3" id="majorOne" [(ngModel)]="application.sectionE.majorOne" name="majorOne" >
+								<input class="col-xs-3" id="majorOne" [(ngModel)]="application.sectionE.majorOne" name="majorOne" maxlength="20" >
 								<label class="col-xs-1 col-form-label">minor:</label>
-								<input class="col-xs-3" maxlength="2" id="minorOne" [(ngModel)]="application.sectionE.minorOne" name="minorOne" >
+								<input class="col-xs-3" maxlength="2" id="minorOne" [(ngModel)]="application.sectionE.minorOne" name="minorOne" maxlength="20" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i. Office, honors, and awards</label>
@@ -1209,41 +1213,41 @@
 							<label class="col-xs-8 col-form-label">2. College</label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
-								<input class="col-xs-7" id="schoolNameTwo" [(ngModel)]="application.sectionE.schoolNameTwo" name="schoolNameTwo" >
+								<input class="col-xs-7" id="schoolNameTwo" [(ngModel)]="application.sectionE.schoolNameTwo" name="schoolNameTwo" maxlength="27" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
 								<label class="col-xs-1 col-form-label">city:</label>
-								<input class="col-xs-3" id="schoolCityTwo" [(ngModel)]="application.sectionE.schoolCityTwo" name="schoolCityTwo" >
+								<input class="col-xs-3" id="schoolCityTwo" [(ngModel)]="application.sectionE.schoolCityTwo" name="schoolCityTwo" maxlength="10" >
 								<label class="col-xs-1 col-form-label">state:</label>
-								<input class="col-xs-2" maxlength="2" id="schoolStateTwo" [(ngModel)]="application.sectionE.schoolStateTwo" name="schoolStateTwo" >
+								<input class="col-xs-2" maxlength="2" id="schoolStateTwo" [(ngModel)]="application.sectionE.schoolStateTwo" name="schoolStateTwo" maxlength="2" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates of attendance::</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-startMonthTwo" [(ngModel)]="application.sectionE.startMonthTwo" name="startMonthTwo" >
+									<input class="mcgill-input-small" id="e1-startMonthTwo" [(ngModel)]="application.sectionE.startMonthTwo" name="startMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-startYearTwo" [(ngModel)]="application.sectionE.startYearTwo" name="startYearTwo" >
+									<input class="mcgill-input-small"  id="e1-startYearTwo" [(ngModel)]="application.sectionE.startYearTwo" name="startYearTwo" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-endMonthTwo" [(ngModel)]="application.sectionE.endMonthTwo" name="endMonthTwo" >
+									<input class="mcgill-input-small" id="e1-endMonthTwo" [(ngModel)]="application.sectionE.endMonthTwo" name="endMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-endYearTwo" [(ngModel)]="application.sectionE.endYearTwo" name="endYearTwo" >							
+									<input class="mcgill-input-small"  id="e1-endYearTwo" [(ngModel)]="application.sectionE.endYearTwo" name="endYearTwo" maxlength="2">
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Credit hours earned: </label>
 								<div class="col-xs-4">
 									<label class="col-form-label">Semester hours:</label>
-									<input id="semesterHoursTwo" [(ngModel)]="application.sectionE.semesterHoursTwo" name="semesterHoursTwo" >								
+									<input id="semesterHoursTwo" [(ngModel)]="application.sectionE.semesterHoursTwo" name="semesterHoursTwo" maxlength="15" >								
 								</div>
 								<div class="col-xs-4">
 									<label class="col-form-label">Trimester hours:</label>
-									<input  id="trimesterHoursTwo" [(ngModel)]="application.sectionE.trimesterHoursTwo" name="trimesterHoursTwo" >
+									<input  id="trimesterHoursTwo" [(ngModel)]="application.sectionE.trimesterHoursTwo" name="trimesterHoursTwo" maxlength="15" >
 								</div>
 								<div class="col-xs-4">
 									<label class="col-form-label">Quarter hours:</label>
-									<input id="quarterHoursTwo" [(ngModel)]="application.sectionE.quarterHoursTwo" name="quarterHoursTwo" >
+									<input id="quarterHoursTwo" [(ngModel)]="application.sectionE.quarterHoursTwo" name="quarterHoursTwo" maxlength="15" >
 								</div>
 							</div>
 							<div class="col-xs-12 mt-1">
@@ -1253,11 +1257,11 @@
 								</div>
 								<div>
 									month/year: 
-									<input type="number" min="1" max="12" id="e1-graduateMonthTwo" [(ngModel)]="application.sectionE.graduateMonthTwo" name="graduateMonthTwo" >
+									<input class="mcgill-input-small" id="e1-graduateMonthTwo" [(ngModel)]="application.sectionE.graduateMonthTwo" name="graduateMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-graduateYearTwo" [(ngModel)]="application.sectionE.graduateYearTwo " name="graduateYearTwo" >							
+									<input class="mcgill-input-small" id="e1-graduateYearTwo" [(ngModel)]="application.sectionE.graduateYearTwo " name="graduateYearTwo" maxlength="2" >							
 									&nbsp;Degree:
-									<input id="e1-degreeTwo" [(ngModel)]="application.sectionE.degreeTwo" name="degreeTwo" >							
+									<input id="e1-degreeTwo" [(ngModel)]="application.sectionE.degreeTwo" name="degreeTwo" maxlength="20" >							
 								</div>
 							</div><br />
 							<div class="col-xs-12">
@@ -1267,9 +1271,9 @@
 							</div><br />
 							<div class="col-xs-12  mt-1">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Grade point average (transcript required)</label>
-								<input type="number" min="0" max="99" class="col-xs-1" id="abc2" [(ngModel)]="application.sectionE.gpaTwo" name="gpaTwo" >
+								<input class="col-xs-1" id="abc2" [(ngModel)]="application.sectionE.gpaTwo" name="gpaTwo" maxlength="10" >
 								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
-								<input maxlength="2" class="col-xs-1" id="gradeTwo" [(ngModel)]="application.sectionE.gradeTwo" name="gradeTwo" >
+								<input maxlength="4" class="col-xs-1" id="gradeTwo" [(ngModel)]="application.sectionE.gradeTwo" name="gradeTwo" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h. Written transcript release on file?</label>
@@ -1280,9 +1284,9 @@
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.  Fields of study (Thesis)</label>
 								<label class="col-xs-1 col-form-label">major:</label>
-								<input class="col-xs-3" id="majorTwo" [(ngModel)]="application.sectionE.majorTwo" name="majorTwo" >
+								<input class="col-xs-3" id="majorTwo" [(ngModel)]="application.sectionE.majorTwo" name="majorTwo" maxlength="20" >
 								<label class="col-xs-1 col-form-label">minor:</label>
-								<input class="col-xs-3" maxlength="2" id="minorTwo" [(ngModel)]="application.sectionE.minorTwo" name="minorTwo" >
+								<input class="col-xs-3" id="minorTwo" [(ngModel)]="application.sectionE.minorTwo" name="minorTwo" maxlength="20" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Office, honors, and awards</label>
@@ -1304,21 +1308,21 @@
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. Portion of total educaiton expenses from:</label><br />
 								<div class="col-xs-4">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scholarship (or Grant): 
-									<input type="number" min="1" max="100" id="e1-scholarshipTwo" [(ngModel)]="application.sectionE.scholarshipTwo" name="scholarshipTwo" >%
+									<input class="mcgill-input-small" id="e1-scholarshipTwo" [(ngModel)]="application.sectionE.scholarshipTwo" name="scholarshipTwo" maxlength="3">%
 								</div>
 								<div class="col-xs-2">
 									Loan: 
-									<input type="number" min="1" max="100" id="e1-loanTwo" [(ngModel)]="application.sectionE.loanTwo" name="loanTwo" >
+									<input class="mcgill-input-small" id="e1-loanTwo" [(ngModel)]="application.sectionE.loanTwo" name="loanTwo" maxlength="3" >
 									%
 								</div>
 								<div class="col-xs-2">
 									Work: 
-									<input type="number" min="1" max="100" id="e1-workTwo" [(ngModel)]="application.sectionE.workTwo" name="workTwo" >
+									<input class="mcgill-input-small" id="e1-workTwo" [(ngModel)]="application.sectionE.workTwo" name="workTwo" maxlength="3" >
 									%
 								</div>
 								<div class="col-xs-2">
 									Family: 
-									<input type="number" min="1" max="100" id="e1-familyTwo" [(ngModel)]="application.sectionE.familyTwo" name="familyTwo" >
+									<input class="mcgill-input-small" id="e1-familyTwo" [(ngModel)]="application.sectionE.familyTwo" name="familyTwo" maxlength="3" >
 									%
 								</div>
 							</div>						
@@ -1328,41 +1332,41 @@
 							<label class="col-xs-8 col-form-label">3. College (or other school)</label>
 							<div class="col-xs-9">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Name of school:</label>
-								<input class="col-xs-7" id="schoolNameThree" [(ngModel)]="application.sectionE.schoolNameThree" name="schoolNameThree" >
+								<input class="col-xs-7" id="schoolNameThree" [(ngModel)]="application.sectionE.schoolNameThree" name="schoolNameThree" maxlength="27" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Location of school:</label>
 								<label class="col-xs-1 col-form-label">city:</label>
-								<input class="col-xs-3" id="schoolCityThree" [(ngModel)]="application.sectionE.schoolCityThree" name="schoolCityThree" >
+								<input class="col-xs-3" id="schoolCityThree" [(ngModel)]="application.sectionE.schoolCityThree" name="schoolCityThree" maxlength="10" >
 								<label class="col-xs-1 col-form-label">state:</label>
-								<input class="col-xs-2" maxlength="2" id="schoolStateThree" [(ngModel)]="application.sectionE.schoolStateThree" name="schoolStateThree" >
+								<input class="col-xs-2" id="schoolStateThree" [(ngModel)]="application.sectionE.schoolStateThree" name="schoolStateThree" maxlength="2" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Dates of attendance::</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-startMonthThree" [(ngModel)]="application.sectionE.startMonthThree" name="startMonthThree" >
+									<input class="mcgill-input-small" id="e1-startMonthThree" [(ngModel)]="application.sectionE.startMonthThree" name="startMonthThree" maxlength="2">
 									/
-									<input type="number" min="1" max="99"  id="e1-startYearThree" [(ngModel)]="application.sectionE.startYearThree" name="startYearThree" >
+									<input class="mcgill-input-small"  id="e1-startYearThree" [(ngModel)]="application.sectionE.startYearThree" name="startYearThree" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-endMonthThree" [(ngModel)]="application.sectionE.endMonthThree" name="endMonthThree" >
+									<input class="mcgill-input-small" id="e1-endMonthThree" [(ngModel)]="application.sectionE.endMonthThree" name="endMonthThree" maxlength="2"  >
 									/
-									<input type="number" min="1" max="99"  id="e1-endYearThree" [(ngModel)]="application.sectionE.endYearThree" name="endYearThree" >							
+									<input class="mcgill-input-small"  id="e1-endYearThree" [(ngModel)]="application.sectionE.endYearThree" name="endYearThree" maxlength="2"  >							
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Credit hours earned: </label>
 								<div class="col-xs-4">
 									<label class="col-form-label">Semester hours:</label>
-									<input id="semesterHoursThree" [(ngModel)]="application.sectionE.semesterHoursThree" name="semesterHoursThree" >								
+									<input id="semesterHoursThree" [(ngModel)]="application.sectionE.semesterHoursThree" name="semesterHoursThree" maxlength="15" >								
 								</div>
 								<div class="col-xs-4">
 									<label class="col-form-label">Trimester hours:</label>
-									<input  id="trimesterHoursThree" [(ngModel)]="application.sectionE.trimesterHoursThree" name="trimesterHoursThree" >
+									<input  id="trimesterHoursThree" [(ngModel)]="application.sectionE.trimesterHoursThree" name="trimesterHoursThree" maxlength="15" >
 								</div>
 								<div class="col-xs-4">
 									<label class="col-form-label">Quarter hours:</label>
-									<input id="quarterHoursThree" [(ngModel)]="application.sectionE.quarterHoursThree" name="quarterHoursThree" >
+									<input id="quarterHoursThree" [(ngModel)]="application.sectionE.quarterHoursThree" name="quarterHoursThree" maxlength="15" >
 								</div>
 							</div>
 							<div class="col-xs-12 mt-1">
@@ -1372,11 +1376,11 @@
 								</div>
 								<div>
 									month/year: 
-									<input type="number" min="1" max="12" id="e1-graduateMonthThree" [(ngModel)]="application.sectionE.graduateMonthThree" name="graduateMonthThree" >
+									<input class="mcgill-input-small" id="e1-graduateMonthThree" [(ngModel)]="application.sectionE.graduateMonthThree" name="graduateMonthThree" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-graduateYearThree" [(ngModel)]="application.sectionE.graduateYearThree" name="graduateYearThree" >							
+									<input class="mcgill-input-small" id="e1-graduateYearThree" [(ngModel)]="application.sectionE.graduateYearThree" name="graduateYearThree" maxlength="2" >							
 									&nbsp;Degree:
-									<input id="e1-degreeThree" [(ngModel)]="application.sectionE.degreeThree" name="degreeThree" >							
+									<input id="e1-degreeThree" [(ngModel)]="application.sectionE.degreeThree" name="degreeThree" maxlength="20" >							
 								</div>
 							</div><br />
 							<div class="col-xs-12">
@@ -1386,9 +1390,9 @@
 							</div><br />
 							<div class="col-xs-12  mt-1">
 								<label class="col-xs-5 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g. Grade point average (transcript required)</label>
-								<input type="number" min="0" max="99" class="col-xs-1" id="gpaThree" [(ngModel)]="application.sectionE.gpaThree" name="gpaThree" >
+								<input class="col-xs-1" id="gpaThree" [(ngModel)]="application.sectionE.gpaThree" name="gpaThree" maxlength="10" >
 								<label class="col-xs-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Grade:</label>
-								<input maxlength="2" class="col-xs-1" id="gradeThree" [(ngModel)]="application.sectionE.gradeThree" name="gradeThree" >
+								<input class="col-xs-1" id="gradeThree" [(ngModel)]="application.sectionE.gradeThree" name="gradeThree" maxlength="4" >
 							</div>
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h. Written transcript release on file?</label>
@@ -1399,9 +1403,9 @@
 							<div class="col-xs-12">
 								<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.  Fields of study (Thesis)</label>
 								<label class="col-xs-1 col-form-label">major:</label>
-								<input class="col-xs-3" id="majorThree" [(ngModel)]="application.sectionE.majorThree" name="majorThree" >
+								<input class="col-xs-3" id="majorThree" [(ngModel)]="application.sectionE.majorThree" name="majorThree" maxlength="20" >
 								<label class="col-xs-1 col-form-label">minor:</label>
-								<input class="col-xs-3" maxlength="2" id="minorThree" [(ngModel)]="application.sectionE.minorThree" name="minorThree" >
+								<input class="col-xs-3" maxlength="2" id="minorThree" [(ngModel)]="application.sectionE.minorThree" name="minorThree" maxlength="20" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j. Office, honors, and awards</label>
@@ -1423,21 +1427,21 @@
 								<label class="col-xs-12 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m. Portion of total educaiton expenses from:</label><br />
 								<div class="col-xs-4">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scholarship (or Grant): 
-									<input type="number" min="1" max="100" id="e1-scholarshipThree" [(ngModel)]="application.sectionE.scholarshipThree" name="scholarshipThree" >%
+									<input class="mcgill-input-small" id="e1-scholarshipThree" [(ngModel)]="application.sectionE.scholarshipThree" name="scholarshipThree" maxlength="3" >%
 								</div>
 								<div class="col-xs-2">
 									Loan: 
-									<input type="number" min="1" max="100" id="e1-loanThree" [(ngModel)]="application.sectionE.loanThree" name="loanThree" >
+									<input class="mcgill-input-small" id="e1-loanThree" [(ngModel)]="application.sectionE.loanThree" name="loanThree" maxlength="2" >
 									%
 								</div>
 								<div class="col-xs-2">
 									Work: 
-									<input type="number" min="1" max="100" id="e1-workThree" [(ngModel)]="application.sectionE.workThree" name="workThree" >
+									<input class="mcgill-input-small" id="e1-workThree" [(ngModel)]="application.sectionE.workThree" name="workThree" maxlength="3" >
 									%
 								</div>
 								<div class="col-xs-2">
 									Family: 
-									<input type="number" min="1" max="100" id="e1-familyThree" [(ngModel)]="application.sectionE.familyThree" name="familyThree" >
+									<input class="mcgill-input-small" id="e1-familyThree" [(ngModel)]="application.sectionE.familyThree" name="familyThree" maxlength="3" >
 									%
 								</div>
 							</div>						
@@ -1451,23 +1455,23 @@
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name of school</label>
-								<input class="col-xs-4" id="nameOne" [(ngModel)]="application.sectionE.nameOne" name="nameOne" >
+								<input class="col-xs-4" id="nameOne" [(ngModel)]="application.sectionE.nameOne" name="nameOne" maxlength="25" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-4 col-form-label">Location of school</label>
-								<input class="col-xs-4" id="schoolLocationOne" [(ngModel)]="application.sectionE.schoolLocationOne" name="schoolLocationOne" >
+								<input class="col-xs-4" id="schoolLocationOne" [(ngModel)]="application.sectionE.schoolLocationOne" name="schoolLocationOne" maxlength="25" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-2 col-form-label">Dates attended:</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-attendedStartMonthOne" [(ngModel)]="application.sectionE.attendedStartMonthOne" name="attendedStartMonthOne" >
+									<input class="mcgill-input-small" id="e1-attendedStartMonthOne" [(ngModel)]="application.sectionE.attendedStartMonthOne" name="attendedStartMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-attendedStartYearOne" [(ngModel)]="application.sectionE.attendedStartYearOne" name="attendedStartYearOne" >
+									<input class="mcgill-input-small"  id="e1-attendedStartYearOne" [(ngModel)]="application.sectionE.attendedStartYearOne" name="attendedStartYearOne" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-attendedEndMonthOne" [(ngModel)]="application.sectionE.attendedEndMonthOne" name="attendedEndMonthOne" >
+									<input class="mcgill-input-small" id="e1-attendedEndMonthOne" [(ngModel)]="application.sectionE.attendedEndMonthOne" name="attendedEndMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-attendedEndYearOne" [(ngModel)]="application.sectionE.attendedEndYearOne" name="attendedEndYearOne" >							
+									<input class="mcgill-input-small"  id="e1-attendedEndYearOne" [(ngModel)]="application.sectionE.attendedEndYearOne" name="attendedEndYearOne" maxlength="2" >							
 								</div>
 							</div><br />
 							<div class="col-xs-7 mt-1">
@@ -1481,9 +1485,9 @@
 								</div>
 								<div>
 									&nbsp;Date: 
-									<input type="number" min="1" max="12" id="e1-completeMonthOne" [(ngModel)]="application.sectionE.completeMonthOne" name="completeMonthOne" >
+									<input class="mcgill-input-small" id="e1-completeMonthOne" [(ngModel)]="application.sectionE.completeMonthOne" name="completeMonthOne" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-completeYearOne" [(ngModel)]="application.sectionE.completeYearOne" name="completeYearOne" >
+									<input class="mcgill-input-small"  id="e1-completeYearOne" [(ngModel)]="application.sectionE.completeYearOne" name="completeYearOne" maxlength="2" >
 								</div>
 							</div>
 						</div>												
@@ -1495,23 +1499,23 @@
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name of school</label>
-								<input class="col-xs-4" id="nameTwo" [(ngModel)]="application.sectionE.nameTwo" name="nameTwo" >
+								<input class="col-xs-4" id="nameTwo" [(ngModel)]="application.sectionE.nameTwo" name="nameTwo" maxlength="25" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-4 col-form-label">Location of school</label>
-								<input class="col-xs-4" id="schoolLocationTwo" [(ngModel)]="application.sectionE.schoolLocationTwo" name="schoolLocationTwo" >
+								<input class="col-xs-4" id="schoolLocationTwo" [(ngModel)]="application.sectionE.schoolLocationTwo" name="schoolLocationTwo" maxlength="25" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-2 col-form-label">Dates attended:</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-attendedStartMonthTwo" [(ngModel)]="application.sectionE.attendedStartMonthTwo" name="attendedStartMonthTwo" >
+									<input class="mcgill-input-small" id="e1-attendedStartMonthTwo" [(ngModel)]="application.sectionE.attendedStartMonthTwo" name="attendedStartMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-attendedStartYearTwo" [(ngModel)]="application.sectionE.attendedStartYearTwo" name="attendedStartYearTwo" >
+									<input class="mcgill-input-small"  id="e1-attendedStartYearTwo" [(ngModel)]="application.sectionE.attendedStartYearTwo" name="attendedStartYearTwo" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-attendedEndMonthTwo" [(ngModel)]="application.sectionE.attendedEndMonthTwo" name="attendedEndMonthTwo" >
+									<input class="mcgill-input-small" id="e1-attendedEndMonthTwo" [(ngModel)]="application.sectionE.attendedEndMonthTwo" name="attendedEndMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-attendedEndYearTwo" [(ngModel)]="application.sectionE.attendedEndYearTwo" name="attendedEndYearTwo" >							
+									<input class="mcgill-input-small"  id="e1-attendedEndYearTwo" [(ngModel)]="application.sectionE.attendedEndYearTwo" name="attendedEndYearTwo" maxlength="2" >							
 								</div>
 							</div><br />
 							<div class="col-xs-7 mt-1">
@@ -1525,9 +1529,9 @@
 								</div>
 								<div>
 									&nbsp;Date: 
-									<input type="number" min="1" max="12" id="e1-completeMonthTwo" [(ngModel)]="application.sectionE.completeMonthTwo" name="completeMonthTwo" >
+									<input class="mcgill-input-small" id="e1-completeMonthTwo" [(ngModel)]="application.sectionE.completeMonthTwo" name="completeMonthTwo" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-completeYearTwo" [(ngModel)]="application.sectionE.completeYearTwo" name="completeYearTwo" >
+									<input class="mcgill-input-small"  id="e1-completeYearTwo" [(ngModel)]="application.sectionE.completeYearTwo" name="completeYearTwo" maxlength="2" >
 								</div>
 							</div>
 						</div>												
@@ -1536,69 +1540,69 @@
 							<label class="col-xs-12 col-form-label">5. Educational References</label>
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="referenceNameOne" [(ngModel)]="application.sectionE.referenceNameOne" name="referenceNameOne" >
+								<input class="col-xs-4" id="referenceNameOne" [(ngModel)]="application.sectionE.referenceNameOne" name="referenceNameOne" maxlength="23" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="referencePositionOne" [(ngModel)]="application.sectionE.referencePositionOne" name="referencePositionOne" >
+								<input class="col-xs-4" id="referencePositionOne" [(ngModel)]="application.sectionE.referencePositionOne" name="referencePositionOne" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="referenceSchoolOne" [(ngModel)]="application.sectionE.referenceSchoolOne" name="referenceSchoolOne" >
+								<input class="col-xs-4" id="referenceSchoolOne" [(ngModel)]="application.sectionE.referenceSchoolOne" name="referenceSchoolOne" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="referenceTelephoneOne" [(ngModel)]="application.sectionE.referenceTelephoneOne" name="referenceTelephoneOne" >
+								<input class="col-xs-4" id="referenceTelephoneOne" [(ngModel)]="application.sectionE.referenceTelephoneOne" name="referenceTelephoneOne" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="referenceEmailOne" [(ngModel)]="application.sectionE.referenceEmailOne" name="referenceEmailOne" >
+								<input class="col-xs-4" id="referenceEmailOne" [(ngModel)]="application.sectionE.referenceEmailOne" name="referenceEmailOne" maxlength="70" >
 							</div>						
 						</div>
 						<hr />
 						<div class="form-group row">
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="referenceNameTwo" [(ngModel)]="application.sectionE.referenceNameTwo" name="referenceNameTwo" >
+								<input class="col-xs-4" id="referenceNameTwo" [(ngModel)]="application.sectionE.referenceNameTwo" name="referenceNameTwo" maxlength="23" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="referencePositionTwo" [(ngModel)]="application.sectionE.referencePositionTwo" name="referencePositionTwo" >
+								<input class="col-xs-4" id="referencePositionTwo" [(ngModel)]="application.sectionE.referencePositionTwo" name="referencePositionTwo" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="referenceSchoolTwo" [(ngModel)]="application.sectionE.referenceSchoolTwo" name="referenceSchoolTwo" >
+								<input class="col-xs-4" id="referenceSchoolTwo" [(ngModel)]="application.sectionE.referenceSchoolTwo" name="referenceSchoolTwo" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="referenceTelephoneTwo" [(ngModel)]="application.sectionE.referenceTelephoneTwo" name="referenceTelephoneTwo" >
+								<input class="col-xs-4" id="referenceTelephoneTwo" [(ngModel)]="application.sectionE.referenceTelephoneTwo" name="referenceTelephoneTwo" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="referenceEmailTwo" [(ngModel)]="application.sectionE.referenceEmailTwo" name="referenceEmailTwo" >
+								<input class="col-xs-4" id="referenceEmailTwo" [(ngModel)]="application.sectionE.referenceEmailTwo" name="referenceEmailTwo" maxlength="70" >
 							</div>						
 						</div>
 						<hr />
 						<div class="form-group row">
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="referenceNameThree" [(ngModel)]="application.sectionE.referenceNameThree" name="referenceNameThree" >
+								<input class="col-xs-4" id="referenceNameThree" [(ngModel)]="application.sectionE.referenceNameThree" name="referenceNameThree" maxlength="23" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="referencePositionThree" [(ngModel)]="application.sectionE.referencePositionThree" name="referencePositionThree" >
+								<input class="col-xs-4" id="referencePositionThree" [(ngModel)]="application.sectionE.referencePositionThree" name="referencePositionThree" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="referenceSchoolThree" [(ngModel)]="application.sectionE.referenceSchoolThree" name="referenceSchoolThree" >
+								<input class="col-xs-4" id="referenceSchoolThree" [(ngModel)]="application.sectionE.referenceSchoolThree" name="referenceSchoolThree" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="referenceTelephoneThree" [(ngModel)]="application.sectionE.referenceTelephoneThree" name="referenceTelephoneThree" >
+								<input class="col-xs-4" id="referenceTelephoneThree" [(ngModel)]="application.sectionE.referenceTelephoneThree" name="referenceTelephoneThree" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="referenceEmailThree" [(ngModel)]="application.sectionE.referenceEmailThree" name="referenceEmailThree" >
+								<input class="col-xs-4" id="referenceEmailThree" [(ngModel)]="application.sectionE.referenceEmailThree" name="referenceEmailThree" maxlength="70" >
 							</div>						
 						</div>
 						<hr />
@@ -1608,15 +1612,15 @@
 								<label class="col-xs-3 col-form-label">Foreign language(s):</label>
 								<div class="col-xs-3">
 									Read:
-									<input id="languageRead" [(ngModel)]="application.sectionE.languageRead" name="languageRead" >
+									<input id="languageRead" [(ngModel)]="application.sectionE.languageRead" name="languageRead" maxlength="20" >
 								</div>
 								<div class="col-xs-3">
 									Write:
-									<input id="languageWrite" [(ngModel)]="application.sectionE.languageWrite" name="languageWrite" >
+									<input id="languageWrite" [(ngModel)]="application.sectionE.languageWrite" name="languageWrite" maxlength="20" >
 								</div>
 								<div class="col-xs-3">
 									Speak:
-									<input id="languageSpeak" [(ngModel)]="application.sectionE.languageSpeak" name="languageSpeak" >
+									<input id="languageSpeak" [(ngModel)]="application.sectionE.languageSpeak" name="languageSpeak" maxlength="20" >
 								</div>
 							</div>						
 							<div class="col-xs-12">
@@ -1626,7 +1630,7 @@
 								</div>
 								<div class="col-xs-4">
 									Speed:
-									<input id="speed" [(ngModel)]="application.sectionE.speed" name="speed" >
+									<input id="speed" [(ngModel)]="application.sectionE.speed" name="speed" maxlength="3" >
 									wpm
 								</div>
 							</div>						
@@ -1649,12 +1653,12 @@
 								</div>
 								<div class="col-xs-4">
 									Name of software:
-									<input id="wordProcessingName" [(ngModel)]="application.sectionE.wordProcessingName" name="wordProcessingName" >
+									<input id="wordProcessingName" [(ngModel)]="application.sectionE.wordProcessingName" name="wordProcessingName" maxlength="55" >
 								</div>
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-4 col-form-label">Apprenticeship or similar training?</label>
-								<input class="col-xs-8" id="apprenticeship" [(ngModel)]="application.sectionE.apprenticeship" name="apprenticeship" >
+								<input class="col-xs-8" id="apprenticeship" [(ngModel)]="application.sectionE.apprenticeship" name="apprenticeship" maxlength="70" >
 							</div>						
 							<div class="col-xs-12">
 								<div class="col-xs-1">
@@ -1662,16 +1666,16 @@
 								</div>
 								<div class="col-xs-4">
 									When?
-									<input id="apprenticeshipTime" [(ngModel)]="application.sectionE.apprenticeshipTime" name="apprenticeshipTime" >
+									<input id="apprenticeshipTime" [(ngModel)]="application.sectionE.apprenticeshipTime" name="apprenticeshipTime" maxlength="20" >
 								</div>
 								<div class="col-xs-4">
 									Where?
-									<input id="apprenticeshipLocation" [(ngModel)]="application.sectionE.apprenticeshipLocation" name="apprenticeshipLocation" >
+									<input id="apprenticeshipLocation" [(ngModel)]="application.sectionE.apprenticeshipLocation" name="apprenticeshipLocation" maxlength="60" >
 								</div>
 							</div>						
 							<div class="col-xs-12 mt-1">
 								<label class="col-xs-3 col-form-label">Special machine skills:</label>
-								<input class="col-xs-9" id="machineSkills" [(ngModel)]="application.sectionE.machineSkills" name="machineSkills" >
+								<input class="col-xs-9" id="machineSkills" [(ngModel)]="application.sectionE.machineSkills" name="machineSkills" maxlength="75" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">Other training programs:</label>
@@ -1689,11 +1693,11 @@
 								</div>
 								<div class="col-xs-3">
 									State:
-									<input id="engineerTrainingState" [(ngModel)]="application.sectionE.engineerTrainingState" name="engineerTrainingState" >
+									<input id="engineerTrainingState" [(ngModel)]="application.sectionE.engineerTrainingState" name="engineerTrainingState" maxlength="25" >
 								</div>
 								<div class="col-xs-3">
 									Date:
-									<input id="engineerTrainingDate" [(ngModel)]="application.sectionE.engineerTrainingDate" name="engineerTrainingDate" >
+									<input id="engineerTrainingDate" [(ngModel)]="application.sectionE.engineerTrainingDate" name="engineerTrainingDate" maxlength="15" >
 								</div>
 							</div>						
 							<div class="col-xs-12">
@@ -1703,11 +1707,11 @@
 								</div>
 								<div class="col-xs-3">
 									State:
-									<input id="professionalState" [(ngModel)]="application.sectionE.professionalState" name="professionalState" >
+									<input id="professionalState" [(ngModel)]="application.sectionE.professionalState" name="professionalState" maxlength="25" >
 								</div>
 								<div class="col-xs-3">
 									Lic.#(s):
-									<input id="professionalLicenses" [(ngModel)]="application.sectionE.professionalLicenses" name="professionalLicenses" >
+									<input id="professionalLicense" [(ngModel)]="application.sectionE.professionalLicense" name="professionalLicense" maxlength="12" >
 								</div>
 							</div>						
 							<div class="col-xs-12">
@@ -1728,130 +1732,135 @@
 					<div class="card card-block card-outline-primary ">
 						<label class="col-xs-4 ">Were or are you in the U.S. military service?</label>
 						<div class="col-xs-1 " *ngFor="let answer of yesnoInt">
-							<input type="radio" id="military" [(ngModel)]="application.sectionE.military" name="military" [value]="answer.value">{{answer.display}}
+							<input type="radio" id="military" [(ngModel)]="application.sectionF.military" name="military" [value]="answer.value">{{answer.display}}
 						</div>
-						<div *ngIf="application.sectionE.military == 1" class="form-group row">	
+						<div *ngIf="application.sectionF.military == 1" class="form-group row">	
 							<div class="col-xs-12">
 								<label class="col-xs-2 col-form-label">When?</label><br />
 								<div>
 									From month: 
-									<input type="number" min="1" max="12" id="e1-militaryStartMonth" [(ngModel)]="application.sectionE.militaryStartMonth" name="militaryStartMonth" >
+									<input class="mcgill-input-small" id="e1-militaryStartMonth" [(ngModel)]="application.sectionF.militaryStartMonth" name="militaryStartMonth" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-militaryStartYear" [(ngModel)]="application.sectionE.militaryStartYear" name="militaryStartYear" >
+									<input class="mcgill-input-small"  id="e1-militaryStartYear" [(ngModel)]="application.sectionF.militaryStartYear" name="militaryStartYear" maxlength="2" >
 									&nbsp;To month/year:
-									<input type="number" min="1" max="12" id="e1-militaryEndMonth" [(ngModel)]="application.sectionE.militaryEndMonth" name="militaryEndMonth" >
+									<input class="mcgill-input-small" id="e1-militaryEndMonth" [(ngModel)]="application.sectionF.militaryEndMonth" name="militaryEndMonth" maxlength="2" >
 									/
-									<input type="number" min="1" max="99"  id="e1-militaryEndYear" [(ngModel)]="application.sectionE.militaryEndYear" name="militaryEndYear" >							
+									<input class="mcgill-input-small"  id="e1-militaryEndYear" [(ngModel)]="application.sectionF.militaryEndYear" name="militaryEndYear" maxlength="2" >							
 								</div>
 							</div><br />
 							<div class="col-xs-7 mt-1">
 								<label class="col-xs-3 col-form-label">Service:</label>
-								<input class="col-xs-4" id="service" [(ngModel)]="application.sectionE.service" name="service" >
+								<input class="col-xs-4" id="service" [(ngModel)]="application.sectionF.service" name="service" maxlength="13" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Branch:</label>
-								<input class="col-xs-4" id="branch" [(ngModel)]="application.sectionE.branch" name="branch" >
+								<input class="col-xs-4" id="branch" [(ngModel)]="application.sectionF.branch" name="branch" maxlength="13" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Rank on entry:</label>
-								<input class="col-xs-4" id="startRank" [(ngModel)]="application.sectionE.startRank" name="startRank" >
+								<input class="col-xs-4" id="startRank" [(ngModel)]="application.sectionF.startRank" name="startRank" maxlength="13" >
 							</div>						
 							<div class="col-xs-8">
 								<label class="col-xs-4 col-form-label">Rank on separation:</label>
-								<input class="col-xs-4" id="endRank" [(ngModel)]="application.sectionE.endRank" name="endRank" >
+								<input class="col-xs-4" id="endRank" [(ngModel)]="application.sectionF.endRank" name="endRank" maxlength="13" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">Principal assignments and duties:</label>
 								<label class="col-xs-1 col-form-label">&nbsp;</label>
-								<textarea rows="3" class="col-xs-10 col-form-label" id="principleDuties" [(ngModel)]="application.sectionE.principleDuties" name="principleDuties" ></textarea>							
+								<textarea rows="3" class="col-xs-10 col-form-label" id="principleDuties" [(ngModel)]="application.sectionF.principleDuties" name="principleDuties" ></textarea>							
 							</div>
 							<div class="col-xs-12 mt-1">
 								<label class="col-xs-4 col-form-label">Education or training received:</label>
-								<input class="col-xs-8" id="militaryEducation" [(ngModel)]="application.sectionE.militaryEducation" name="militaryEducation" >
+								<input class="col-xs-8" id="militaryEducation" [(ngModel)]="application.sectionF.militaryEducation" name="militaryEducation" maxlength="70" >
 							</div>						
 							<div class="col-xs-12">
 								<label class="col-xs-12 col-form-label">Military honors received:</label>
 								<label class="col-xs-1 col-form-label">&nbsp;</label>
-								<textarea rows="3" class="col-xs-10 col-form-label" id="militaryHonors" [(ngModel)]="application.sectionE.militaryHonors" name="militaryHonors" ></textarea>							
+								<textarea rows="3" class="col-xs-10 col-form-label" id="militaryHonors" [(ngModel)]="application.sectionF.militaryHonors" name="militaryHonors" ></textarea>							
 							</div>											
 						</div>				
-						<div *ngIf="application.sectionE.military == 1" class="form-group row">	
+						<div *ngIf="application.sectionF.military == 1" class="form-group row">	
 							<label class="col-xs-12 col-form-label">2. Military References</label>
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="militaryNameOne" [(ngModel)]="application.sectionE.militaryNameOne" name="militaryNameOne" >
+								<input class="col-xs-4" id="militaryNameOne" [(ngModel)]="application.sectionF.militaryNameOne" name="militaryNameOne" maxlength="22" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="militaryPositionOne" [(ngModel)]="application.sectionE.militaryPositionOne" name="militaryPositionOne" >
+								<input class="col-xs-4" id="militaryPositionOne" [(ngModel)]="application.sectionF.militaryPositionOne" name="militaryPositionOne" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="militarySchoolOne" [(ngModel)]="application.sectionE.militarySchoolOne" name="militarySchoolOne" >
+								<input class="col-xs-4" id="militarySchoolOne" [(ngModel)]="application.sectionF.militarySchoolOne" name="militarySchoolOne" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="militaryTelephoneOne" [(ngModel)]="application.sectionE.militaryTelephoneOne" name="militaryTelephoneOne" >
+								<input class="col-xs-4" id="militaryTelephoneOne" [(ngModel)]="application.sectionF.militaryTelephoneOne" name="militaryTelephoneOne" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="militaryEmailOne" [(ngModel)]="application.sectionE.militaryEmailOne" name="militaryEmailOne" >
+								<input class="col-xs-4" id="militaryEmailOne" [(ngModel)]="application.sectionF.militaryEmailOne" name="militaryEmailOne" maxlength="70" >
 							</div>										
 							<hr class="col-xs-12"/>
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="militaryNameTwo" [(ngModel)]="application.sectionE.militaryNameTwo" name="militaryNameTwo" >
+								<input class="col-xs-4" id="militaryNameTwo" [(ngModel)]="application.sectionF.militaryNameTwo" name="militaryNameTwo" maxlength="22" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="militaryPositionTwo" [(ngModel)]="application.sectionE.militaryPositionTwo" name="militaryPositionTwo" >
+								<input class="col-xs-4" id="militaryPositionTwo" [(ngModel)]="application.sectionF.militaryPositionTwo" name="militaryPositionTwo" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="militarySchoolTwo" [(ngModel)]="application.sectionE.militarySchoolTwo" name="militarySchoolTwo" >
+								<input class="col-xs-4" id="militarySchoolTwo" [(ngModel)]="application.sectionF.militarySchoolTwo" name="militarySchoolTwo" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="militaryTelephoneTwo" [(ngModel)]="application.sectionE.militaryTelephoneTwo" name="militaryTelephoneTwo" >
+								<input class="col-xs-4" id="militaryTelephoneTwo" [(ngModel)]="application.sectionF.militaryTelephoneTwo" name="militaryTelephoneTwo" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="militaryEmailTwo" [(ngModel)]="application.sectionE.militaryEmailTwo" name="militaryEmailTwo" >
+								<input class="col-xs-4" id="militaryEmailTwo" [(ngModel)]="application.sectionF.militaryEmailTwo" name="militaryEmailTwo" maxlength="70" >
 							</div>										
 							<hr class="col-xs-12"/>
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Name:</label>
-								<input class="col-xs-4" id="militaryNameThree" [(ngModel)]="application.sectionE.militaryNameThree" name="militaryNameThree" >
+								<input class="col-xs-4" id="militaryNameThree" [(ngModel)]="application.sectionF.militaryNameThree" name="militaryNameThree"maxlength="22"  >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Position:</label>
-								<input class="col-xs-4" id="militaryPositionThree" [(ngModel)]="application.sectionE.militaryPositionThree" name="militaryPositionThree" >
+								<input class="col-xs-4" id="militaryPositionThree" [(ngModel)]="application.sectionF.militaryPositionThree" name="militaryPositionThree" maxlength="12" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">School:</label>
-								<input class="col-xs-4" id="militarySchoolThree" [(ngModel)]="application.sectionE.militarySchoolThree" name="militarySchoolThree" >
+								<input class="col-xs-4" id="militarySchoolThree" [(ngModel)]="application.sectionF.militarySchoolThree" name="militarySchoolThree" maxlength="15" >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">Telephone:</label>
-								<input class="col-xs-4" id="militaryTelephoneThree" [(ngModel)]="application.sectionE.militaryTelephoneThree" name="militaryTelephoneThree" >
+								<input class="col-xs-4" id="militaryTelephoneThree" [(ngModel)]="application.sectionF.militaryTelephoneThree" name="militaryTelephoneThree" maxlength="12"  >
 							</div>						
 							<div class="col-xs-7">
 								<label class="col-xs-3 col-form-label">E-mail:</label>
-								<input class="col-xs-4" id="militaryEmailThree" [(ngModel)]="application.sectionE.militaryEmailThree" name="militaryEmailThree" >
+								<input class="col-xs-4" id="militaryEmailThree" [(ngModel)]="application.sectionF.militaryEmailThree" name="militaryEmailThree" maxlength="70" >
 							</div>																								
 						</div>
 					</div>
 				</tab>
 			</tabset>
 			<div class="form-group row">
-				<label class="col-xs-12 col-form-label" for="accept-input">Please type your initials into the box below if you agree with the above statements (Section A).</label>
+				<label class="col-xs-12 col-form-label" for="accept-input">Please type your initials into the box below if you agree with the above statements (Section A).  <b>All tabs must be free of errors to save!</b></label>
 			</div>
 			<div class="form-group row">
 				<div class="offset-xs-1 col-xs-3 form-group row">
-					<input type="text" class="form-control" [(ngModel)]="agree" id="accept-input" name="accept">
+					<input type="text" class="form-control" [(ngModel)]="agree" id="accept-input" name="accept" required #accept="ngModel" >
+					<div [hidden]="accept.valid" 
+						class="alert alert-danger">
+						Initials are required
+					</div>
 				</div>
 				<div class="form-group row">
-					<button class="btn btn-success" (click)="saveApplication()">I Agree (Save)</button>
+					<!-- <button class="btn btn-success" (click)="saveApplication()">I Agree (Save)</button> -->
+					<button class="btn btn-success" [disabled]="!applicationForm.form.valid" >I Agree (Save)</button>  
 					<button class="btn btn-info" (click)="generatePDF()">Generate PDF</button>
 					 <a *ngIf="thePDF != ''" href="{{thePDF}}" target="_blank">Click here to view PDF</a> 
 				</div>
@@ -1868,7 +1877,6 @@
 					<span>{{lastUpdate}}</span>
 				</div>
 			</div>
-
 		</form>
 	</div>
 </div>

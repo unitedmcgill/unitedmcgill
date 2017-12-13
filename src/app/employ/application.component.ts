@@ -728,7 +728,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         () => this.showLoader = false);
   }
 
-  private saveApplication(){
+  public saveApplication(){
     if ( this.agree.length <= 0 ){
       alert("You must type your initials in agreement to save the application.");
       return;
