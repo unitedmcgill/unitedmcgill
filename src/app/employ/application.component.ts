@@ -491,6 +491,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   public workSecondPart : boolean = false;
   public workThirdFull : boolean = false;
   public workThirdPart : boolean = false;
+  public generatingPDF : boolean = false;
+  public pingKathyOnce : boolean = true;
 
   public thePDF : string = '';
 
@@ -511,6 +513,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  public test(){
+    alert("test");
   }
 
   private processWorkXIn(){
@@ -727,12 +733,12 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         // Finally
         () => this.showLoader = false);
   }
-
-  public saveApplication(){
-    if ( this.agree.length <= 0 ){
-      alert("You must type your initials in agreement to save the application.");
-      return;
-    }
+  
+  public saveApplication(autoSave){
+    // if ( this.agree.length <= 0 ){
+    //   alert("You must type your initials in agreement to save the application.");
+    //   return;
+    // }
 
     this.showLoader = true;
     this.processLocationsOut();
@@ -740,7 +746,9 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.processWorkOut();
     this.processWorkXOut();
     this.lastUpdate = new Date();
+    this.application.sectionA.agreeText = this.agree;
     this.application.lastUpdate = Math.round(this.lastUpdate.getTime()/1000); // time() in php was seconds since the Epoch, Date gives ms
+    this.application.sectionA.agreeTime = this.application.lastUpdate;
     this.employService.saveApplication(this.application)
       .subscribe((data: IApplication) => {
           if ( data ){
@@ -763,8 +771,17 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         // Finally
         () => {
           this.showLoader = false;
-          alert("Application saved.");
-          this.notifyPersonnel();
+          if (!autoSave)
+          {
+            alert("Application saved.");
+          }
+          
+          if ( this.pingKathyOnce )
+          {
+            this.notifyPersonnel();
+            this.pingKathyOnce = false;
+          }
+          
         });      
   }
 
@@ -812,6 +829,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   public generatePDF(){
     this.showLoader = true;
+    this.generatingPDF = true;
     this.employService.generatePDF(this.application)
       .subscribe((data: Values) => {
           if ( data ){
@@ -823,6 +841,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
             console.log(data);
             // Remove extra part of this path reference from src
             this.thePDF = data.value.substring(data.value.indexOf("\pdf"));
+            this.generatingPDF = false;
           } else {
             console.log("error");
           }

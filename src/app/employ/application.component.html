@@ -2,9 +2,9 @@
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
 		<h4 class="card-title">Employment Application ({{application.code}})</h4>
-		<form name="applicationForm" #applicationForm="ngForm" (ngSubmit)="saveApplication()" novalidate>
+		<form name="applicationForm" #applicationForm="ngForm" (ngSubmit)="saveApplication(false)" novalidate>
 			<tabset>
-				<tab heading="Section A">
+				<tab heading="Section A" (select)="saveApplication(true)">
 					<div class="card card-block card-outline-primary ">
 						<h6 class="card-header">A. &nbsp; Application Company & Agreement</h6><br />
 						<div class="card-text col-md-12">
@@ -53,7 +53,7 @@
 						</div>						
 					</div>
 				</tab>
-				<tab heading="Section B">
+				<tab heading="Section B" (select)="saveApplication(true)">
 					<div class="card card-block card-outline-primary ">
 						<h6 class="card-header">B. &nbsp; Employment Desired</h6><br />
 						<div class="form-group row">
@@ -257,7 +257,7 @@
 						</div>					
 					</div>
 				</tab>
-				<tab heading="Section C">
+				<tab heading="Section C" (select)="saveApplication(true)">
 					<div class="card card-block card-outline-primary ">
 					<h6 class="card-header">C. &nbsp; Personal Information</h6><br />
 						<div class="form-group row">
@@ -544,7 +544,7 @@
 						</div>					
 					</div>
 				</tab>
-				<tab heading="Section D"> 
+				<tab heading="Section D" (select)="saveApplication(true)"> 
 					<div class="card card-block card-outline-primary ">
 						<h6 class="card-header">D. &nbsp; Employment Record</h6><br />
 						<div class="card-text">
@@ -1132,7 +1132,7 @@
 						</div>
 					</div>
 				</tab>
-				<tab heading="Section E"> 
+				<tab heading="Section E" (select)="saveApplication(true)"> 
 					<div class="card card-block card-outline-primary ">
 						<h6 class="card-header">E. &nbsp; Education Record</h6><br />
 						<div class="card-text">
@@ -1727,7 +1727,7 @@
 						</div>
 					</div>
 				</tab>
-				<tab heading="Section F">
+				<tab heading="Section F" (select)="saveApplication(true)">
 					<h6 class="card-header">F. &nbsp; Military Record</h6><br />
 					<div class="card card-block card-outline-primary ">
 						<label class="col-xs-4 ">Were or are you in the U.S. military service?</label>
@@ -1848,7 +1848,7 @@
 				</tab>
 			</tabset>
 			<div class="form-group row">
-				<label class="col-xs-12 col-form-label" for="accept-input">Please type your initials into the box below if you agree with the above statements (Section A).  <b>All tabs must be free of errors to save!</b></label>
+				<label class="col-xs-12 col-form-label" for="accept-input">Please type your initials into the box below if you agree with the above statements (Section A).  <b>Application will save when switching tabs!</b></label>
 			</div>
 			<div class="form-group row">
 				<div class="offset-xs-1 col-xs-3 form-group row">
@@ -1859,10 +1859,10 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<!-- <button class="btn btn-success" (click)="saveApplication()">I Agree (Save)</button> -->
 					<button class="btn btn-success" [disabled]="!applicationForm.form.valid" >I Agree (Save)</button>  
 					<button class="btn btn-info" (click)="generatePDF()">Generate PDF</button>
-					 <a *ngIf="thePDF != ''" href="{{thePDF}}" target="_blank">Click here to view PDF</a> 
+					 <a *ngIf="thePDF != ''" href="{{thePDF}}" target="_blank">Click here to view PDF</a>
+					 <a *ngIf="generatingPDF">Generating PDF... This will take a few moments.</a>
 				</div>
 			</div>
 			<div class="form-group row">
