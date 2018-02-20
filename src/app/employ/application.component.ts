@@ -504,6 +504,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
+      console.log("Inside ngOnInit of ApplicationComponent")
       let code = params['code']; // Number.parseInt(params['id']);
       this.application.code = code;
       this.getApplication(code);
@@ -678,6 +679,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   public getApplication(code){
+    console.log('Inside getApplication()');
     this.showLoader = true;
     this.employService.getApplication(code)
       .subscribe((data: IApplication) => {

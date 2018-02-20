@@ -511,14 +511,14 @@
 						<div class="form-group row">
 							<label class="col-xs-8 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Have any of your driver's licenses ever been suspended or revoked?</label>
 							<div class="col-xs-1 col-form-label" *ngFor="let answer of yesnoInt">
-								<input type="radio" id="licenseSuspended" [(ngModel)]="application.sectionC.licenseSuspended" name="licenseSuspended" [value]="answer.value">{{answer.display}}
+								<input type="radio" id="licenseSuspended" [(ngModel)]="application.sectionC.licenseSuspend" name="licenseSuspended" [value]="answer.value">{{answer.display}}
 							</div>
 						</div>					
-						<div *ngIf="application.sectionC.licenseSuspended == 1" class="form-group row">
+						<div *ngIf="application.sectionC.licenseSuspend == 1" class="form-group row">
 							<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If yes, when?</label>
 							<input class="col-xs-3" [(ngModel)]="application.sectionC.licenseWhen" name="licenseWhen" maxlength="30" />
 						</div>					
-						<div *ngIf="application.sectionC.licenseSuspended == 1" class="form-group row">
+						<div *ngIf="application.sectionC.licenseSuspend == 1" class="form-group row">
 							<label class="col-xs-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If yes, please explain:</label>
 							<input class="col-xs-9" [(ngModel)]="application.sectionC.licenseExplain" name="licenseExplain" maxlength="75" />
 						</div>					

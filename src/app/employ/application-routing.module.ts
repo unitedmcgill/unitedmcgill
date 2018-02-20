@@ -18,4 +18,8 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ApplicationRoutingModule {}
+export class ApplicationRoutingModule {
+    constructor(){
+        console.log("Inside application-routing.module.ts");
+    }    
+}

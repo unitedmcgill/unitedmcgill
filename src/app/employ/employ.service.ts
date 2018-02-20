@@ -117,7 +117,8 @@ export class EmployService{
     }    
 
     public getApplication(code : string) : Observable<IApplication>{
-       
+        
+        console.log('Inside getApplication()');
         //let bodyString = JSON.stringify(''); // Stringify payload
         //let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let url = this.config.apiUrl+"/onlineapp"+"/"+code;

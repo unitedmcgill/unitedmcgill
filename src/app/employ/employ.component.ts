@@ -24,6 +24,7 @@ export class EmployComponent implements OnInit {
     { value: 'K', display: 'Keep' }
   ];
   public selectedType = this.statusTypes[0].value;
+  public searchTerm : string = "";
 
   constructor(  private authService : AuthenticationService,
                   private route: ActivatedRoute,
@@ -88,6 +89,7 @@ export class EmployComponent implements OnInit {
   }
 
   public editApplication(){
+    console.log('Inside editApplication()');
     if ( this.selectedId == -1 )
     {
       alert("Please select an applicant from the list first.");
