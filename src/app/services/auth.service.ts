@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { ConfigService } from "./config.service";
 import { ApplicationUser } from "../models/applicationuser";
- 
+import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class AuthenticationService {
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();

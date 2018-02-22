@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicationUser } from '../models/applicationuser';
+import { FormsModule }   from '@angular/forms';
  
 import { AuthenticationService } from '../services/auth.service';
  
