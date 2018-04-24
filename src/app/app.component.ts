@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { LoaderService } from './services/loader.service';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
     selector: 'body',
@@ -8,7 +9,7 @@ import { LoaderService } from './services/loader.service';
 })
 export class AppComponent { 
     showLoader : boolean;
-   constructor(private _router:Router, private _loaderService: LoaderService) {}
+   constructor(private _router:Router, private _loaderService: LoaderService, private _analytics : AnalyticsService) {}
   
     ngOnInit() {       
         // TODO: assign proper type to event
@@ -23,6 +24,7 @@ export class AppComponent {
             this.showLoader = true;
         }
         if (event instanceof NavigationEnd) {
+            this._analytics.pageView(event.urlAfterRedirects);
             this.showLoader = false;
         }
         if (event instanceof NavigationCancel) {

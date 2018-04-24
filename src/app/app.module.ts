@@ -22,6 +22,7 @@ import { FullLayoutComponent }          from './layouts/full-layout.component';
 
 // My Components (Move to modules that need them...)
 import { ConfigService }                from "./services/config.service";
+import {AnalyticsService }              from "./services/analytics.service";
 
 // Authentication
 import { AuthGuard } from './shared/authguard';
@@ -52,6 +53,7 @@ export function initConfig(config: ConfigService){
     providers: [
         LoaderService,
         ConfigService,
+        AnalyticsService,        
         AuthGuard,
         AuthenticationService,
         {
