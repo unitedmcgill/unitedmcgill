@@ -2,6 +2,7 @@
 	<span *ngIf="showLoader" class="loading"></span>
 	<div class="card card-block card-outline-primary ">
 		<h4 class="card-title">Employment Application ({{application.code}})</h4>
+		<h6 class="card-subtitle" ><font color="red">Please call 614-829-1212 if you experience any technical issues with this application.</font></h6>
 		<form name="applicationForm" #applicationForm="ngForm" (ngSubmit)="saveApplication(false)" novalidate>
 			<tabset>
 				<tab heading="Section A" (select)="saveApplication(true)">
