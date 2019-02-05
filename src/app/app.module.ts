@@ -1,6 +1,6 @@
 import { NgModule, APP_INITIALIZER }    from '@angular/core';
 import { BrowserModule }                from '@angular/platform-browser';
-import { HttpModule }                   from '@angular/http';
+import { HttpClientModule }             from '@angular/common/http';
 import { LocationStrategy,
          PathLocationStrategy }         from '@angular/common';
 import { FormsModule }                  from '@angular/forms';
@@ -37,7 +37,7 @@ export function initConfig(config: ConfigService){
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         AppRoutingModule,
         FormsModule
     ],

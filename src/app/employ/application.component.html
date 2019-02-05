@@ -272,11 +272,7 @@
 						<hr />			
 						<div class="form-group row">
 							<label class="col-xs-6 col-form-label">2. SSN (No dashs or spaces): </label>
-							<input class="col-xs-4" id="ssn" [(ngModel)]="application.sectionC.ssn" name="ssn" #ssn="ngModel" required maxlength="9">
-							<div [hidden]="ssn.valid" 
-								class="alert alert-danger">
-								SSN is required
-							</div>
+							<input class="col-xs-4" id="ssn" [(ngModel)]="application.sectionC.ssn" name="ssn" #ssn="ngModel" maxlength="9">
 						</div>	
 						<hr />				
 						<div class="form-group row">

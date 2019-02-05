@@ -1,10 +1,13 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import {HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { ConfigService } from "./config.service";
 import { ApplicationUser } from "../models/applicationuser";
-import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class AuthenticationService {
@@ -14,7 +17,7 @@ export class AuthenticationService {
     public token: string;
     private config : any;
 
-    constructor(private configService: ConfigService, private http: Http) {
+    constructor(private configService: ConfigService, private http: HttpClient) {
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
@@ -25,13 +28,13 @@ export class AuthenticationService {
         let url = this.config.apiUrl+'/jwt';
         //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }); // ... Set content type to JSON
         let bodyString = JSON.stringify(applicationUser );
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        return this.http.post(url, bodyString , {headers:headers})
-            .map((response: Response) => {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        return this.http.post(url, bodyString , {headers:headers}).pipe(
+            map((response: Response) => {
                 // login successful if there's a jwt token in the response
-                let body = response["_body"];
-                let accessToken = JSON.parse(body);
-                let token = accessToken["access_token"];
+                //let body = response["_body"];
+                //let accessToken = JSON.parse(body);
+                let token = response["access_token"];
                 if (token) {
                     // set token property
                     this.token = token;
@@ -49,7 +52,7 @@ export class AuthenticationService {
                     this.getLoggedInName.emit("");
                     return false;
                 }
-            });
+            }));
     }
  
     logout(): void {
@@ -63,16 +66,12 @@ export class AuthenticationService {
 
     checkUser() : Observable<string>{
     let url = this.config.apiUrl+"/checkuser";
-        return this.http.get(url).map((res: Response) => {
-            let result = res.json();
-            //TODO you can do stuff with the values here if you want
-            return result;
-        })
-        .catch(this._handleError);
+        return this.http.get<string>(url).pipe(
+        catchError(this._handleError));
     }
 
     private _handleError(error:any){
         console.error(error);
-        return Observable.throw(error);
+        return observableThrowError(error);
     }
 }
